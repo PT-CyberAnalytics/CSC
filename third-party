@@ -1,0 +1,20 @@
+This product includes open-source components licensed under the MIT License:
+
+- jQuery 3.6.0 © JS Foundation  
+  https://jquery.com 
+
+- jQuery UI 1.13.2 © JS Foundation  
+  https://jqueryui.com 
+
+- Inputmask 5.0.8 © Robin Herbots  
+  https://github.com/RobinHerbots/Inputmask 
+
+- Custom styles based on jQuery UI CSS © jQuery Foundation  
+  https://jqueryui.com 
+
+---
+
+This product uses the MITRE ATT&CK® framework.  
+© The MITRE Corporation. Used under the terms of the [CC BY 4.0 license](https://creativecommons.org/licenses/by/4.0/).  
+ATT&CK® is a registered trademark of The MITRE Corporation.  
+https://attack.mitre.org 

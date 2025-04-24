@@ -1,0 +1,3179 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Cyberattack Score Calculator</title>
+  <link type="image/x-icon" href="img/Cyber-Analytics-icon.ico" rel="shortcut icon">
+  <link type="image/x-icon" href="img/Cyber-Analytics-icon.ico" rel="icon">
+  
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.8/jquery.inputmask.min.js"></script>
+
+  <link rel="stylesheet" href="css/jquery-ui.css">
+  <link rel="stylesheet" href="css/style.css">
+  <script>
+    (function() {
+      var lang = localStorage.getItem("currentLang") || "en";
+      if (lang === "ru") {
+        var css = 
+          '#toggleLang + .toggle-wrapper .toggle-circle { transform: translateX(30px) !important; transition: none !important; }';
+        var style = document.createElement('style');
+        style.type = 'text/css';
+        style.appendChild(document.createTextNode(css));
+        document.head.appendChild(style);
+      }
+    })();
+  </script>
+  <style>
+    
+  </style>
+</head>
+<body>
+  <div id="tabs" class="tabs">
+    <div class="header-bar">
+      <nav>
+        <div class="logo-container"><img src="img/logo.svg" alt="CA" class="logo"> CSC</div>
+        <ul>
+          <li><a href="#tab-1" data-i18n="tab1">Основная вкладка</a></li>
+          <li><a href="#tab-2" data-i18n="tab2">1-day/0-day уязвимость</a></li>
+          <li><a href="#tab-3" data-i18n="tab3">Сохранения</a></li>
+        </ul>
+
+<div class="lang-toggle">
+  <input type="checkbox" id="toggleLang" />
+  <label for="toggleLang" class="toggle-wrapper">
+    <div class="toggle-text">
+      <span class="en">EN</span>
+      <span class="ru">RU</span>
+    </div>
+    <div class="toggle-circle"></div>
+  </label>
+</div>
+      </nav>
+    </div>
+
+    <div id="tab-1" class="tab-content">
+      <div class="flex-top">
+        <div class="top-right">
+          <div class="sticky-div">
+            <fieldset class="nav-panel">
+              <a href="#tabs"><img src="img/metrics.svg" alt="Metrics"><span data-i18n="metrics">Метрики</span></a>
+              <a href="#infra"><img src="img/infra.svg" alt="Infrastructure"><span data-i18n="infrastructure">Инфраструктура</span></a>
+              <a href="#dynamic_blocks"><img src="img/chain.svg" alt="Attack"><span data-i18n="attack_chain">Цепь атаки</span></a>
+            </fieldset>
+            <h2 data-i18n="total_values">Итоговые значения</h2>
+            <fieldset id="results-fieldset">
+              <div class="">
+                <div class="result-time">
+                  <div class="input-wrapper">
+                    <label for="entry_t_d" data-i18n="time_days" class="small-line">Время(в сутках)</label>
+                    <input type="text" id="entry_t_d" class="readonly" style="padding-top: 8px;" readonly>
+                  </div>
+                  <div class="divider"></div>
+                  <div class="input-wrapper">
+                    <label for="entry_t_h" data-i18n="time_hours" class="small-line">Время(в часах)</label>
+                    <input type="text" id="entry_t_h" class="readonly" style="padding-top: 8px;" readonly>
+                  </div>
+                </div>
+                <label data-i18n="attack_cost">Итоговая стоимость атаки ($)</label>
+                <div class="last-price">
+                  <div class="input-wrapper">
+                    <input type="text" id="entry_s_f" class="readonly" readonly>
+                    <label for="entry_s_f" class="input-label" data-i18n="min">min</label>
+                  </div>
+                  <div class="input-wrapper">
+                    <input type="text" id="entry_m_f" class="readonly" readonly>
+                    <label for="entry_m_f" class="input-label" data-i18n="med">med</label>
+                  </div>
+                  <div class="input-wrapper">
+                    <input type="text" id="entry_l_f" class="readonly" readonly>
+                    <label for="entry_l_f" class="input-label" data-i18n="max">max</label>
+                  </div>
+                </div>
+                <div class="save-button-container">
+                  <button id="save_state_btn" data-i18n="save">Сохранить</button>
+                  <button id="clear_state_btn" data-i18n="clear">Очистить</button>
+                </div>
+              </div>
+            </fieldset>
+          </div>
+        </div>
+
+        <div class="top-left">
+          <h2 data-i18n="basic_metrics">Базовые метрики</h2>
+          <fieldset id="basic_metrics">
+            <div id="basic_metrics_grid" class="grid-table">
+              <div class="grid-body" id="basic_metrics_grid_body">
+                <div class="grid-row" style="padding-bottom: 0px !important;">
+                  <label for="a_combobox" data-i18n="company_industry">Отрасль атакованной компании</label>
+                  <label style="grid-column: 2 / 5;" data-i18n="market_access_cost">Стоимость доступа на черном рынке ($)</label>
+                </div>
+                <div class="grid-row" style="padding-top: 8px !important;">
+                  <div>
+                    <select id="a_combobox"></select>
+                  </div>
+                  <div class="input-wrapper">
+                    <input type="text" id="a_min" class="readonly" readonly>
+                    <label for="a_min" class="input-label" data-i18n="min">min</label>
+                  </div>
+                  <div class="input-wrapper">
+                    <input type="text" id="a_med" class="readonly" readonly>
+                    <label for="a_med" class="input-label" data-i18n="med">med</label>
+                  </div>
+                  <div class="input-wrapper">
+                    <input type="text" id="a_max" class="readonly" readonly>
+                    <label for="a_max" class="input-label" data-i18n="max">max</label>
+                  </div>
+                </div>
+                <div class="grid-row">
+                  <div>
+                    <label for="b_combobox" data-i18n="cyber_security_maturity">Зрелость ИБ</label>
+                    <select id="b_combobox"></select>
+                  </div>
+                  <div>
+                    <label data-i18n="coefficient">Коэффициент:</label>
+                    <input type="text" id="b_entry" class="readonly" readonly>
+                  </div>
+                  <div></div>
+                  <div></div>
+                </div>
+                <div class="grid-row">
+                  <div>
+                    <label for="c_combobox" data-i18n="countermeasures">Противодействие</label>
+                    <select id="c_combobox"></select>
+                  </div>
+                  <div>
+                    <label data-i18n="coefficient">Коэффициент</label>
+                    <input type="text" id="c_entry" class="readonly" readonly>
+                  </div>
+                  <div></div>
+                  <div></div>
+                </div>
+                <div class="grid-row">
+                  <div>
+                    <div class="help">
+                    <label for="skill_combobox" data-i18n="attacker_skill">Уровень квалификации атакующих</label><div style="display:flex; align-items:flex-end; padding-bottom:4px;">
+                    <button id="skill_help_btn" aria-label="Help" title="" class="help-btn">i</button>
+                  </div>
+                    </div><select id="skill_combobox"></select>
+                  </div>
+
+                  <div>
+                    <label data-i18n="coefficient">Коэффициент</label>
+                    <div style="display:flex; align-items:center; gap:12px;">
+                      <input type="text" id="skill_entry" class="readonly" readonly style="width:100px;">
+                    </div>
+                  </div>
+
+
+                  
+
+                  <div></div>
+                </div>
+                <div class="grid-row">
+                  <div>
+                    <label for="period" data-i18n="attack_period">Период проведения работ/атаки</label>
+                    <input type="text" id="period" placeholder="Выберите период" data-i18n-placeholder="select_period">
+
+                  </div>
+                  <div>
+                    <label id="infra" data-i18n="service_cost" style="width: 120px">Стоимость ($)</label>
+                    <input type="text" id="result_date" class="readonly" readonly>
+                  </div>
+                  
+                </div>
+                <div class="grid-row" style="border-top: 1.6px solid rgba(216, 224, 235, 0.5);" >
+                  <div data-i18n="scope_collection_method" style="font-size: 20px;">
+                    Сбор скоупа и разведка
+                  </div>
+                  <div>
+                    <label  data-i18n="collection_time">Время(сутки)</label>
+                    <input type="text" id="d_time" class="time-input" value="20">
+                  </div>
+                  <div>
+                    <label data-i18n="collection_cost" style="width: 120px">Стоимость ($)</label>
+                    <input type="text" id="d_cost" class="readonly" readonly>
+                  </div>
+                  <div></div>
+                </div>
+                
+              </div>
+            </div>
+          </fieldset>
+
+          <h2 data-i18n="hacker_infra">Инфраструктура хакеров</h2>
+          <fieldset id="hacker_infra">
+            <div id="hacker_infra_grid" class="grid-table">
+              <div class="grid-header">
+                <div data-i18n="service">Сервис</div>
+                <div data-i18n="count">Количество</div>
+                <div data-i18n="cost">Стоимость ($)</div>
+              </div>
+              <div class="grid-body" id="hacker_infra_grid_body">
+              </div>
+            </div>
+          </fieldset>
+
+          <h2 data-i18n="attack_chain_title">Цепочка атаки хакеров</h2>
+          <fieldset id="dynamic_blocks">
+            <div id="blocks_container">
+            </div>
+          </fieldset>
+        </div>
+      </div>
+    </div>
+
+    <div id="tab-2" class="tab-content">
+      <div class="flex-top">
+        <div class="top-right">
+          <h3 data-i18n="total_exploit_cost">Общая стоимость эксплойтов ($)</h3>
+          <fieldset id="final_values">
+            <div class="last-price">
+              <div class="input-wrapper">
+                <input type="text" id="final_min" class="readonly" readonly>
+                <label for="final_min" class="input-label" data-i18n="min">min</label>
+              </div>
+              <div class="input-wrapper">
+                <input type="text" id="final_med" class="readonly" readonly>
+                <label for="final_med" class="input-label" data-i18n="med">med</label>
+              </div>
+              <div class="input-wrapper">
+                <input type="text" id="final_max" class="readonly" readonly>
+                <label for="final_max" class="input-label" data-i18n="max">max</label>
+              </div>
+            </div>
+          </fieldset>
+    
+          <h2 data-i18n="total_values">Итоговые значения</h2>
+          <fieldset id="results-fieldset-tab2">
+            <div>
+              <label for="entry_t_d_tab2" data-i18n="time_in_days">Время в сутках</label>
+              <input type="text" id="entry_t_d_tab2" class="readonly" readonly>
+              <label for="entry_t_h_tab2" data-i18n="time_in_hours">Время в часах</label>
+              <input type="text" id="entry_t_h_tab2" class="readonly" readonly>
+              <label data-i18n="attack_cost">Итоговая стоимость атаки($)</label>
+              <div class="last-price">
+                <div class="input-wrapper">
+                  <input type="text" id="entry_s_f_tab2" class="readonly" readonly>
+                  <label for="entry_s_f_tab2" class="input-label" data-i18n="min">min</label>
+                </div>
+                <div class="input-wrapper">
+                  <input type="text" id="entry_m_f_tab2" class="readonly" readonly>
+                  <label for="entry_m_f_tab2" class="input-label" data-i18n="med">med</label>
+                </div>
+                <div class="input-wrapper">
+                  <input type="text" id="entry_l_f_tab2" class="readonly" readonly>
+                  <label for="entry_l_f_tab2" class="input-label" data-i18n="max">max</label>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+        </div>
+    
+        <div class="top-left">
+          <fieldset id="vulnerability_blocks">
+            <div id="vuln_container">
+              
+            </div>
+            <button id="add_vuln_block" data-i18n="add_vuln_block">Добавить блок уязвимости</button>
+          </fieldset>
+        </div>
+      </div>
+    </div>
+
+    <div id="tab-3" class="tab-content">
+      <h2 data-i18n="saved_calculations">Сохраненные расчеты</h2>
+      <div style="display: flex; justify-content: space-between; align-items: center; width: 788px;">
+      <div class="export-import-buttons">
+        <button id="export_state_btn" data-i18n="export">Экспорт</button>
+        <button id="import_state_btn" data-i18n="import">Импорт</button>
+      </div>
+      <button id="clear_saves_btn" data-i18n="clear_saves_btn">Удалить сохранения<img src="img/trash1.svg" alt="Удалить" style="width:20px; height:20px;"></button></div>
+      <ul id="saved_list">
+      </ul>
+    </div>
+  </div>
+  
+  <script>
+    var currentLang = localStorage.getItem("currentLang") || "en";
+    var skillAlertText = {
+      ru: "После подсчета вектора необходимо выставить квалификацию атакующих в соответствии с самым сложным шагом, который присутствовал в векторе.\nНапример, вы оценили вектор из трех шагов следующим образом:\nШаг 1 - Базовая\nШаг 2 - Базовая\nШаг 3 - Экспертная\nТаким образом, общая квалификация команды должна быть оценена, как экспертная.",
+      en: "After calculating the vector, you should set the attackers' qualification according to the most complex step present in the vector.\nFor example, you assessed a 3-step vector as follows:\nStep 1 - Basic\nStep 2 - Basic\nStep 3 - Expert\nThus, the overall team qualification should be assessed as Expert."
+    };
+    var uiTranslations = {
+      "select_period": { ru: "Выберите период", en: "Select Period" },
+      "attacker_skill": { ru: "Уровень квалификации атакующих", en: "Attacker Qualification Level" },
+      "tab1": { ru: "Основная вкладка", en: "Main Tab" },
+      "tab2": { ru: "1-day/0-day уязвимость", en: "1-day/0-day Vulnerability" },
+      "tab3": { ru: "Сохранения", en: "Saved Calculations" },
+      "metrics": { ru: "Метрики", en: "Metrics" },
+      "infrastructure": { ru: "Инфраструктура", en: "Infrastructure" },
+      "attack_chain": { ru: "Цепь атаки", en: "Attack Chain" },
+      "total_values": { ru: "Итоговые значения", en: "Total Values" },
+      "time_days": { ru: "Время<br>(в сутках)", en: "Time<br>(in days)" },
+      "time_hours": { ru: "Время<br>(в часах)", en: "Time<br>(in hours)" },
+      "attack_cost": { ru: "Итоговая стоимость атаки ($)", en: "Total Attack Cost ($)" },
+      "min": { ru: "min", en: "min" },
+      "med": { ru: "med", en: "med" },
+      "max": { ru: "max", en: "max" },
+      "minimum": { ru: "Минимальная", en: "Minimum" },
+      "medium": { ru: "Средняя", en: "Medium" },
+      "maximum": { ru: "Максимальная", en: "Maximum" },
+      "save": { ru: "Сохранить", en: "Save" },
+      "clear": { ru: "Очистить", en: "Clear" },
+      "clear_saves_btn":{ru: "Удалить сохранения", en:"Delete saves"},
+      "cost": {ru: "Стоимость ($)", en:"Cost ($)"},
+      "count": {ru: "Количество", en: "Count"},
+      "basic_metrics": { ru: "Базовые метрики", en: "Basic Metrics" },
+      "company_industry": { ru: "Отрасль атакованной компании", en: "Target Company Industry" },
+      "market_access_cost": { ru: "Стоимость доступа на черном рынке ($)", en: "Black Market Access Cost ($)" },
+      "cyber_security_maturity": { ru: "Зрелость ИБ", en: "Cybersecurity Maturity" },
+      "coefficient": { ru: "Коэффициент", en: "Coefficient" },
+      "countermeasures": { ru: "Противодействие", en: "Countermeasures" },
+      "scope_collection_method": { ru: "Сбор скоупа и разведка", en: "Scope collection and reconnaissance" },
+      "collection_time": { ru: "Время(сутки)", en: "Time (days)" },
+      "collection_cost": { ru: "Стоимость ($)", en: "Cost ($)" },
+      "attack_period": { ru: "Период проведения работ/атаки", en: "Attack/Work Period" },
+      "select_period": { ru: "Выберите период", en: "Select Period" },
+      "service_cost": { ru: "Стоимость ($)", en: "Cost ($)" },
+      "hacker_infra": { ru: "Инфраструктура хакеров", en: "Hacker Infrastructure" },
+      "service": { ru: "Сервис", en: "Service" },
+      "attack_chain_title": { ru: "Цепочка атаки хакеров", en: "Hacker Attack Chain" },
+      "total_exploit_cost": { ru: "Общая стоимость эксплойтов ($)", en: "Total Exploit Cost ($)" },
+      "time_in_days": { ru: "Время в сутках", en: "Time in Days" },
+      "time_in_hours": { ru: "Время в часах", en: "Time in Hours" },
+      "add_vuln_block": { ru: "Добавить блок уязвимости", en: "Add Vulnerability Block" },
+      "saved_calculations": { ru: "Сохраненные расчеты", en: "Saved Calculations" },
+      "export": { ru: "Экспорт", en: "Export" },
+      "import": { ru: "Импорт", en: "Import" }
+    };
+
+    function updateStaticTexts() {
+  $('[data-i18n]').each(function(){
+    var key = $(this).attr('data-i18n');
+    if (uiTranslations[key] && uiTranslations[key][currentLang]) {
+      $(this).html(uiTranslations[key][currentLang]);
+    }
+  });
+  $('[data-i18n-placeholder]').each(function(){
+    var key = $(this).data('i18n-placeholder');
+    if (uiTranslations[key] && uiTranslations[key][currentLang]) {
+      $(this).attr('placeholder', uiTranslations[key][currentLang]);
+    }
+  });
+}
+      function getSkillMultiplier() {
+        var k = $("#skill_combobox").val();
+        if (!k || !DATA_SKILL[k]) return 300; 
+        return DATA_SKILL[k].multiplier;
+      }
+
+    function repopulateDropdowns() {
+
+      $("#a_combobox").empty();
+      for (var key in DATA_A) {
+        $("#a_combobox").append($("<option></option>")
+          .val(key)
+          .text(DATA_A[key].translations[currentLang]));
+      }
+      $("#a_combobox").val(Object.keys(DATA_A)[0]).trigger("change");
+
+      $("#b_combobox").empty();
+      for (var key in DATA_B) {
+        $("#b_combobox").append($("<option></option>")
+          .val(key)
+          .text(DATA_B[key].translations[currentLang]));
+      }
+      $("#b_combobox").val(Object.keys(DATA_B)[0]).trigger("change");
+
+      $("#c_combobox").empty();
+      for (var key in DATA_C) {
+        $("#c_combobox").append($("<option></option>")
+          .val(key)
+          .text(DATA_C[key].translations[currentLang]));
+      }
+      $("#c_combobox").val(Object.keys(DATA_C)[0]).trigger("change");
+      $("#skill_combobox").empty();
+      for (var key in DATA_SKILL) {
+        var $opt = $("<option></option>")
+          .val(key)
+          .text(DATA_SKILL[key].translations[currentLang]);
+
+        if (key === "special_services") { 
+          $opt.prop("disabled", true); 
+        }
+        $("#skill_combobox").append($opt);
+      }
+      
+      $("#skill_combobox").val("basic").trigger("change");
+    }
+    
+
+    var DATA_A = {
+      blockchain_projects: {
+        translations: { ru: "Блокчейн-проекты", en: "Blockchain Projects" },
+        values: [150, 3200, 13600]
+      },
+      government_institutions: {
+        translations: { ru: "Госучреждения", en: "Government Institutions" },
+        values: [30, 2000, 50000]
+      },
+      medical_institutions: {
+        translations: { ru: "Медицинские учреждения", en: "Medical Institutions" },
+        values: [75, 530, 3500]
+      },
+      service_sector: {
+        translations: { ru: "Сфера услуг", en: "Service Sector" },
+        values: [50, 1900, 30000]
+      },
+      finance: {
+        translations: { ru: "Финансы", en: "Finance" },
+        values: [20, 3250, 50000]
+      },
+      IT: {
+        translations: { ru: "IT", en: "IT" },
+        values: [100, 5500, 80000]
+      },
+      industry: {
+        translations: { ru: "Промышленность", en: "Industry" },
+        values: [50, 1283, 10000]
+      },
+      science_and_education: {
+        translations: { ru: "Наука и образование", en: "Science and Education" },
+        values: [15, 1900, 15000]
+      },
+      transport: {
+        translations: { ru: "Транспорт", en: "Transport" },
+        values: [50, 1870, 18000]
+      },
+      telecommunications: {
+        translations: { ru: "Телекоммуникации", en: "Telecommunications" },
+        values: [200, 2100, 25000]
+      },
+      defense_enterprises: {
+        translations: { ru: "Оборонные предприятия", en: "Defense Enterprises" },
+        values: [80, 1500, 5000]
+      },
+      trade: {
+        translations: { ru: "Торговля", en: "Trade" },
+        values: [25, 1100, 24000]
+      },
+      media: {
+        translations: { ru: "СМИ", en: "Media" },
+        values: [50, 1000, 5000]
+      },
+      online_services: {
+        translations: { ru: "Онлайн-сервисы", en: "Online Services" },
+        values: [100, 3000, 22000]
+      },
+      others: {
+        translations: { ru: "Другие", en: "Others" },
+        values: [100, 1400, 4000]
+      }
+    };
+    var DATA_SKILL = {
+      basic: {
+        translations: { ru: "Базовый", en: "Basic" },
+        multiplier: 200    
+      },
+      basic_plus: {
+        translations: { ru: "Базовый +", en: "Basic +" },
+        multiplier: 300
+      },
+      advanced: {
+        translations: { ru: "Продвинутый", en: "Advanced" },
+        multiplier: 500
+      },
+      expert: {
+        translations: { ru: "Экспертный", en: "Expert" },
+        multiplier: 1000
+      },
+      special_services: {
+        translations: { ru: "Спец. службы", en: "Security service" },
+        multiplier: 1000 
+      }
+    };
+
+    var SKILL_ORDER = {
+      basic: 1,
+      basic_plus: 2,
+      advanced: 3,
+      expert: 4,
+      special_services: 5 
+    };
+
+
+    function getQualificationRank(val) {
+
+      if (val === "basic") return 1;
+      if (val === "basic_plus") return 2;
+      if (val === "advanced") return 3;
+      if (val === "top") return 4; 
+      return 1;
+    }
+
+    function getAttackerSkillRank() {
+      var key = $("#skill_combobox").val() || "basic";
+      return SKILL_ORDER[key] || 1;
+    }
+
+    var DATA_B = {
+      no_security_measures: {
+        translations: { ru: "Отсутствуют меры ИБ и/или выделенное подразделение/не учитываем", en: "No cybersecurity measures/dedicated department (not considered)" },
+        value: "1"
+      },
+      partial_SOC: {
+        translations: { ru: "Частичный SOC, базовые средства защиты (WAF, EDR)", en: "Partial SOC, basic security tools (WAF, EDR)" },
+        value: "1,4"
+      },
+      full_SOC: {
+        translations: { ru: "Полноценный SOC, сегментация сетей усиленные меры", en: "Full-fledged SOC, network segmentation, enhanced measures" },
+        value: "1,9"
+      },
+      comprehensive_security: {
+        translations: { ru: "Полное покрытие безопасности, регулярный Red Teaming, Bug Bounty", en: "Comprehensive security coverage, regular red teaming, bug bounty" },
+        value: "2,5"
+      }
+    };
+
+    var DATA_C = {
+      countermeasures_not_considered: {
+        translations: { ru: "Противодействие не учитывалось", en: "Countermeasures were not considered" },
+        value: "1"
+      },
+      no_countermeasures: {
+        translations: { ru: "Противодействие отсутствовало", en: "No countermeasures" },
+        value: "0,8"
+      },
+      countermeasures_no_effect: {
+        translations: { ru: "Противодействие оказало минимальное влияние на кибератаку, максимальный ущерб", en: "Countermeasures had minimal impact on the cyberattack, maximum damage" },
+        value: "1,1"
+      },
+      countermeasures_temp_stop_all: {
+        translations: { ru: "Противодействие оказало значительное влияние на кибератаку, часть ущерба предотвращена", en: "Countermeasures had a significant impact on the cyberattack, some of the damage was prevented" },
+        value: "1,4"
+      },
+      countermeasures_stop_some: {
+        translations: { ru: "Противодействие полностью остановило кибератаку до нанесения значимого ущерба", en: "Countermeasures completely stopped the cyberattack before any meaningful damage was done" },
+        value: "1,7"
+      }
+    };
+
+    var DATA_BUTTONS_1_14 = {
+      C2_servers: {
+        translations: { ru: "C2-серверы", en: "C2 Servers" },
+        values: [1, 4, 54]
+      },
+      stealers: {
+        translations: { ru: "Cтилеры", en: "Stealers" },
+        values: [5, 400, 100000]
+      },
+      remote_admin_tools: {
+        translations: { ru: "Инструменты удаленного<br> админ. (RAT)", en: "Remote Administration Tools" },
+        values: [250, 2000, 100000]
+      },
+      ransomware: {
+        translations: { ru: "Шифровальщики", en: "Ransomware" },
+        values: [100, 2275, 7500]
+      },
+      VPS_VDS: {
+        translations: { ru: "VPS/VDS", en: "VPS/VDS" },
+        values: [3, 12, 220]
+      },
+      VPN: {
+        translations: { ru: "VPN", en: "VPN" },
+        values: [1, 20, 44]
+      },
+      proxy_servers: {
+        translations: { ru: "Прокси-серверы", en: "Proxy Servers" },
+        values: [1, 4, 21]
+      },
+      rootkits: {
+        translations: { ru: "Руткиты", en: "Rootkits" },
+        values: [50, 5000, 40000]
+      },
+      cobalt_strike: {
+        translations: { ru: "Cobalt Strike", en: "Cobalt Strike" },
+        values: [400, 2500, 6000]
+      },
+      nessus: {
+        translations: { ru: "Nessus (или аналоги)", en: "Nessus (or Equivalents)" },
+        values: [500, 2600, 5000]
+      },
+      phishing_kits: {
+        translations: { ru: "Фишинговые наборы", en: "Phishing Kits" },
+        values: [50, 190, 10000]
+      },
+      phishing_pages: {
+        translations: { ru: "Фишинговые страницы", en: "Phishing Pages" },
+        values: [10, 230, 2500]
+      },
+      bruteforce_farms: {
+        translations: { ru: "Фермы для брутфорса", en: "Brute-force Farms" },
+        values: [200, 3000, 5000]
+      },
+      wireless_attack_kits: {
+        translations: { ru: "Набор для атак <br> на беспроводные сети", en: "Wireless Network<br> Attack Kits" },
+        values: [100, 300, 500]
+      },
+    };
+
+    var COMBO_FACTORS = {
+      basic: {
+        translations: { ru: "Базовая", en: "Basic" },
+        values: [8, 9, 10]
+      },
+      basic_plus: {
+        translations: { ru: "Базовая +", en: "Basic +" },
+        values: [11, 13, 15]
+      },
+      advanced: {
+        translations: { ru: "Продвинутая", en: "Advanced" },
+        values: [16, 22, 28]
+      },
+      top: {
+        translations: { ru: "Топ", en: "Top" },
+        values: [30, 36, 42]
+      }
+    };
+
+    var spread_map = {
+      local: {
+        translations: { ru: "Локальное", en: "Local" },
+        value: 500
+      },
+      niche: {
+        translations: { ru: "Узкоспециализированное", en: "Niche" },
+        value: 3000
+      },
+      regional: {
+        translations: { ru: "Региональное", en: "Regional" },
+        value: 5000
+      },
+      widely_used: {
+        translations: { ru: "Широко используемое", en: "Widely Used" },
+        value: 15000
+      },
+      mass: {
+        translations: { ru: "Массовое", en: "Mass" },
+        value: 50000
+      },
+      systemic: {
+        translations: { ru: "Системное", en: "Systemic" },
+        value: 100000
+      }
+    };
+
+    var vuln_map = {
+      code_execution: {
+        translations: { ru: "Выполнение кода", en: "Code Execution" },
+        value: 8
+      },
+      privilege_escalation: {
+        translations: { ru: "Повышение привилегий", en: "Privilege Escalation" },
+        value: 6
+      },
+      information_disclosure: {
+        translations: { ru: "Утечка информации", en: "Information Disclosure" },
+        value: 4
+      },
+      other: {
+        translations: { ru: "Другое", en: "Other" },
+        value: 1
+      }
+    };
+
+    var TECHNIQUE_TIMES = {
+      active_scanning: {
+        translations: { ru: "Активное сканирование (T1595)", en: "Active Scanning (T1595)" },
+        values: [4, 0]
+      },
+      target_nodes_info: {
+        translations: { ru: "Сбор информации об атакуемых узлах (T1592)", en: "Gather Victim Host Information (T1592)" },
+        values: [4, 0]
+      },
+      target_users_info: {
+        translations: { ru: "Сбор информации об атакуемых пользователях (T1589)", en: "Gather Victim Identity Information (T1589)" },
+        values: [8, 0]
+      },
+      network_infra_info: {
+        translations: { ru: "Сбор информации об атакуемой сетевой инфраструктуре (T1590)", en: "Gather Victim Network Information (T1590)" },
+        values: [4, 0]
+      },
+      business_info: {
+        translations: { ru: "Сбор бизнес-информации об атакуемой организации (T1591)", en: "Gather Victim Org Information (T1591)" },
+        values: [8, 0]
+      },
+      phishing_for_info: {
+        translations: { ru: "Фишинг с целью сбора сведений (T1598)", en: "Phishing for Information (T1598)" },
+        values: [48, 0]
+      },
+      search_closed_sources: {
+        translations: { ru: "Поиск в закрытых источниках (T1597)", en: "Search Closed Sources (T1597)" },
+        values: [120, 0]
+      },
+      search_public_tech_info: {
+        translations: { ru: "Поиск технической информации в общедоступных источниках (T1596)", en: "Search Open Technical Databases (T1596)" },
+        values: [2, 0]
+      },
+      search_public_websites: {
+        translations: { ru: "Поиск на общедоступных сайтах (T1593)", en: "Search Open Websites/Domains (T1593)" },
+        values: [2, 0]
+      },
+      search_target_website: {
+        translations: { ru: "Поиск на сайтах атакуемой организации (T1594)", en: "Search Victim-Owned Websites (T1594)" },
+        values: [2, 0]
+      },
+      purchase_access: {
+        translations: { ru: "Приобретение доступа (T1650)", en: "Acquire Access (T1650)" },
+        values: [12, 0]
+      },
+      purchase_infra: {
+        translations: { ru: "Приобретение инфраструктуры (T1583)", en: "Acquire Infrastructure (T1583)" },
+        values: [2, 0]
+      },
+      compromise_accounts: {
+        translations: { ru: "Компрометация учетных записей (T1586)", en: "Compromise Accounts (T1586)" },
+        values: [2, 0]
+      },
+      compromise_third_party_infra: {
+        translations: { ru: "Компрометация сторонней инфраструктуры (T1584)", en: "Compromise Infrastructure (T1584)" },
+        values: [4, 0]
+      },
+      develop_custom_tools: {
+        translations: { ru: "Разработка собственных средств (T1587)", en: "Develop Capabilities (T1587)" },
+        values: [72, 0]
+      },
+      create_accounts: {
+        translations: { ru: "Создание учетных записей (T1585)", en: "Establish Accounts (T1585)" },
+        values: [0, 10]
+      },
+      prepare_required_tools: {
+        translations: { ru: "Подготовка необходимых средств (T1588)", en: "Obtain Capabilities (T1588)" },
+        values: [1, 0]
+      },
+      deploy_tools: {
+        translations: { ru: "Размещение средств (T1608)", en: "Stage Capabilities (T1608)" },
+        values: [0, 30]
+      },
+      content_injection: {
+        translations: { ru: "Внедрение контента (T1659)", en: "Content Injection (T1659)" },
+        values: [2, 0]
+      },
+      drive_by_compromise: {
+        translations: { ru: "Теневая (drive-by) компрометация (T1189)", en: "Drive-by Compromise (T1189)" },
+        values: [2, 0]
+      },
+      public_app_vulnerabilities: {
+        translations: { ru: "Недостатки в общедоступном приложении (T1190)", en: "Exploit Public-Facing Application (T1190)" },
+        values: [4, 0]
+      },
+      external_remote_services: {
+        translations: { ru: "Внешние службы удаленного доступа (T1133)", en: "External Remote Services (T1133)" },
+        values: [0, 30]
+      },
+      connect_additional_devices: {
+        translations: { ru: "Подключение дополнительных устройств (T1200)", en: "Hardware Additions (T1200)" },
+        values: [24, 0]
+      },
+      phishing: {
+        translations: { ru: "Фишинг (T1566)", en: "Phishing (T1566)" },
+        values: [24, 0]
+      },
+      removable_media_propagation: {
+        translations: { ru: "Распространение через съемные носители (T1091)", en: "Replication Through Removable Media (T1091)" },
+        values: [4, 0]
+      },
+      supply_chain_compromise: {
+        translations: { ru: "Компрометация цепочки поставок (T1195)", en: "Supply Chain Compromise (T1195)" },
+        values: [168, 0]
+      },
+      trusted_relationships: {
+        translations: { ru: "Доверительные отношения (T1199)", en: "Trusted Relationships (T1199)" },
+        values: [48, 0]
+      },
+      existing_accounts: {
+        translations: { ru: "Существующие учетные записи (T1078)", en: "Valid Accounts (T1078)" },
+        values: [0, 30]
+      },
+      cloud_admin_tools: {
+        translations: { ru: "Средства администрирования облака (T1651)", en: "Cloud Administration Command (T1651)" },
+        values: [0, 15]
+      },
+      command_line_interpreters: {
+        translations: { ru: "Интерпретаторы командной строки и сценариев (T1059)", en: "Command and Scripting Interpreter (T1059)" },
+        values: [0, 5]
+      },
+      container_admin_tools: {
+        translations: { ru: "Средства администрирования контейнера (T1609)", en: "Container Administration Command (T1609)" },
+        values: [0, 15]
+      },
+      container_deployment: {
+        translations: { ru: "Развертывание контейнера (T1610)", en: "Deploy Container (T1610)" },
+        values: [0, 15]
+      },
+      exploit_client_vuln: {
+        translations: { ru: "Эксплуатация уязвимостей в клиентском ПО (T1203)", en: "Exploitation for Client Execution (T1203)" },
+        values: [4, 0]
+      },
+      interprocess_comm: {
+        translations: { ru: "Межпроцессное взаимодействие (T1559)", en: "Inter-Process Communication (T1559)" },
+        values: [0, 5]
+      },
+      native_API: {
+        translations: { ru: "Нативный API (T1106)", en: "Native API (T1106)" },
+        values: [0, 5]
+      },
+      scheduled_task: {
+        translations: { ru: "Запланированная задача (T1053)", en: "Scheduled Task/Job (T1053)" },
+        values: [0, 5]
+      },
+      serverless_execution: {
+        translations: { ru: "Бессерверное выполнение (T1648)", en: "Serverless Execution (T1648)" },
+        values: [0, 15]
+      },
+      common_modules: {
+        translations: { ru: "Общие модули (T1129)", en: "Shared Modules (T1129)" },
+        values: [0, 30]
+      },
+      software_deployment_tools: {
+        translations: { ru: "Средства развертывания ПО (T1072)", en: "Software Deployment Tools (T1072)" },
+        values: [1, 0]
+      },
+      system_services: {
+        translations: { ru: "Системные службы (T1569)", en: "System Services (T1569)" },
+        values: [0, 5]
+      },
+      user_involved_execution: {
+        translations: { ru: "Выполнение с участием пользователя (T1204)", en: "User Execution (T1204)" },
+        values: [24, 0]
+      },
+      windows_management_tools: {
+        translations: { ru: "Инструментарий управления Windows (T1047)", en: "Windows Management Instrumentation (T1047)" },
+        values: [0, 5]
+      },
+      account_manipulation: {
+        translations: { ru: "Манипуляции с учетной записью (T1098)", en: "Account Manipulation (T1098)" },
+        values: [2, 0]
+      },
+      BITS_jobs: {
+        translations: { ru: "Задания BITS (T1197)", en: "BITS Jobs (T1197)" },
+        values: [2, 0]
+      },
+      boot_or_logon_autostart: {
+        translations: { ru: "Автозапуск при загрузке или входе в систему (T1547)", en: "Boot or Logon Autostart Execution (T1547)" },
+        values: [2, 0]
+      },
+      boot_or_logon_init_scripts: {
+        translations: { ru: "Сценарии инициализации при загрузке или входе в систему (T1037)", en: "Boot or Logon Initialization Scripts (T1037)" },
+        values: [2, 0]
+      },
+      browser_extensions: {
+        translations: { ru: "Расширения браузеров (T1176)", en: "Browser Extensions (T1176)" },
+        values: [4, 0]
+      },
+      compromise_host_software_binary: {
+        translations: { ru: "Компрометация бинарных файлов ПО узла (T1554)", en: "Compromise Host Software Binary (T1554)" },
+        values: [4, 0]
+      },
+      create_account: {
+        translations: { ru: "Создание учетной записи (T1136)", en: "Create Account (T1136)" },
+        values: [0, 30]
+      },
+      create_or_modify_system_process: {
+        translations: { ru: "Создание или изменение системных процессов (T1543)", en: "Create or Modify System Process (T1543)" },
+        values: [4, 0]
+      },
+      event_triggered_execution: {
+        translations: { ru: "Выполнение по событию (T1546)", en: "Event Triggered Execution (T1546)" },
+        values: [4, 0]
+      },
+      hijack_execution_flow: {
+        translations: { ru: "Перехват потока исполнения (T1574)", en: "Hijack Execution Flow (T1574)" },
+        values: [4, 0]
+      },
+      implant_internal_image: {
+        translations: { ru: "Внедрение кода в образ (T1525)", en: "Implant Internal Image (T1525)" },
+        values: [24, 0]
+      },
+      modify_auth_process: {
+        translations: { ru: "Изменение процесса аутентификации (T1556)", en: "Modify Authentication Process (T1556)" },
+        values: [48, 0]
+      },
+      office_app_startup: {
+        translations: { ru: "Запуск приложения Office (T1137)", en: "Office Application Startup (T1137)" },
+        values: [4, 0]
+      },
+      power_settings: {
+        translations: { ru: "Настройки питания (T1653)", en: "Power Settings (T1653)" },
+        values: [4, 0]
+      },
+      pre_OS_boot: {
+        translations: { ru: "Загрузка раньше ОС (T1542)", en: "Pre-OS Boot (T1542)" },
+        values: [48, 0]
+      },
+      server_software_component: {
+        translations: { ru: "Компонент серверного ПО (T1505)", en: "Server Software Component (T1505)" },
+        values: [24, 0]
+      },
+      traffic_signaling: {
+        translations: { ru: "Передача управляющих сигналов в трафике (T1205)", en: "Traffic Signaling (T1205)" },
+        values: [24, 0]
+      },
+      abuse_elevation_control_mechanism: {
+        translations: { ru: "Обход механизмов контроля привилегий (T1548)", en: "Abuse Elevation Control Mechanism (T1548)" },
+        values: [4, 0]
+      },
+      access_token_manipulation: {
+        translations: { ru: "Манипуляции с токенами доступа (T1134)", en: "Access Token Manipulation (T1134)" },
+        values: [2, 0]
+      },
+      domain_or_tenant_policy_modification: {
+        translations: { ru: "Изменение политики домена или тенант (T1484)", en: "Domain or Tenant Policy Modification (T1484)" },
+        values: [48, 0]
+      },
+      escape_to_host: {
+        translations: { ru: "Выход за пределы контейнера (T1611)", en: "Escape to Host (T1611)" },
+        values: [24, 0]
+      },
+      exploitation_for_privilege_escalation: {
+        translations: { ru: "Эксплуатация уязвимостей для повышения привилегий (T1068)", en: "Exploitation for Privilege Escalation (T1068)" },
+        values: [24, 0]
+      },
+      process_injection: {
+        translations: { ru: "Внедрение кода в процессы (T1055)", en: "Process Injection (T1055)" },
+        values: [4, 0]
+      },
+      build_image_on_host: {
+        translations: { ru: "Создание образа на узле (T1612)", en: "Build Image on Host (T1612)" },
+        values: [4, 0]
+      },
+      debugger_evasion: {
+        translations: { ru: "Предотвращение отладки (T1622)", en: "Debugger Evasion (T1622)" },
+        values: [2, 0]
+      },
+      deobfuscate_decode_files: {
+        translations: { ru: "Деобфускация или декодирование файлов или данных (T1140)", en: "Deobfuscate/Decode Files or Information (T1140)" },
+        values: [1, 0]
+      },
+      direct_volume_access: {
+        translations: { ru: "Прямой доступ к тому (T1006)", en: "Direct Volume Access (T1006)" },
+        values: [2, 0]
+      },
+      execution_guardrails: {
+        translations: { ru: "Ограничсения на исполнение (T1480)", en: "Execution Guardrails (T1480)" },
+        values: [4, 0]
+      },
+      exploitation_for_defense_evasion: {
+        translations: { ru: "Эксплуатация уязвимостей для предотвращения обнаружения (T1211)", en: "Exploitation for Defense Evasion (T1211)" },
+        values: [24, 0]
+      },
+      file_directory_permissions_modification: {
+        translations: { ru: "Изменение разрещений для файлов и каталогов (T1222)", en: "File and Directory Permissions Modification (T1222)" },
+        values: [2, 0]
+      },
+      hide_artifacts: {
+        translations: { ru: "Сокрытие артефактов (T1564)", en: "Hide Artifacts (T1564)" },
+        values: [4, 0]
+      },
+      impair_defenses: {
+        translations: { ru: "Ослабление защиты (T1562)", en: "Impair Defenses (T1562)" },
+        values: [4, 0]
+      },
+      impersonation: {
+        translations: { ru: "Имперсонация (T1656)", en: "Impersonation (T1656)" },
+        values: [4, 0]
+      },
+      indicator_removal: {
+        translations: { ru: "Устранение индикаторов (T1070)", en: "Indicator Removal (T1070)" },
+        values: [4, 0]
+      },
+      indirect_command_execution: {
+        translations: { ru: "Непрямое выполнение команд (T1202)", en: "Indirect Command Execution (T1202)" },
+        values: [2, 0]
+      },
+      masquerading: {
+        translations: { ru: "Маскировка (T1036)", en: "Masquerading (T1036)" },
+        values: [4, 0]
+      },
+      modify_cloud_resource_hierarchy: {
+        translations: { ru: "Изменение облачной вычислительной инфраструктуры (T1666)", en: "Modify Cloud Resource Hierarchy (T1666)" },
+        values: [48, 0]
+      },
+      modify_registry: {
+        translations: { ru: "Изменение реестра (T1112)", en: "Modify Registry (T1112)" },
+        values: [2, 0]
+      },
+      modify_system_image: {
+        translations: { ru: "Изменение образа системы (T1601)", en: "Modify System Image (T1601)" },
+        values: [48, 0]
+      },
+      network_boundary_bridging: {
+        translations: { ru: "Преодоление границ сети (T1599)", en: "Network Boundary Bridging (T1599)" },
+        values: [48, 0]
+      },
+      obfuscated_files_or_information: {
+        translations: { ru: "Обфусцированные файлы или данные (T1027)", en: "Obfuscated Files or Information (T1027)" },
+        values: [4, 0]
+      },
+      plist_file_modification: {
+        translations: { ru: "Изменения файла PLIST (T1647)", en: "Plist File Modification (T1647)" },
+        values: [4, 0]
+      },
+      reflective_code_loading: {
+        translations: { ru: "Отраженная загрузка кода (T1620)", en: "Reflective Code Loading (T1620)" },
+        values: [4, 0]
+      },
+      rogue_domain_controller: {
+        translations: { ru: "Поддельный контроллер домена (T1207)", en: "Rogue Domain Controller (T1207)" },
+        values: [48, 0]
+      },
+      rootkit: {
+        translations: { ru: "Руткит (T1014)", en: "Rootkit (T1014)" },
+        values: [120, 0]
+      },
+      subvert_trust_controls: {
+        translations: { ru: "Нарушение работы средств контроля доверия (T1553)", en: "Subvert Trust Controls (T1553)" },
+        values: [48, 0]
+      },
+      system_binary_proxy_execution: {
+        translations: { ru: "Выполнение с помощью системных бинарных файлов (T1218)", en: "System Binary Proxy Execution (T1218)" },
+        values: [4, 0]
+      },
+      system_script_proxy_execution: {
+        translations: { ru: "Выполнение через системный сценарий (T1216)", en: "System Script Proxy Execution (T1216)" },
+        values: [4, 0]
+      },
+      template_injection: {
+        translations: { ru: "Внедрение в шаблоны (T1221)", en: "Template Injection (T1221)" },
+        values: [4, 0]
+      },
+      trusted_developer_utils_proxy: {
+        translations: { ru: "Выполнение через доверенные утилиты разработчика (T1127)", en: "Trusted Developer Utilities Proxy Execution (T1127)" },
+        values: [4, 0]
+      },
+      unused_unsupported_cloud_regions: {
+        translations: { ru: "Облачные инфраструктуры в редко используемых регионах (T1535)", en: "Unused/Unsupported Cloud Regions (T1535)" },
+        values: [4, 0]
+      },
+      use_alternate_authentication_material: {
+        translations: { ru: "Использование альтернативных сущностей для аутентификации (T1550)", en: "Use Alternate Authentication Material (T1550)" },
+        values: [1, 0]
+      },
+      virtualization_sandbox_evasion: {
+        translations: { ru: "Обход виртуализации или песочницы (T1497)", en: "Virtualization/Sandbox Evasion (T1497)" },
+        values: [48, 0]
+      },
+      weaken_encryption: {
+        translations: { ru: "Понижение надежности шифрования (T1600)", en: "Weaken Encryption (T1600)" },
+        values: [48, 0]
+      },
+      xsl_script_processing: {
+        translations: { ru: "Использование сценариев XSL (T1220)", en: "XSL Script Processing (T1220)" },
+        values: [4, 0]
+      },
+      adversary_in_the_middle: {
+        translations: { ru: "Злоумышленник посередине (T1557)", en: "Adversary-in-the-Middle (T1557)" },
+        values: [4, 0]
+      },
+      brute_force: {
+        translations: { ru: "Метод перебора (T1110)", en: "Brute Force (T1110)" },
+        values: [24, 0]
+      },
+      credentials_from_password_stores: {
+        translations: { ru: "Учетные данные из хранилищ паролей (T1555)", en: "Credentials from Password Stores (T1555)" },
+        values: [1, 0]
+      },
+      exploitation_for_credential_access: {
+        translations: { ru: "Эксплуатация уязвимостей для получения учетных данных (T1212)", en: "Exploitation for Credential Access (T1212)" },
+        values: [24, 0]
+      },
+      forced_authentication: {
+        translations: { ru: "Принудительная аутентификация (T1187)", en: "Forced Authentication (T1187)" },
+        values: [2, 0]
+      },
+      forge_web_credentials: {
+        translations: { ru: "Подделка учетных данных для веб ресурсов (T1606)", en: "Forge Web Credentials (T1606)" },
+        values: [2, 0]
+      },
+      input_capture: {
+        translations: { ru: "Перехват вводимых данных (T1056)", en: "Input Capture (T1056)" },
+        values: [4, 0]
+      },
+      mfa_interception: {
+        translations: { ru: "Перехват многофакторной аутентификации (T1111)", en: "Multi‑Factor Authentication Interception (T1111)" },
+        values: [48, 0]
+      },
+      mfa_request_generation: {
+        translations: { ru: "Генерирование запросов многофакторной аутентификации (T1621)", en: "Multi‑Factor Authentication Request Generation (T1621)" },
+        values: [48, 0]
+      },
+      network_sniffing: {
+        translations: { ru: "Прослушивание сетевого трафика (T1040)", en: "Network Sniffing (T1040)" },
+        values: [4, 0]
+      },
+      os_credential_dumping: {
+        translations: { ru: "Получение дампа учетных данных (T1003)", en: "OS Credential Dumping (T1003)" },
+        values: [4, 0]
+      },
+      steal_application_access_tokens: {
+        translations: { ru: "Кража токена доступа к приложению (T1528)", en: "Steal Application Access Tokens (T1528)" },
+        values: [2, 0]
+      },
+      steal_web_session_cookie: {
+        translations: { ru: "Кража сессионных куки (T1539)", en: "Steal Web Session Cookie (T1539)" },
+        values: [2, 0]
+      },
+      steal_or_forge_auth_certificates: {
+        translations: { ru: "Кража или подделка сертификатов аутентификации (T1649)", en: "Steal or Forge Authentication Certificates (T1649)" },
+        values: [48, 0]
+      },
+      steal_or_forge_kerberos_tickets: {
+        translations: { ru: "Кража или подделка билетов Kerberos (T1558)", en: "Steal or Forge Kerberos Tickets (T1558)" },
+        values: [48, 0]
+      },
+      unsecured_credentials: {
+        translations: { ru: "Незащищенные учетные данные (T1552)", en: "Unsecured Credentials (T1552)" },
+        values: [2, 0]
+      },
+      account_discovery: {
+        translations: { ru: "Изучение учетных записей (T1087)", en: "Account Discovery (T1087)" },
+        values: [1, 0]
+      },
+      application_window_discovery: {
+        translations: { ru: "Изучение открытых приложений (T1010)", en: "Application Window Discovery (T1010)" },
+        values: [1, 0]
+      },
+      browser_information_discovery: {
+        translations: { ru: "Изучение браузера (T1217)", en: "Browser Information Discovery (T1217)" },
+        values: [1, 0]
+      },
+      cloud_infrastructure_discovery: {
+        translations: { ru: "Изучение облачной инфраструктуры (T1580)", en: "Cloud Infrastructure Discovery (T1580)" },
+        values: [2, 0]
+      },
+      cloud_service_dashboard: {
+        translations: { ru: "Дашборд облачного сервиса (T1538)", en: "Cloud Service Dashboard (T1538)" },
+        values: [2, 0]
+      },
+      cloud_service_discovery: {
+        translations: { ru: "Изучение облачных служб (T1526)", en: "Cloud Service Discovery (T1526)" },
+        values: [2, 0]
+      },
+      cloud_storage_object_discovery: {
+        translations: { ru: "Обнаружение объектов облачного хранилища (T1619)", en: "Cloud Storage Object Discovery (T1619)" },
+        values: [2, 0]
+      },
+      container_and_resource_discovery: {
+        translations: { ru: "Изучение контейнеров и их ресурсов (T1613)", en: "Container and Resource Discovery (T1613)" },
+        values: [2, 0]
+      },
+      device_driver_discovery: {
+        translations: { ru: "Изучение драйверов устройств (T1652)", en: "Device Driver Discovery (T1652)" },
+        values: [2, 0]
+      },
+      domain_trust_discovery: {
+        translations: { ru: "Изучение доверительных отношений между доменами (T1482)", en: "Domain Trust Discovery (T1482)" },
+        values: [4, 0]
+      },
+      file_and_directory_discovery: {
+        translations: { ru: "Изучение файлов и каталогов (T1083)", en: "File and Directory Discovery (T1083)" },
+        values: [4, 0]
+      },
+      group_policy_discovery: {
+        translations: { ru: "Изучение групповой политики (T1615)", en: "Group Policy Discovery (T1615)" },
+        values: [4, 0]
+      },
+      log_enumeration: {
+        translations: { ru: "Сбор журналов (T1654)", en: "Log Enumeration (T1654)" },
+        values: [4, 0]
+      },
+      network_service_discovery: {
+        translations: { ru: "Изучение сетевых служб (T1046)", en: "Network Service Discovery (T1046)" },
+        values: [4, 0]
+      },
+      network_share_discovery: {
+        translations: { ru: "Изучение общих сетевых ресурсов (T1135)", en: "Network Share Discovery (T1135)" },
+        values: [2, 0]
+      },
+      password_policy_discovery: {
+        translations: { ru: "Изучение парольной политики (T1201)", en: "Password Policy Discovery (T1201)" },
+        values: [2, 0]
+      },
+      peripheral_device_discovery: {
+        translations: { ru: "Изучение периферийных устройств (T1120)", en: "Peripheral Device Discovery (T1120)" },
+        values: [2, 0]
+      },
+      permission_groups_discovery: {
+        translations: { ru: "Изучение групп разрешений (T1069)", en: "Permission Groups Discovery (T1069)" },
+        values: [4, 0]
+      },
+      process_discovery: {
+        translations: { ru: "Изучение процессов (T1057)", en: "Process Discovery (T1057)" },
+        values: [2, 0]
+      },
+      query_registry: {
+        translations: { ru: "Запросы к реестру (T1012)", en: "Query Registry (T1012)" },
+        values: [1, 0]
+      },
+      remote_system_discovery: {
+        translations: { ru: "Изучение удаленных систем (T1018)", en: "Remote System Discovery (T1018)" },
+        values: [2, 0]
+      },
+      software_discovery: {
+        translations: { ru: "Изучение установленного ПО (T1518)", en: "Software Discovery (T1518)" },
+        values: [4, 0]
+      },
+      system_information_discovery: {
+        translations: { ru: "Изучение системы (T1082)", en: "System Information Discovery (T1082)" },
+        values: [2, 0]
+      },
+      system_location_discovery: {
+        translations: { ru: "Изучение местоположения системы (T1614)", en: "System Location Discovery (T1614)" },
+        values: [2, 0]
+      },
+      system_network_configuration_discovery: {
+        translations: { ru: "Изучение конфигурации сети (T1016)", en: "System Network Configuration Discovery (T1016)" },
+        values: [4, 0]
+      },
+      system_network_connections_discovery: {
+        translations: { ru: "Изучение сетевых подключений (T1049)", en: "System Network Connections Discovery (T1049)" },
+        values: [4, 0]
+      },
+      system_owner_user_discovery: {
+        translations: { ru: "Изучение владельца или пользоваталей системы (T1033)", en: "System Owner/User Discovery (T1033)" },
+        values: [2, 0]
+      },
+      system_service_discovery: {
+        translations: { ru: "Изучение системных служб (T1007)", en: "System Service Discovery (T1007)" },
+        values: [2, 0]
+      },
+      system_time_discovery: {
+        translations: { ru: "Изучение системного времени (T1124)", en: "System Time Discovery (T1124)" },
+        values: [1, 0]
+      },
+      exploration_of_remote_services: {
+        translations: { ru: "Эксплуатация уязвимостей в удаленных службах (T1210)", en: "Exploitation of Remote Services (T1210)" },
+        values: [24, 0]
+      },
+      internal_spearphishing: {
+        translations: { ru: "Внутренний целевой фишинг (T1534)", en: "Internal Spearphishing (T1534)" },
+        values: [48, 0]
+      },
+      lateral_tool_transfer: {
+        translations: { ru: "Передача инструментов внутри периметра (T1570)", en: "Lateral Tool Transfer (T1570)" },
+        values: [4, 0]
+      },
+      remote_service_session_hijacking: {
+        translations: { ru: "Перехват сессии службы удаленного доступа (T1563)", en: "Remote Service Session Hijacking (T1563)" },
+        values: [24, 0]
+      },
+      remote_services: {
+        translations: { ru: "Службы удаленного доступа (T1021)", en: "Remote Services (T1021)" },
+        values: [0, 30]
+      },
+      taint_shared_content: {
+        translations: { ru: "Заражение общего содержимого (T1080)", en: "Taint Shared Content (T1080)" },
+        values: [4, 0]
+      },
+      archive_collected_data: {
+        translations: { ru: "Архивация собранных данных (T1560)", en: "Archive Collected Data (T1560)" },
+        values: [2, 0]
+      },
+      audio_capture: {
+        translations: { ru: "Захват аудиоданных (T1123)", en: "Audio Capture (T1123)" },
+        values: [2, 0]
+      },
+      automated_collection: {
+        translations: { ru: "Автоматизированный сбор данных (T1119)", en: "Automated Collection (T1119)" },
+        values: [4, 0]
+      },
+      browser_session_hijacking: {
+        translations: { ru: "Перехват сессии браузера (T1185)", en: "Browser Session Hijacking (T1185)" },
+        values: [4, 0]
+      },
+      clipboard_data: {
+        translations: { ru: "Данные из буфера обмена (T1115)", en: "Clipboard Data (T1115)" },
+        values: [1, 0]
+      },
+      data_staged: {
+        translations: { ru: "Промежуточное хранение данных (T1074)", en: "Data Staged (T1074)" },
+        values: [2, 0]
+      },
+      data_from_cloud_storage: {
+        translations: { ru: "Данные из облачных хранилищ (T1530)", en: "Data from Cloud Storage (T1530)" },
+        values: [4, 0]
+      },
+      data_from_configuration_repository: {
+        translations: { ru: "Данные из репозитория конфигураций (T1602)", en: "Data from Configuration Repository (T1602)" },
+        values: [4, 0]
+      },
+      data_from_information_repositories: {
+        translations: { ru: "Данные из информационных репозиториев (T1213)", en: "Data from Information Repositories (T1213)" },
+        values: [4, 0]
+      },
+      data_from_local_system: {
+        translations: { ru: "Данные из локальной системы (T1005)", en: "Data from Local System (T1005)" },
+        values: [2, 0]
+      },
+      data_from_removable_media: {
+        translations: { ru: "Данные со съемных носителей (T1025)", en: "Data from Removable Media (T1025)" },
+        values: [2, 0]
+      },
+      email_collection: {
+        translations: { ru: "Сбор электронной почты (T1114)", en: "Email Collection (T1114)" },
+        values: [4, 0]
+      },
+      screen_capture: {
+        translations: { ru: "Захват экрана (T1113)", en: "Screen Capture (T1113)" },
+        values: [2, 0]
+      },
+      video_capture: {
+        translations: { ru: "Захват видеоданных (T1125)", en: "Video Capture (T1125)" },
+        values: [4, 0]
+      },
+      application_layer_protocol: {
+        translations: { ru: "Протокол прикладного уровня (T1071)", en: "Application Layer Protocol (T1071)" },
+        values: [2, 0]
+      },
+      communication_through_removable_media: {
+        translations: { ru: "Взаимодействие через съемные носители (T1092)", en: "Communication Through Removable Media (T1092)" },
+        values: [4, 0]
+      },
+      data_encoding: {
+        translations: { ru: "Кодирование данных (T1132)", en: "Data Encoding (T1132)" },
+        values: [1, 0]
+      },
+      data_obfuscation: {
+        translations: { ru: "Обфускация данных (T1001)", en: "Data Obfuscation (T1001)" },
+        values: [1, 0]
+      },
+      dynamic_resolution: {
+        translations: { ru: "Динамическое разрешение (T1568)", en: "Dynamic Resolution (T1568)" },
+        values: [4, 0]
+      },
+      encrypted_channel: {
+        translations: { ru: "Зашифрованный канал (T1573)", en: "Encrypted Channel (T1573)" },
+        values: [2, 0]
+      },
+      fallback_channels: {
+        translations: { ru: "Резервные каналы (T1008)", en: "Fallback Channels (T1008)" },
+        values: [4, 0]
+      },
+      hide_infrastructure: {
+        translations: { ru: "Сокрытие инфраструктуры (T1665)", en: "Hide Infrastructure (T1665)" },
+        values: [4, 0]
+      },
+      ingress_tool_transfer: {
+        translations: { ru: "Передача инструментов из внешней сети (T1105)", en: "Ingress Tool Transfer (T1105)" },
+        values: [2, 0]
+      },
+      multi_stage_channels: {
+        translations: { ru: "Отдельный канал для каждого этапа (T1104)", en: "Multi‑Stage Channels (T1104)" },
+        values: [4, 0]
+      },
+      non_app_layer_protocol: {
+        translations: { ru: "Протоколы (кроме прикладного уровня) (T1095)", en: "Non‑Application Layer Protocol (T1095)" },
+        values: [4, 0]
+      },
+      non_standard_port: {
+        translations: { ru: "Нестандартный порт (T1571)", en: "Non‑Standard Port (T1571)" },
+        values: [4, 0]
+      },
+      protocol_tunneling: {
+        translations: { ru: "Туннелирование протокола (T1572)", en: "Protocol Tunneling (T1572)" },
+        values: [4, 0]
+      },
+      proxy: {
+        translations: { ru: "Прокси‑сервер (T1090)", en: "Proxy (T1090)" },
+        values: [4, 0]
+      },
+      remote_access_software: {
+        translations: { ru: "ПО для удаленного доступа (T1219)", en: "Remote Access Software (T1219)" },
+        values: [4, 0]
+      },
+      web_service: {
+        translations: { ru: "Веб‑служба (T1102)", en: "Web Service (T1102)" },
+        values: [4, 0]
+      },
+      automated_exfiltration: {
+        translations: { ru: "Автоматизированная эксфильтрация (T1020)", en: "Automated Exfiltration (T1020)" },
+        values: [2, 0]
+      },
+      data_transfer_size_limits: {
+        translations: { ru: "Ограничение размера передаваемых блоков данных (T1030)", en: "Data Transfer Size Limits (T1030)" },
+        values: [1, 0]
+      },
+      exfil_over_alt_protocol: {
+        translations: { ru: "Эксфильтрация по альтернативному протоколу (T1048)", en: "Exfiltration Over Alternative Protocol (T1048)" },
+        values: [2, 0]
+      },
+      exfil_over_c2_channel: {
+        translations: { ru: "Эксфильтрация по каналу управления (T1041)", en: "Exfiltration Over C2 Channel (T1041)" },
+        values: [1, 0]
+      },
+      exfil_over_other_network: {
+        translations: { ru: "Эксфильтрация через альтернативную сетевую среду (T1011)", en: "Exfiltration Over Other Network Medium (T1011)" },
+        values: [4, 0]
+      },
+      exfil_over_physical_medium: {
+        translations: { ru: "Эксфильтрация через альтернативную физическую среду (T1052)", en: "Exfiltration Over Physical Medium (T1052)" },
+        values: [2, 0]
+      },
+      exfil_over_web_service: {
+        translations: { ru: "Эксфильтрация через веб‑службу (T1567)", en: "Exfiltration Over Web Service (T1567)" },
+        values: [2, 0]
+      },
+      scheduled_transfer: {
+        translations: { ru: "Передача по расписанию (T1029)", en: "Scheduled Transfer (T1029)" },
+        values: [2, 0]
+      },
+      transfer_data_to_cloud_account: {
+        translations: { ru: "Перемещение данных между облачными учетными записями (T1537)", en: "Transfer Data to Cloud Account (T1537)" },
+        values: [2, 0]
+      },
+      account_access_removal: {
+        translations: { ru: "Прекращение доступа к учетной записи (T1531)", en: "Account Access Removal (T1531)" },
+        values: [2, 0]
+      },
+      data_destruction: {
+        translations: { ru: "Уничтожение данных (T1485)", en: "Data Destruction (T1485)" },
+        values: [4, 0]
+      },
+      data_encrypted_for_impact: {
+        translations: { ru: "Шифрование данных (T1486)", en: "Data Encrypted for Impact (T1486)" },
+        values: [4, 0]
+      },
+      data_manipulation: {
+        translations: { ru: "Манипуляция с данными (T1565)", en: "Data Manipulation (T1565)" },
+        values: [4, 0]
+      },
+      defacement: {
+        translations: { ru: "Дефейс (T1491)", en: "Defacement (T1491)" },
+        values: [4, 0]
+      },
+      disk_wipe: {
+        translations: { ru: "Уничтожение диска (T1561)", en: "Disk Wipe (T1561)" },
+        values: [24, 0]
+      },
+      endpoint_denial_of_service: {
+        translations: { ru: "Точечный отказ в обслуживании (T1499)", en: "Endpoint Denial of Service (T1499)" },
+        values: [4, 0]
+      },
+      financial_theft: {
+        translations: { ru: "Кража денежных средств (T1657)", en: "Financial Theft (T1657)" },
+        values: [24, 0]
+      },
+      firmware_corruption: {
+        translations: { ru: "Повреждение прошивки (T1495)", en: "Firmware Corruption (T1495)" },
+        values: [48, 0]
+      },
+      inhibit_system_recovery: {
+        translations: { ru: "Препятствование восстановлению системы (T1490)", en: "Inhibit System Recovery (T1490)" },
+        values: [48, 0]
+      },
+      network_denial_of_service: {
+        translations: { ru: "Сетевой отказ в обслуживании (T1498)", en: "Network Denial of Service (T1498)" },
+        values: [24, 0]
+      },
+      resource_hijacking: {
+        translations: { ru: "Несанкционированное использование ресурсов (T1496)", en: "Resource Hijacking (T1496)" },
+        values: [4, 0]
+      },
+      service_stop: {
+        translations: { ru: "Остановка службы (T1489)", en: "Service Stop (T1489)" },
+        values: [1, 0]
+      },
+      system_shutdown_reboot: {
+        translations: { ru: "Завершение работы или перезагрузка системы (T1529)", en: "System Shutdown/Reboot (T1529)" },
+        values: [1, 0]
+      },
+      wifi_networks: {
+        translations: { ru: "Беспроводные сети (T1676)", en: "Wi-Fi Networks (T1676)" },
+        values: [8, 0]
+      },
+      esxi_administration_command: {
+        translations: { ru: "Команды администрирования ESXi (T1675)", en: "ESXi Administration Command (T1675)" },
+        values: [0, 5]
+      },
+      input_injection: {
+        translations: { ru: "Имитация ввода данных (T1674)", en: "Input Injection (T1674)" },
+        values: [1, 0]
+      },
+      cloud_application_integration: {
+        translations: { ru: "Интеграция облачных приложений (T1671)", en: "Cloud Application Integration (T1671)" },
+        values: [4, 0]
+      },
+      exclusive_control: {
+        translations: { ru: "Исключительный контроль (T1668)", en: "Exclusive Control (T1668)" },
+        values: [2, 0]
+      },
+      virtual_machine_discovery: {
+        translations: { ru: "Изучение виртуальной машины (T1673)", en: "Virtual Machine Discovery (T1673)" },
+        values: [2, 0]
+      },
+      email_bombing: {
+        translations: { ru: "Email Bombing (T1667)", en: "Email Bombing (T1667)" },
+        values: [4, 0]
+      },
+      email_spoofing: {
+        translations: { ru: "Подмена электронной почты (T1672)", en: "Email Spoofing (T1672)" },
+        values: [1, 0]
+      }
+    };
+
+
+    var TACTICS_TO_TECHNIQUES = {
+      reconnaissance: {
+        translations: { ru: "Разведка", en: "Reconnaissance" },
+        techniques: [
+          { ru: "Активное сканирование (T1595)", en: "Active Scanning (T1595)" },
+          { ru: "Сбор информации об атакуемых узлах (T1592)", en: "Gather Victim Host Information (T1592)" },
+          { ru: "Сбор информации об атакуемых пользователях (T1589)", en: "Gather Victim Identity Information (T1589)" },
+          { ru: "Сбор информации об атакуемой сетевой инфраструктуре (T1590)", en: "Gather Victim Network Information (T1590)" },
+          { ru: "Сбор бизнес-информации об атакуемой организации (T1591)", en: "Gather Victim Org Information (T1591)" },
+          { ru: "Фишинг с целью сбора сведений (T1585)", en: "Phishing for Information (T1585)" },
+          { ru: "Поиск в закрытых источниках (T1597)", en: "Search Closed Sources (T1597)" },
+          { ru: "Поиск технической информации в общедоступных источниках (T1596)", en: "Search Open Technical Databases (T1596)" },
+          { ru: "Поиск на общедоступных сайтах (T1593)", en: "Search Open Websites/Domains (T1593)" },
+          { ru: "Поиск на сайтах атакуемой организации (T1594)", en: "Search Victim-Owned Websites (T1594)" }
+        ]
+      },
+      resource_preparation: {
+        translations: { ru: "Подготовка ресурсов", en: "Resource Development" },
+        techniques: [
+          { ru: "Приобретение доступа (T1650)", en: "Acquire Access (T1650)" },
+          { ru: "Приобретение инфраструктуры (T1583)", en: "Acquire Infrastructure (T1583)" },
+          { ru: "Компрометация учетных записей (T1586)", en: "Compromise Accounts (T1586)" },
+          { ru: "Компрометация сторонней инфраструктуры (T1584)", en: "Compromise Infrastructure (T1584)" },
+          { ru: "Разработка собственных средств (T1587)", en: "Develop Capabilities (T1587)" },
+          { ru: "Создание учетных записей (T1585)", en: "Establish Accounts (T1585)" },
+          { ru: "Подготовка необходимых средств (T1588)", en: "Obtain Capabilities (T1588)" },
+          { ru: "Размещение средств (T1608)", en: "Stage Capabilities (T1608)" }
+        ]
+      },
+      initial_access: {
+        translations: { ru: "Первоначальный доступ", en: "Initial Access" },
+        techniques: [
+          { ru: "Внедрение контента (T1659)", en: "Content Injection (T1659)" },
+          { ru: "Теневая (drive-by) компрометация (T1189)", en: "Drive-by Compromise (T1189)" },
+          { ru: "Недостатки в общедоступном приложении (T1190)", en: "Exploit Public-Facing Application (T1190)" },
+          { ru: "Внешние службы удаленного доступа (T1133)", en: "External Remote Services (T1133)" },
+          { ru: "Подключение дополнительных устройств (T1200)", en: "Hardware Additions (T1200)" },
+          { ru: "Фишинг (T1566)", en: "Phishing (T1566)" },
+          { ru: "Распространение через съемные носители (T1091)", en: "Replication Through Removable Media (T1091)" },
+          { ru: "Компрометация цепочки поставок (T1195)", en: "Supply Chain Compromise (T1195)" },
+          { ru: "Доверительные отношения (T1199)", en: "Trusted Relationships (T1199)" },
+          { ru: "Существующие учетные записи (T1078)", en: "Valid Accounts (T1078)" },
+          { ru: "Беспроводные сети (T1676)", en: "Wi-Fi Networks (T1676)" }
+        ]
+      },
+
+      execution: {
+        translations: { ru: "Выполнение", en: "Execution" },
+        techniques: [
+          { ru: "Средства администрирования облака (T1651)", en: "Cloud Administration Command (T1651)" },
+          { ru: "Интерпретаторы командной строки и сценариев (T1059)", en: "Command and Scripting Interpreter (T1059)" },
+          { ru: "Средства администрирования контейнера (T1609)", en: "Container Administration Command (T1609)" },
+          { ru: "Развертывание контейнера (T1610)", en: "Deploy Container (T1610)" },
+          { ru: "Команды администрирования ESXi (T1675)", en: "ESXi Administration Command (T1675)" },
+          { ru: "Эксплуатация уязвимостей в клиентском ПО (T1203)", en: "Exploitation for Client Execution (T1203)" },
+          { ru: "Имитация ввода данных (T1674)", en: "Input Injection (T1674)" },
+          { ru: "Межпроцессное взаимодействие (T1559)", en: "Inter-Process Communication (T1559)" },
+          { ru: "Нативный API (T1106)", en: "Native API (T1106)" },
+          { ru: "Запланированная задача (T1053)", en: "Scheduled Task/Job (T1053)" },
+          { ru: "Бессерверное выполнение (T1648)", en: "Serverless Execution (T1648)" },
+          { ru: "Общие модули (T1129)", en: "Shared Modules (T1129)" },
+          { ru: "Средства развертывания ПО (T1072)", en: "Software Deployment Tools (T1072)" },
+          { ru: "Системные службы (T1569)", en: "System Services (T1569)" },
+          { ru: "Выполнение с участием пользователя (T1204)", en: "User Execution (T1204)" },
+          { ru: "Инструментарий управления Windows (T1047)", en: "Windows Management Instrumentation (T1047)" }
+        ]
+      },
+
+      persistence: {
+        translations: { ru: "Закрепление", en: "Persistence" },
+        techniques: [
+          { ru: "Манипуляции с учетной записью (T1098)", en: "Account Manipulation (T1098)" },
+          { ru: "Задания BITS (T1197)", en: "BITS Jobs (T1197)" },
+          { ru: "Автозапуск при загрузке или входе в систему (T1547)", en: "Boot or Logon Autostart Execution (T1547)" },
+          { ru: "Сценарии инициализации при загрузке или входе в систему (T1037)", en: "Boot or Logon Initialization Scripts (T1037)" },
+          { ru: "Интеграция облачных приложений (T1671)", en: "Cloud Application Integration (T1671)" },
+          { ru: "Расширения браузеров (T1176)", en: "Browser Extensions (T1176)" },
+          { ru: "Компрометация бинарных файлов ПО узла (T1554)", en: "Compromise Host Software Binary (T1554)" },
+          { ru: "Создание учетной записи (T1136)", en: "Create Account (T1136)" },
+          { ru: "Создание или изменение системных процессов (T1543)", en: "Create or Modify System Process (T1543)" },
+          { ru: "Выполнение по событию (T1546)", en: "Event Triggered Execution (T1546)" },
+          { ru: "Исключительный контроль (T1668)", en: "Exclusive Control (T1668)" },
+          { ru: "Внешние службы удаленного доступа (T1133)", en: "External Remote Services (T1133)" },
+          { ru: "Перехват потока исполнения (T1574)", en: "Hijack Execution Flow (T1574)" },
+          { ru: "Внедрение кода в образ (T1525)", en: "Implant Internal Image (T1525)" },
+          { ru: "Изменение процесса аутентификации (T1556)", en: "Modify Authentication Process (T1556)" },
+          { ru: "Запуск приложения Office (T1137)", en: "Office Application Startup (T1137)" },
+          { ru: "Настройки питания (T1653)", en: "Power Settings (T1653)" },
+          { ru: "Загрузка раньше ОС (T1542)", en: "Pre-OS Boot (T1542)" },
+          { ru: "Запланированная задача (T1053)", en: "Scheduled Task/Job (T1053)" },
+          { ru: "Компонент серверного ПО (T1505)", en: "Server Software Component (T1505)" },
+          { ru: "Передача управляющих сигналов в трафике (T1205)", en: "Traffic Signaling (T1205)" },
+          { ru: "Существующие учетные записи (T1078)", en: "Valid Accounts (T1078)" }
+        ]
+      },
+
+      privilege_escalation: {
+        translations: { ru: "Повышение привилегий", en: "Privilege Escalation" },
+        techniques: [
+          { ru: "Обход механизмов контроля привилегий (T1548)", en: "Abuse Elevation Control Mechanism (T1548)" },
+          { ru: "Мапипуляции с токенами доступа (T1134)", en: "Access Token Manipulation (T1134)" },
+          { ru: "Манипуляции с учетной запиью (T1098)", en: "Account Manipulation (T1098)" },
+          { ru: "Автозапуск при загрузке или входе в систему (T1547)", en: "Boot or Logon Autostart Execution (T1547)" },
+          { ru: "Сценарии инициализации при загрузке или входе в систему (T1037)", en: "Boot or Logon Initialization Scripts (T1037)" },
+          { ru: "Создание или изменение системных процессов (T1543)", en: "Create or Modify System Process (T1543)" },
+          { ru: "Изменение политики домена или тенант (T1484)", en: "Domain or Tenant Policy Modification (T1484)" },
+          { ru: "Выход за пределы контейнера (T1611)", en: "Escape to Host (T1611)" },
+          { ru: "Выполнение по событию (T1546)", en: "Event Triggered Execution (T1546)" },
+          { ru: "Эксплуатация уязвимостей для повышения привилегий (T1068)", en: "Exploitation for Privilege Escalation (T1068)" },
+          { ru: "Перехват потока исполнения (T1574)", en: "Hijack Execution Flow (T1574)" },
+          { ru: "Внедрение кода в процессы (T1055)", en: "Process Injection (T1055)" },
+          { ru: "Запланированная задача (T1053)", en: "Scheduled Task/Job (T1053)" },
+          { ru: "Существующие учетные записи (T1078)", en: "Valid Accounts (T1078)" }
+        ]
+      },
+
+      "detection_avoidance": {
+        translations: { ru: "Предотвращение обнаружения", en: "Defense Evasion" },
+        techniques: [
+          { ru: "Обход механизмов контроля привилегий (T1548)", en: "Abuse Elevation Control Mechanism (T1548)" },
+          { ru: "Манипуляции с токенами доступа (T1134)", en: "Access Token Manipulation (T1134)" },
+          { ru: "Задания BITS (T1197)", en: "BITS Jobs (T1197)" },
+          { ru: "Создание образа на узле (T1612)", en: "Build Image on Host (T1612)" },
+          { ru: "Предотвращение отладки (T1622)", en: "Debugger Evasion (T1622)" },
+          { ru: "Деобфускация или декодирование файлов или данных (T1140)", en: "Deobfuscate/Decode Files or Information (T1140)" },
+          { ru: "Развертывание контейнера (T1610)", en: "Deploy Container (T1610)" },
+          { ru: "Прямой доступ к тому (T1006)", en: "Direct Volume Access (T1006)" },
+          { ru: "Изменение политики домена или тенанта (T1484)", en: "Domain or Tenant Policy Modification (T1484)" },
+          { ru: "Подмена электронной почты (T1672)", en: "Email Spoofing (T1672)" },
+          { ru: "Ограничсения на исполнение (T1480)", en: "Execution Guardrails (T1480)" },
+          { ru: "Эксплуатация уязвимостей для предотвращения обнаружения (T1211)", en: "Exploitation for Defense Evasion (T1211)" },
+          { ru: "Изменение разрещений для файлов и каталогов (T1222)", en: "File and Directory Permissions Modification (T1222)" },
+          { ru: "Сокрытие артефактов (T1564)", en: "Hide Artifacts (T1564)" },
+          { ru: "Перехват потока исполнения (T1574)", en: "Hijack Execution Flow (T1574)" },
+          { ru: "Ослабление защиты (T1562)", en: "Impair Defenses (T1562)" },
+          { ru: "Имперсонация (T1656)", en: "Impersonation (T1656)" },
+          { ru: "Устранение индикаторов (T1070)", en: "Indicator Removal (T1070)" },
+          { ru: "Непрямое выполнение команд (T1202)", en: "Indirect Command Execution (T1202)" },
+          { ru: "Маскировка (T1036)", en: "Masquerading (T1036)" },
+          { ru: "Изменение процесса аутентификации (T1556)", en: "Modify Authentication Process (T1556)" },
+          { ru: "Изменение облачной вычислительной инфраструктуры (T1666)", en: "Modify Cloud Resource Hierarchy (T1666)" },
+          { ru: "Изменение реестра (T1112)", en: "Modify Registry (T1112)" },
+          { ru: "Изменение образа системы (T1601)", en: "Modify System Image (T1601)" },
+          { ru: "Преодоление границ сети (T1599)", en: "Network Boundary Bridging (T1599)" },
+          { ru: "Обфусцированные файлы или данные (T1027)", en: "Obfuscated Files or Information (T1027)" },
+          { ru: "Изменения файла PLIST (T1647)", en: "Plist File Modification (T1647)" },
+          { ru: "Загрузка раньше ОС (T1542)", en: "Pre-OS Boot (T1542)" },
+          { ru: "Внедрение кода в процессы (T1055)", en: "Process Injection (T1055)" },
+          { ru: "Отраженная загрузка кода (T1620)", en: "Reflective Code Loading (T1620)" },
+          { ru: "Поддельный контроллер домена (T1207)", en: "Rogue Domain Controller (T1207)" },
+          { ru: "Руткит (T1014)", en: "Rootkit (T1014)" },
+          { ru: "Нарушение работы средств контроля доверия (T1553)", en: "Subvert Trust Controls (T1553)" },
+          { ru: "Выполнение с помощью системных бинарных файлов (T1218)", en: "System Binary Proxy Execution (T1218)" },
+          { ru: "Выполнение через системный сценарий (T1216)", en: "System Script Proxy Execution (T1216)" },
+          { ru: "Внедрение в шаблоны (T1221)", en: "Template Injection (T1221)" },
+          { ru: "Передача управляющих сигналов в трафике (T1205)", en: "Traffic Signaling (T1205)" },
+          { ru: "Выполнение через доверенные утилиты разработчика (T1127)", en: "Trusted Developer Utilities Proxy Execution (T1127)" },
+          { ru: "Облачные инфраструктуры в редко используемых регионах (T1535)", en: "Unused/Unsupported Cloud Regions (T1535)" },
+          { ru: "Использование альтернативных сущностей для аутентификации (T1550)", en: "Use Alternate Authentication Material (T1550)" },
+          { ru: "Существующие учетные записи (T1078)", en: "Valid Accounts (T1078)" },
+          { ru: "Обход виртуализации или песочницы (T1497)", en: "Virtualization/Sandbox Evasion (T1497)" },
+          { ru: "Понижение надежности шифрования (T1600)", en: "Weaken Encryption (T1600)" },
+          { ru: "Использование сценариев XSL (T1220)", en: "XSL Script Processing (T1220)" }
+        ]
+      },
+
+      "Credential Access": {
+        translations: { ru: "Получение учетных данных", en: "Credential Access" },
+        techniques: [
+          { ru: "Злоумышленник посередине (T1557)", en: "Adversary-in-the-Middle (T1557)" },
+          { ru: "Метод перебора (T1110)", en: "Brute Force (T1110)" },
+          { ru: "Учетные даннные из хранилищ паролей (T1555)", en: "Credentials from Password Stores (T1555)" },
+          { ru: "Эксплуатация уязвимостей для получения учетных данных (T1212)", en: "Exploitation for Credential Access (T1212)" },
+          { ru: "Принудительная аутентификация (T1187)", en: "Forced Authentication (T1187)" },
+          { ru: "Подделка учетных данных для веб ресурсов (T1606)", en: "Forge Web Credentials (T1606)" },
+          { ru: "Перехват вводимых данных (T1056)", en: "Input Capture (T1056)" },
+          { ru: "Изменение процесса аутентификации (T1556)", en: "Modify Authentication Process (T1556)" },
+          { ru: "Перехват многофакторной аутентификации (T1111)", en: "Multi-Factor Authentication Interception (T1111)" },
+          { ru: "Генерирование запросов многофакторной аутентификации (T1621)", en: "Multi-Factor Authentication Request Generation (T1621)" },
+          { ru: "Прослушивание сетевого трафика (T1040)", en: "Network Sniffing (T1040)" },
+          { ru: "Получение дампа учетных данных (T1003)", en: "OS Credential Dumping (T1003)" },
+          { ru: "Кража токена доступа к приложению (T1528)", en: "Steal Application Access Tokens (T1528)" },
+          { ru: "Кража сессионных куки (T1539)", en: "Steal Web Session Cookie (T1539)" },
+          { ru: "Кража или подделка сертификатов аутентификации (T1649)", en: "Steal or Forge Authentication Certificates (T1649)" },
+          { ru: "Кража или подделка билетов Kerberos (T1558)", en: "Steal or Forge Kerberos Tickets (T1558)" },
+          { ru: "Незащищенные учетные данные (T1552)", en: "Unsecured Credentials (T1552)" }
+        ]
+      },
+
+    "discovery": {
+      translations: { ru: "Обнаружение", en: "Discovery" },
+      techniques: [
+        { ru: "Изучение учетных записей (T1087)", en: "Account Discovery (T1087)" },
+        { ru: "Изучение открытых приложений (T1010)", en: "Application Window Discovery (T1010)" },
+        { ru: "Изучение браузера (T1217)", en: "Browser Information Discovery (T1217)" },
+        { ru: "Изучение облачной инфраструктуры (T1580)", en: "Cloud Infrastructure Discovery (T1580)" },
+        { ru: "Дашборд облачного сервиса (T1538)", en: "Cloud Service Dashboard (T1538)" },
+        { ru: "Изучение облачных служб (T1526)", en: "Cloud Service Discovery (T1526)" },
+        { ru: "Обнаружение объектов облачного хранилища (T1619)", en: "Cloud Storage Object Discovery (T1619)" },
+        { ru: "Изучение контейнеров и их ресурсов (T1613)", en: "Container and Resource Discovery (T1613)" },
+        { ru: "Предотвращение отладки (T1622)", en: "Debugger Evasion (T1622)" },
+        { ru: "Изучение драйверов устройств (T1652)", en: "Device Driver Discovery (T1652)" },
+        { ru: "Изучение доверительных отношений между доменами (T1482)", en: "Domain Trust Discovery (T1482)" },
+        { ru: "Изучение файлов и каталогов (T1083)", en: "File and Directory Discovery (T1083)" },
+        { ru: "Изучение групповой политики (T1615)", en: "Group Policy Discovery (T1615)" },
+        { ru: "Сбор журналов (T1654)", en: "Log Enumeration (T1654)" },
+        { ru: "Изучение сетевых служб (T1046)", en: "Network Service Discovery (T1046)" },
+        { ru: "Изучение общих сетевых ресурсов (T1135)", en: "Network Share Discovery (T1135)" },
+        { ru: "Прослушивание сетевого трафика (T1040)", en: "Network Sniffing (T1040)" },
+        { ru: "Изучение парольной политики (T1201)", en: "Password Policy Discovery (T1201)" },
+        { ru: "Изучение периферийных устройств (T1120)", en: "Peripheral Device Discovery (T1120)" },
+        { ru: "Изучение групп разрешений (T1069)", en: "Permission Groups Discovery (T1069)" },
+        { ru: "Изучение процессов (T1057)", en: "Process Discovery (T1057)" },
+        { ru: "Запросы к реестру (T1012)", en: "Query Registry (T1012)" },
+        { ru: "Изучение удаленных систем (T1018)", en: "Remote System Discovery (T1018)" },
+        { ru: "Изучение установленного ПО (T1518)", en: "Software Discovery (T1518)" },
+        { ru: "Изучение системы (T1082)", en: "System Information Discovery (T1082)" },
+        { ru: "Изучение местоположения системы (T1614)", en: "System Location Discovery (T1614)" },
+        { ru: "Изучение конфигурации сети (T1016)", en: "System Network Configuration Discovery (T1016)" },
+        { ru: "Изучение сетевых подключений (T1049)", en: "System Network Connections Discovery (T1049)" },
+        { ru: "Изучение владельца или пользоваталей системы (T1033)", en: "System Owner/User Discovery (T1033)" },
+        { ru: "Изучение системных служб (T1007)", en: "System Service Discovery (T1007)" },
+        { ru: "Изучение системного времени (T1124)", en: "System Time Discovery (T1124)" },
+        { ru: "Изучение виртуальной машины (T1673)", en: "Virtual Machine Discovery (T1673)" },
+        { ru: "Обход виртуализации или песочницы (T1497)", en: "Virtualization/Sandbox Evasion (T1497)" }
+      ]
+    },
+
+    lateral_movement: {
+      translations: { ru: "Перемещение внутри периметра", en: "Lateral Movement" },
+      techniques: [
+        { ru: "Эксплуатация уязвимостей в удаленных службах (T1210)", en: "Exploitation of Remote Services (T1210)" },
+        { ru: "Внутренний целевой фишинг (T1534)", en: "Internal Spearphishing (T1534)" },
+        { ru: "Передача инструментов внутри периметра (T1570)", en: "Lateral Tool Transfer (T1570)" },
+        { ru: "Перехват сессии служб удаленного доступа (T1563)", en: "Remote Service Session Hijacking (T1563)" },
+        { ru: "Службы удаленного доступа (T1021)", en: "Remote Services (T1021)" },
+        { ru: "Распространение через съемные носители (T1091)", en: "Replication Through Removable Media (T1091)" },
+        { ru: "Средства развертывания ПО (T1072)", en: "Software Deployment Tools (T1072)" },
+        { ru: "Заражение общего содержимого (T1080)", en: "Taint Shared Content (T1080)" },
+        { ru: "Использование альтернативных сущностей для аутентификации (T1550)", en: "Use Alternate Authentication Material (T1550)" }
+      ]
+    },
+
+    data_collection: {
+      translations: { ru: "Сбор данных", en: "Collection" },
+      techniques: [
+        { ru: "Злоумышленник посередине (T1557)", en: "Adversary-in-the-Middle (T1557)" },
+        { ru: "Архивация собранных данных (T1560)", en: "Archive Collected Data (T1560)" },
+        { ru: "Захват аудиоданных (T1123)", en: "Audio Capture (T1123)" },
+        { ru: "Автоматизированный сбор данных (T1119)", en: "Automated Collection (T1119)" },
+        { ru: "Данные буфера обмена (T1115)", en: "Clipboard Data (T1115)" },
+        { ru: "Данные из облачного хранилища (T1530)", en: "Data from Cloud Storage (T1530)" },
+        { ru: "Перехват сессии браузера (T1185)", en: "Browser Session Hijacking (T1185)" },
+        { ru: "Промежуточное хранение данных (T1074)", en: "Data Staged (T1074)" },
+        { ru: "Данные из репозиториев конфигураций (T1602)", en: "Data from Configuration Repository (T1602)" },
+        { ru: "Данные из информационных репозиториев (T1213)", en: "Data from Information Repositories (T1213)" },
+        { ru: "Данные из локальной системы (T1005)", en: "Data from Local System (T1005)" },
+        { ru: "Данные со съемных дисков (T1025)", en: "Data from Removable Media (T1025)" },
+        { ru: "Сбор электронной почты (T1114)", en: "Email Collection (T1114)" },
+        { ru: "Захват экрана (T1113)", en: "Screen Capture (T1113)" },
+        { ru: "Захват ввода (T1056)", en: "Input Capture (T1056)" },
+        { ru: "Захват видеоданных (T1125)", en: "Video Capture (T1125)" }
+      ]
+    },
+
+    management: {
+      translations: { ru: "Организация управления", en: "Command and Control" },
+      techniques: [
+        { ru: "Протокол прикладного уровня (T1071)", en: "Application Layer Protocol (T1071)" },
+        { ru: "Взаимодействие через съемные носители (T1092)", en: "Communication Through Removable Media (T1092)" },
+        { ru: "Внедрение контента (T1659)", en: "Content Injection (T1659)" },
+        { ru: "Кодирование данных (T1132)", en: "Data Encoding (T1132)" },
+        { ru: "Обфускация данных (T1001)", en: "Data Obfuscation (T1001)" },
+        { ru: "Динамическое разрешение (T1568)", en: "Dynamic Resolution (T1568)" },
+        { ru: "Зашифрованный канал (T1573)", en: "Encrypted Channel (T1573)" },
+        { ru: "Резервные каналы (T1008)", en: "Fallback Channels (T1008)" },
+        { ru: "Сокрытие инфраструктуры (T1665)", en: "Hide Infrastructure (T1665)" },
+        { ru: "Передача инструментов из внешней сети (T1105)", en: "Ingress Tool Transfer (T1105)" },
+        { ru: "Отдельный канал для каждого этапа (T1104)", en: "Multi-Stage Channels (T1104)" },
+        { ru: "Протоколы (кроме прикладного уровня) (T1095)", en: "Non-Application Layer Protocol (T1095)" },
+        { ru: "Нестандартный порт (T1571)", en: "Non-Standard Port (T1571)" },
+        { ru: "Туннелирование протокола (T1572)", en: "Protocol Tunneling (T1572)" },
+        { ru: "Прокси-сервер (T1090)", en: "Proxy (T1090)" },
+        { ru: "ПО для удаленного доступа (T1219)", en: "Remote Access Software (T1219)" },
+        { ru: "Передача управляющих сигналов в трафике (T1205)", en: "Traffic Signaling (T1205)" },
+        { ru: "Веб-служба (T1102)", en: "Web Service (T1102)" }
+      ]
+    },
+
+    data_exfiltration: {
+      translations: { ru: "Эксфильтрация данных", en: "Exfiltration" },
+      techniques: [
+        { ru: "Автоматизированная эксфильтрация (T1020)", en: "Automated Exfiltration (T1020)" },
+        { ru: "Ограничение размера передаваемых блоков данных (T1030)", en: "Data Transfer Size Limits (T1030)" },
+        { ru: "Эксфильтрация по альтернативному протоколу (T1048)", en: "Exfiltration Over Alternative Protocol (T1048)" },
+        { ru: "Эксфильтрация по каналу управления (T1041)", en: "Exfiltration Over C2 Channel (T1041)" },
+        { ru: "Эксфильтрация через альтернативную сетевую среду (T1011)", en: "Exfiltration Over Other Network Medium (T1011)" },
+        { ru: "Эксфильтрация через альтернативную физическую среду (T1052)", en: "Exfiltration Over Physical Medium (T1052)" },
+        { ru: "Эксфильтрация через веб-службу (T1567)", en: "Exfiltration Over Web Service (T1567)" },
+        { ru: "Передача по расписанию (T1029)", en: "Scheduled Transfer (T1029)" },
+        { ru: "Перемещение данных между облачными учетными записями (T1537)", en: "Transfer Data to Cloud Account (T1537)" }
+      ]
+    },
+
+    destructive_impact: {
+      translations: { ru: "Деструктивное воздействие", en: "Impact" },
+      techniques: [
+        { ru: "Прекращение доступа к учетной записи (T1531)", en: "Account Access Removal (T1531)" },
+        { ru: "Уничтожение данных (T1485)", en: "Data Destruction (T1485)" },
+        { ru: "Шифрование данных (T1486)", en: "Data Encrypted for Impact (T1486)" },
+        { ru: "Манипуляция с данными (T1565)", en: "Data Manipulation (T1565)" },
+        { ru: "Дефейс (T1491)", en: "Defacement (T1491)" },
+        { ru: "Уничтожение диска (T1561)", en: "Disk Wipe (T1561)" },
+        { ru: "Email Bombing (T1667)", en: "Email Bombing (T1667)" },
+        { ru: "Точечный отказ в обслуживании (T1499)", en: "Endpoint Denial of Service (T1499)" },
+        { ru: "Кража денежных средств (T1657)", en: "Financial Theft (T1657)" },
+        { ru: "Повреждение прошивки (T1495)", en: "Firmware Corruption (T1495)" },
+        { ru: "Препятствование восстановлению системы (T1490)", en: "Inhibit System Recovery (T1490)" },
+        { ru: "Сетевой отказ в обслуживании (T1498)", en: "Network Denial of Service (T1498)" },
+        { ru: "Несанкционированное использование ресурсов (T1496)", en: "Resource Hijacking (T1496)" },
+        { ru: "Остановка службы (T1489)", en: "Service Stop (T1489)" },
+        { ru: "Завершение работы или перезагрузка системы (T1529)", en: "System Shutdown/Reboot (T1529)" }
+      ]
+    },
+
+    };
+
+    function parseFloatSafe(s) {
+      s = s.replace(',', '.');
+      var f = parseFloat(s);
+      return isNaN(f) ? 0.0 : f;
+    }
+
+    var buttonStates = {};
+    for (var i = 1; i <= 18; i++) {
+      buttonStates[i] = false;
+    }
+
+    $(function() {
+
+      
+    $("#tabs").tabs();
+    var activeTab = localStorage.getItem("activeTab");
+    if (activeTab !== null) {
+        $("#tabs").tabs("option", "active", parseInt(activeTab, 10));
+        localStorage.removeItem("activeTab");
+    }
+
+    if (currentLang === "ru") {
+  $("#toggleLang").prop("checked", true);
+} else {
+  $("#toggleLang").prop("checked", false);
+}
+
+  $("#toggleLang").on("change", function(){
+    if (!confirm(currentLang === "ru" ? "При переключении языка все значения будут сброшены до стандартных" : "When switching the language, all values will be reset to the default values")) {
+    $(this).prop("checked", currentLang === "ru");
+    return false;
+  }
+    currentLang = $(this).is(":checked") ? "ru" : "en";
+    localStorage.setItem("currentLang", currentLang);
+    
+    var activeTab = $("#tabs").tabs("option", "active");
+    localStorage.setItem("activeTab", activeTab);
+    localStorage.setItem("scrollPosition", window.pageYOffset);
+    
+    setTimeout(function(){
+    location.reload();
+  }, 0);
+  });
+
+      createNewVulnBlock();
+      $("#add_vuln_block").remove();
+      $("#tabs").tabs();
+      $("#date1, #date2").datepicker({ dateFormat: "dd.mm.yy" });
+
+      repopulateDropdowns();
+      var gridBody = $("#hacker_infra_grid_body");
+      var keysTools = Object.keys(DATA_BUTTONS_1_14);
+      for (var i = 0; i < keysTools.length; i++) {
+        var row = $("<div></div>").addClass("grid-row").attr("data-index", i+1);
+        row.append($("<div></div>").html(`
+          <label>
+            <input type="checkbox" class="toggle-check" data-index="${i+1}" />
+            ${DATA_BUTTONS_1_14[keysTools[i]].translations[currentLang]}
+          </label>
+        `));
+        row.append(
+          $("<div></div>")
+            
+            .html("<input type='text' class='count-input hidden-fields' value='1' placeholder=''/>")
+        );
+              row.append(
+          $("<div></div>")
+            .addClass("input-wrapper")
+            .html("<input type='text' class='btn-min readonly hidden-fields' readonly value='0'><label class='input-label' data-i18n='min'>min</label>")
+        );
+        row.append(
+          $("<div></div>")
+            .addClass("input-wrapper")
+            .html("<input type='text' class='btn-med readonly hidden-fields' readonly value='0'><label class='input-label' data-i18n='med'>med</label>")
+        );
+        row.append(
+          $("<div></div>")
+            .addClass("input-wrapper")
+            .html("<input type='text' class='btn-max readonly hidden-fields' readonly value='0'><label class='input-label' data-i18n='max'>max</label>")
+        );
+        gridBody.append(row);
+      }
+      var row20 = $("<div></div>")
+        .addClass("grid-row")
+        .attr("data-index", "20");
+      var minerText = currentLang === "ru" ? "Майнер" : "Miner";
+      row20.append($("<div></div>").html(`
+        <label>
+          <input type='checkbox' class="toggle-check" data-index="20" />
+          ${minerText}
+        </label>
+      `));
+      row20.append(
+        $("<div></div>").html("<input type='text' class='count-input hidden-fields' value='1' placeholder=''/>")
+      );
+      row20.append(
+        $("<div></div>").addClass("input-wrapper").html("<input type='text' class='btn-min readonly hidden-fields' readonly value='0'><label class='input-label' data-i18n='min'>min</label>")
+      );
+      row20.append(
+        $("<div></div>").addClass("input-wrapper").html("<input type='text' class='btn-med readonly hidden-fields' readonly value='0'><label class='input-label' data-i18n='med'>med</label>")
+      );
+      row20.append(
+        $("<div></div>").addClass("input-wrapper").html("<input type='text' class='btn-max readonly hidden-fields' readonly value='0'><label class='input-label' data-i18n='max'>max</label>")
+      );
+      gridBody.append(row20);
+
+      var row21 = $("<div></div>")
+        .addClass("grid-row")
+        .attr("data-index", "21");
+      var keyloggerText = currentLang === "ru" ? "Кейлоггер" : "Keylogger";
+      row21.append($("<div></div>").html(`
+        <label>
+          <input type='checkbox' class="toggle-check" data-index="21" />
+          ${keyloggerText}
+        </label>
+      `));
+      row21.append(
+        $("<div></div>").html("<input type='text' class='count-input hidden-fields' value='1' placeholder=''/>")
+      );
+      row21.append(
+        $("<div></div>").addClass("input-wrapper").html("<input type='text' class='btn-min readonly hidden-fields' readonly value='0'><label class='input-label' data-i18n='min'>min</label>")
+      );
+      row21.append(
+        $("<div></div>").addClass("input-wrapper").html("<input type='text' class='btn-med readonly hidden-fields' readonly value='0'><label class='input-label' data-i18n='med'>med</label>")
+      );
+      row21.append(
+        $("<div></div>").addClass("input-wrapper").html("<input type='text' class='btn-max readonly hidden-fields' readonly value='0'><label class='input-label' data-i18n='max'>max</label>")
+      );
+      gridBody.append(row21);
+
+      var row17 = $("<div></div>").addClass("grid-row").attr("data-index", "17");
+      var purchaseText = currentLang === "ru" ? "Покупка доступов<br> в инфраструктуру" : "Infrastructure Access Purchase";
+      row17.append($("<div></div>").html(`
+        <label>
+          <input type="checkbox" class="toggle-check" data-index="17" />
+          ${purchaseText}
+        </label>
+      `));
+      row17.append(
+    $("<div></div>")
+      
+      .html("<input type='text' class='count-input hidden-fields' value='1' placeholder=''/>")
+  );
+row17.append(
+  $("<div></div>").addClass("input-wrapper").html("<input type='text' class='btn-min readonly hidden-fields' readonly value='0'><label class='input-label' data-i18n='min'>min</label>")
+);
+row17.append(
+  $("<div></div>").addClass("input-wrapper").html("<input type='text' class='btn-med readonly hidden-fields' readonly value='0'><label class='input-label' data-i18n='med'>med</label>")
+);
+row17.append(
+  $("<div></div>").addClass("input-wrapper").html("<input type='text' class='btn-max readonly hidden-fields' readonly value='0'><label class='input-label' data-i18n='max'>max</label>")
+);
+      gridBody.append(row17);
+      var row18 = $("<div></div>").addClass("grid-row").attr("data-index", "18");
+      var exploitText = currentLang === "ru" ? "Платные 0/1-day эксплойты" : "Paid 0/1-day Exploits";
+      row18.append($("<div></div>").html(`
+        <label>
+          <input type="checkbox" class="toggle-check" data-index="18" />
+          ${exploitText}
+        </label>
+      `));
+      row18.append(
+  $("<div></div>").addClass("input-wrapper").html("<input type='text' class='btn-min readonly hidden-fields' readonly value='0'><label class='input-label' data-i18n='min'>min</label>")
+);
+row18.append(
+  $("<div></div>").addClass("input-wrapper").html("<input type='text' class='btn-med readonly hidden-fields' readonly value='0'><label class='input-label' data-i18n='med'>med</label>")
+);
+row18.append(
+  $("<div></div>").addClass("input-wrapper").html("<input type='text' class='btn-max readonly hidden-fields' readonly value='0'><label class='input-label' data-i18n='max'>max</label>")
+);gridBody.append(row18);
+
+      var row15 = $("<div></div>")
+        .attr("data-index", "15")
+        .addClass("grid-row special-border")
+        .css({ "row-gap": "16px" });
+      var stageTitle = currentLang === "ru" ? "Этап " : "Stage ";
+      var cell15_1_3 = $("<div></div>")
+        .css({ "grid-row": "1", "grid-column": "1 / span 3" })
+        .html(`
+          <div style="display: flex; justify-content:space-between; align-items: center;">
+            <label>
+              <input type="checkbox" class="toggle-check" data-index="15" />
+              ${currentLang === "ru" ? "Услуги брутфорса" : "Bruteforce Services"}
+            </label>
+            <label class="input-vopr">${currentLang === "ru" ? "Сколько хешей надо было сбрутить?" : "How many hashes to crack?"}</label>
+          </div>
+        `);
+      var cell15_4 = $("<div></div>")
+        .css({ "grid-row": "1", "grid-column": "4" })
+        .html(`<input type="text" id="input_15" style="width:100px; height: 40px" placeholder="0" disabled>`);
+        var cell15_2_2 = $("<div></div>")
+  .addClass("input-wrapper")
+  .css({ "grid-row": "2", "grid-column": "2" })
+  .html(`<input type="text" class="btn-min readonly hidden-fields" readonly value="0"><label class="input-label" data-i18n="min">min</label>`);
+var cell15_2_3 = $("<div></div>")
+  .addClass("input-wrapper")
+  .css({ "grid-row": "2", "grid-column": "3" })
+  .html(`<input type="text" class="btn-med readonly hidden-fields" readonly value="0"><label class="input-label" data-i18n="med">med</label>`);
+var cell15_2_4 = $("<div></div>")
+  .addClass("input-wrapper")
+  .css({ "grid-row": "2", "grid-column": "4" })
+  .html(`<input type="text" class="btn-max readonly hidden-fields" readonly value="0"><label class="input-label" data-i18n="max">max</label>`);
+      row15.append(cell15_1_3, cell15_4, cell15_2_2, cell15_2_3, cell15_2_4);
+      gridBody.append(row15);
+
+      var row16 = $("<div></div>")
+        .attr("data-index", "16")
+        .addClass("grid-row")
+        .css({ "row-gap": "16px" });
+      var cell16_1_3 = $("<div></div>")
+        .css({ "grid-row": "1", "grid-column": "1 / span 3" })
+        .html(`
+          <div style="display: flex; justify-content:space-between; align-items: center;">
+            <label>
+              <input type="checkbox" class="toggle-check" data-index="16" />
+              ${currentLang === "ru" ? "Ботнеты" : "Botnets"}
+            </label>
+            <label class="input-vopr">${currentLang === "ru" ? "Сколько дней использовались?" : "For how many days were they used?"}</label>
+          </div>
+        `);
+      var cell16_4 = $("<div></div>")
+        .css({ "grid-row": "1", "grid-column": "4" })
+        .html(`<input type="text" id="input_16" style="width:100px; height: 40px" placeholder="0" disabled>`);
+        var cell16_2_2 = $("<div></div>")
+  .addClass("input-wrapper")
+  .css({ "grid-row": "2", "grid-column": "2" })
+  .html(`<input type="text" class="btn-min readonly hidden-fields" readonly value="0"><label class="input-label" data-i18n="min">min</label>`);
+var cell16_2_3 = $("<div></div>")
+  .addClass("input-wrapper")
+  .css({ "grid-row": "2", "grid-column": "3" })
+  .html(`<input type="text" class="btn-med readonly hidden-fields" readonly value="0"><label class="input-label" data-i18n="med">med</label>`);
+var cell16_2_4 = $("<div></div>")
+  .addClass("input-wrapper")
+  .css({ "grid-row": "2", "grid-column": "4" })
+  .html(`<input type="text" class="btn-max readonly hidden-fields" readonly value="0"><label class="input-label" data-i18n="max">max</label>`);
+      row16.append(cell16_1_3, cell16_4, cell16_2_2, cell16_2_3, cell16_2_4);
+      gridBody.append(row16);
+
+      $("#input_15, #input_16").on("input", function() {
+          this.value = this.value.replace(/[^\d]/g, '');
+      });
+
+      $("#a_combobox").change(function() {
+        var selected = $(this).val();
+        var vals = DATA_A[selected].values;
+        $("#a_min").val(vals[0]);
+        $("#a_med").val(vals[1]);
+        $("#a_max").val(vals[2]);
+        updateAllTotals();
+      }).trigger("change");
+
+      $("#b_combobox").change(function() {
+        var selected = $(this).val();
+        $("#b_entry").val(DATA_B[selected].value);
+        updateAllTotals();
+      }).trigger("change");
+
+      $("#c_combobox").change(function() {
+        var selected = $(this).val();
+        $("#c_entry").val(DATA_C[selected].value);
+        updateAllTotals();
+      }).trigger("change");
+
+
+      $("#skill_combobox").change(function() {
+        var k = $(this).val();
+        var mult = getSkillMultiplier();
+       
+        $("#skill_entry").val(mult);
+       
+        calculateDateDiff();
+        calculateDateDiffRange();
+        updateAllTotals();
+        checkSkillConsistency();
+      }).trigger("change");
+
+      $("#d_time").on("input", function() {
+        var days = parseFloatSafe($(this).val() || "0");
+        $("#d_cost").val((days * 100).toFixed(0));
+        updateAllTotals();
+      });
+    
+
+
+      $("#date1").change(function() {
+        var d1 = $(this).datepicker("getDate");
+        $("#date2").datepicker("option", "minDate", d1);
+        if ($("#date2").datepicker("getDate") < d1) {
+          $("#date2").datepicker("setDate", d1);
+        }
+        calculateDateDiff();
+      });
+      $("#date2").change(function() {
+        calculateDateDiff();
+      });
+
+      $(document).on("change", ".toggle-check", function() {
+        var index = $(this).data("index");
+        var row = $(this).closest(".grid-row");
+        var $min = row.find("input.btn-min");
+        var $med = row.find("input.btn-med");
+        var $max = row.find("input.btn-max");
+        var isChecked = $(this).is(":checked");
+
+        buttonStates[index] = isChecked;
+        if (isChecked) {
+          var data = getDataForButton(index);
+          updateButtonRow(index, data);
+          $min.removeClass("hidden-fields");
+          $med.removeClass("hidden-fields");
+          $max.removeClass("hidden-fields");
+        } else {
+          updateButtonRow(index, [0,0,0]);
+          $min.addClass("hidden-fields");
+          $med.addClass("hidden-fields");
+          $max.addClass("hidden-fields");
+        }
+        if(index === 15) {
+          row.find("#input_15").prop("disabled", !isChecked);
+          if(!isChecked) row.find("#input_15").val("");
+        }
+        if(index === 16) {
+          row.find("#input_16").prop("disabled", !isChecked);
+          if(!isChecked) row.find("#input_16").val("");
+        }
+
+        if (index === 18 && $(this).is(":checked")) {
+  var finalMin = $("#final_min").val();
+
+}
+        updateAllTotals();
+      });
+      $(document).on("change", ".toggle-check", function() {
+  var isChecked = $(this).is(":checked");
+  var row = $(this).closest(".grid-row");
+  row.find(".count-input").prop("disabled", !isChecked)
+                           .toggleClass("hidden-fields", !isChecked);
+});
+
+      $("#input_15").on("input", function() { updateService15(); });
+      $("#input_16").on("input", function() { updateService16(); });
+      updateAllTotals();
+
+      $("#blocks_container").on("change", ".tactic-input", function() {
+        if (window.isRestoringDynamicBlocks) return;
+        var $blocks = $("#blocks_container .dynamic-block");
+        var lastBlock = $blocks.last();
+        if(lastBlock.find(".tactic-input").val().trim() !== "") {
+          if($blocks.filter(function(){ return $(this).find(".tactic-input").val().trim() === ""; }).length === 0) {
+            createNewDynamicBlock();
+          }
+        }
+      });
+
+      $("#load_excel").click(function() {
+        var $input = $("<input type='file' accept='.xlsx, .xls'>");
+        $input.on("change", function(e) {
+          var file = e.target.files[0];
+          if(file) { loadExcelFile(file); }
+        });
+        $input.trigger("click");
+      });
+
+      $("#add_vuln_block").click(function() { createNewVulnBlock(); });
+
+      createNewDynamicBlock();
+      updateStaticTexts();
+    });
+
+    function calculateDateDiff() {
+      var d1 = $("#date1").datepicker("getDate");
+      var d2 = $("#date2").datepicker("getDate");
+      if(d1 && d2) {
+        var diffDays = Math.abs((d2 - d1) / (1000 * 60 * 60 * 24));
+        var mult = getSkillMultiplier();
+        $("#result_date").val(diffDays * mult);
+        updateAllTotals();
+      }
+    }
+
+    function getDataForButton(index) {
+      var quantity = 1;
+      var row = $(".grid-row[data-index='" + index + "']");
+      if (row.length) {
+        quantity = parseFloatSafe(row.find(".count-input").val() || "1");
+      }
+      if (index >= 1 && index <= 14) {
+        var key = Object.keys(DATA_BUTTONS_1_14)[index - 1];
+        var baseValues = DATA_BUTTONS_1_14[key].values;
+        return [baseValues[0] * quantity, baseValues[1] * quantity, baseValues[2] * quantity];
+      } else if (index == 15) {
+        var val = parseFloatSafe($("#input_15").val() || "0");
+        return [val * 5, val * 100, val * 500];
+      } else if (index == 16) {
+        var val = parseFloatSafe($("#input_16").val() || "0");
+        return [val * 5, val * 80, val * 200];
+      } else if (index == 17) {
+        var selectedA = $("#a_combobox").val();
+        var valsA = DATA_A[selectedA].values;
+        var bVal = parseFloatSafe($("#b_entry").val() || "0");
+        return [valsA[0] * bVal * quantity, valsA[1] * bVal * quantity, valsA[2] * bVal * quantity];
+      } else if (index == 18) {
+        return [
+          parseFloatSafe($("#final_min").val() || "0"),
+          parseFloatSafe($("#final_med").val() || "0"),
+          parseFloatSafe($("#final_max").val() || "0")
+        ];
+      } else if (index == 20) {
+        return [80 * quantity, 150 * quantity, 400 * quantity];
+      } else if (index == 21) {
+        return [10 * quantity, 50 * quantity, 100 * quantity];
+      }
+      return [0, 0, 0];
+    }
+
+    $(document).on("input", ".count-input", function() {
+      var row = $(this).closest(".grid-row");
+      var index = row.attr("data-index");
+      var data = getDataForButton(index);
+      updateButtonRow(index, data);
+      updateAllTotals();
+    });
+
+
+    function updateButtonRow(index, data) {
+      var row = $("#hacker_infra_grid_body .grid-row[data-index='"+index+"']");
+      row.find("input.btn-min").val(data[0]);
+      row.find("input.btn-med").val(data[1]);
+      row.find("input.btn-max").val(data[2]);
+
+      
+    }
+
+    function updateService15() {
+      var val = parseFloatSafe($("#input_15").val() || "0");
+      if(val != 0) {
+        buttonStates[15] = true;
+        $("div.grid-row[data-index='15']").find("input.btn-min").val(val*10);
+        $("div.grid-row[data-index='15']").find("input.btn-med").val(val*100);
+        $("div.grid-row[data-index='15']").find("input.btn-max").val(val*1000);
+      } else {
+        buttonStates[15] = false;
+        $("div.grid-row[data-index='15']").find("input.btn-min").val(0);
+        $("div.grid-row[data-index='15']").find("input.btn-med").val(0);
+        $("div.grid-row[data-index='15']").find("input.btn-max").val(0);
+      }
+      updateAllTotals();
+    }
+
+    function updateService16() {
+      var val = parseFloatSafe($("#input_16").val() || "0");
+      if(val != 0) {
+        buttonStates[16] = true;
+        $("div.grid-row[data-index='16']").find("input.btn-min").val(val*50);
+        $("div.grid-row[data-index='16']").find("input.btn-med").val(val*2500);
+        $("div.grid-row[data-index='16']").find("input.btn-max").val(val*70000);
+      } else {
+        buttonStates[16] = false;
+        $("div.grid-row[data-index='16']").find("input.btn-min").val(0);
+        $("div.grid-row[data-index='16']").find("input.btn-med").val(0);
+        $("div.grid-row[data-index='16']").find("input.btn-max").val(0);
+      }
+      updateAllTotals();
+    }
+
+    function updateAllTotals() {
+      var d_time_val = parseFloatSafe($("#d_time").val() || "0");
+
+      var new_cost = d_time_val * 100;
+      $("#d_cost").val(new_cost.toFixed(0)); 
+    
+      var d_time_hours = d_time_val * 24;
+      var sumMin = 0, sumMed = 0, sumMax = 0;
+      var sumMinb = 0, sumMedb = 0, sumMaxb = 0;
+      $("#hacker_infra_grid_body .grid-row").each(function() {
+        sumMin += parseFloatSafe($(this).find("input.btn-min").val() || "0");
+        sumMed += parseFloatSafe($(this).find("input.btn-med").val() || "0");
+        sumMax += parseFloatSafe($(this).find("input.btn-max").val() || "0");
+      });
+      $("#blocks_container .dynamic-block").each(function() {
+        sumMinb += parseFloatSafe($(this).find(".calc-min").val() || "0");
+        sumMedb += parseFloatSafe($(this).find(".calc-med").val() || "0");
+        sumMaxb += parseFloatSafe($(this).find(".calc-max").val() || "0");
+      });
+      var d_time_val = parseFloatSafe($("#d_time").val() || "0");
+      var d_time_hours = d_time_val * 24;
+      var sumDynamicHours = 0, sumDynamicMinutes = 0;
+      $("#blocks_container .dynamic-block").each(function() {
+        sumDynamicHours += parseFloatSafe($(this).find(".time-hours").val() || "0");
+        sumDynamicMinutes += parseFloatSafe($(this).find(".time-minutes").val() || "0");
+      });
+      var additionalHours = sumDynamicHours + (sumDynamicMinutes / 60);
+      var additionalDays = (sumDynamicHours / 24) + (sumDynamicMinutes / 1440);
+      var calc_t_h = d_time_hours + additionalHours;
+      var calc_t_d = d_time_val + additionalDays;
+      $("#entry_t_h").val(calc_t_h.toFixed(0));
+      $("#entry_t_d").val(calc_t_d.toFixed(0));
+      var p_d_val = parseFloatSafe($("#d_cost").val() || "0");
+      var b_val = parseFloatSafe($("#b_entry").val() || "0");
+      var c_val = parseFloatSafe(($("#c_entry").val() || "0").replace(',', '.'));
+      var date_diff_val = parseFloatSafe($("#result_date").val() || "0");
+      var calc_s_f = (p_d_val + sumMin) + ((sumMinb + date_diff_val) * b_val * c_val);
+      var calc_m_f = (p_d_val + sumMed) + ((sumMedb + date_diff_val) * b_val * c_val);
+      var calc_l_f = (p_d_val + sumMax) + ((sumMaxb + date_diff_val) * b_val * c_val);
+      $("#entry_s_f").val(calc_s_f.toFixed(0));
+      $("#entry_m_f").val(calc_m_f.toFixed(0));
+      $("#entry_l_f").val(calc_l_f.toFixed(0));
+      $("#entry_t_d_tab2").val(calc_t_d.toFixed(0));
+      $("#entry_t_h_tab2").val(calc_t_h.toFixed(0));
+      $("#entry_s_f_tab2").val(calc_s_f.toFixed(0));
+      $("#entry_m_f_tab2").val(calc_m_f.toFixed(0));
+      $("#entry_l_f_tab2").val(calc_l_f.toFixed(0));
+
+      
+    }
+
+    var dynamicBlockCount = 0;
+    function createNewDynamicBlock() {
+      dynamicBlockCount++;
+      var blockId = "dynamic_block_" + dynamicBlockCount;
+      var stageTitle = currentLang === "ru" ? "Этап " : "Stage ";
+      var tacticLabel = currentLang === "ru" ? "Тактика" : "Tactic";
+      var techniqueLabel = currentLang === "ru" ? "Техника" : "Technique";
+      var qualLabel = currentLang === "ru" ? "Сложность реализации:" : "Complexity of implementation:";
+      var timeHoursLabel = currentLang === "ru" ? "Время (часы)" : "Time (hours)";
+      var timeMinLabel = currentLang === "ru" ? "Время (мин)" : "Time (min)";
+      var html = `
+        <div class="dynamic-block" id="${blockId}">
+          <div class="stage-title">${stageTitle}${dynamicBlockCount}</div>
+          <div style="display: flex; gap: 16px; margin-bottom: 32px;">
+            <div class="field-group">
+              <label>${tacticLabel}</label>
+              <input type="text" class="tactic-input" placeholder="${currentLang === "ru" ? "Начните вводить" : "Start typing"}">
+            </div>
+            <div class="field-group">
+              <label>${techniqueLabel}</label>
+              <input type="text" class="technique-input" disabled>
+            </div>
+          </div>
+          <div style="display: flex; gap: 16px; margin-bottom: 16px;">  
+            <div class="field-group" style="margin-bottom: 16px;">
+              <label>${qualLabel}</label>
+              <select class="qualification-select">
+                <option value="basic">${currentLang === "ru" ? "Базовая" : "Basic"}</option>
+                <option value="basic_plus">${currentLang === "ru" ? "Базовая +" : "Basic +"}</option>
+                <option value="advanced">${currentLang === "ru" ? "Продвинутая" : "Advanced"}</option>
+                <option value="top">${currentLang === "ru" ? "Экспертная" : "Expert"}</option>
+              </select>
+            </div>
+            <div class="field-group">
+              <label>${timeHoursLabel}</label>
+              <input type="text" class="time-hours">
+            </div>
+            <div class="field-group">
+              <label>${timeMinLabel}</label>
+              <input type="text" class="time-minutes">
+            </div>
+          </div>
+          <div class="last-price">
+            <div class="input-wrapper">
+              <input type="text" class="calc-min readonly" readonly>
+              <label class="input-label" data-i18n="min">min</label>
+            </div>
+            <div class="input-wrapper">
+              <input type="text" class="calc-med readonly" readonly>
+              <label class="input-label" data-i18n="med">med</label>
+            </div>
+            <div class="input-wrapper">
+              <input type="text" class="calc-max readonly" readonly>
+              <label class="input-label" data-i18n="max">max</label>
+            </div>
+          </div>
+        </div>
+      `;
+      $("#blocks_container").append(html);
+      var $block = $("#" + blockId);
+      $block.hide().slideDown(300);
+
+      var tactics = [];
+      var tacticKeyMap = {};
+      for (var key in TACTICS_TO_TECHNIQUES) {
+        var display = TACTICS_TO_TECHNIQUES[key].translations[currentLang];
+        tactics.push(display);
+        tacticKeyMap[display] = key;
+      }
+      $block.find(".tactic-input").autocomplete({
+        source: tactics,
+        minLength: 0,
+        select: function(event, ui) {
+          var selectedDisplay = ui.item.value;
+          var tacticKey = tacticKeyMap[selectedDisplay];
+          $(this).val(selectedDisplay);
+          $(this).data("tactic-key", tacticKey);
+          $(this).trigger("change");
+          $block.find(".technique-input").prop("disabled", false).val("");
+          var techArray = TACTICS_TO_TECHNIQUES[tacticKey].techniques || [];
+          var techsText = techArray.map(function(item){ 
+            return currentLang === "ru" ? item.ru : item.en; 
+          });
+          $block.find(".technique-input").autocomplete({ source: techsText, minLength: 0 });
+        }
+      }).on("focus", function() {
+        $(this).autocomplete("search", "");
+      });
+      $block.find(".technique-input").autocomplete({
+        source: [],
+        minLength: 0,
+        select: function(event, ui) {
+          var selectedText = ui.item.value;
+          var techKey = null;
+          for (var key in TECHNIQUE_TIMES) {
+            if (TECHNIQUE_TIMES[key].translations[currentLang] === selectedText) {
+              techKey = key;
+              break;
+            }
+          }
+          if (techKey && TECHNIQUE_TIMES.hasOwnProperty(techKey)) {
+            var times = TECHNIQUE_TIMES[techKey].values;
+            $block.find(".time-hours").val(times[0]);
+            $block.find(".time-minutes").val(times[1]);
+          }
+          recalcDynamicBlock($block);
+        }
+      }).on("focus", function() {
+        $(this).autocomplete("search", "");
+      });
+      $block.find(".time-hours, .time-minutes, .qualification-select").on("input change", function() {
+        recalcDynamicBlock($block);
+      });
+      $block.find(".technique-input").on("change", function() {
+        recalcDynamicBlock($block);
+      });
+    }
+
+    function recalcDynamicBlock($block) {
+      var hours = parseFloatSafe($block.find(".time-hours").val() || "0");
+      var minutes = parseFloatSafe($block.find(".time-minutes").val() || "0");
+      var base = hours + (minutes/60);
+      var qual = $block.find(".qualification-select").val();
+      var factors = COMBO_FACTORS[qual].values || [8,9,10];
+      var calcMin = base * factors[0];
+      var calcMed = base * factors[1];
+      var calcMax = base * factors[2];
+      $block.find(".calc-min").val(calcMin.toFixed(0));
+      $block.find(".calc-med").val(calcMed.toFixed(0));
+      $block.find(".calc-max").val(calcMax.toFixed(0));
+      updateAllTotals();
+      checkSkillConsistency();
+    }
+    window.skillAlertShown = false;
+
+    function checkSkillConsistency() {
+
+      var maxBlockRank = 0;
+      $("#blocks_container .dynamic-block .qualification-select").each(function(){
+        var r = getQualificationRank($(this).val());
+        if (r > maxBlockRank) maxBlockRank = r;
+      });
+
+      var attackerRank = getAttackerSkillRank();
+
+
+      if (maxBlockRank > attackerRank) {
+        if (!window.skillAlertShown) {
+          var lang = (typeof currentLang !== "undefined") ? currentLang : "en";
+          alert(skillAlertText[lang] || skillAlertText["en"]);
+          window.skillAlertShown = true;
+        }
+      } else {
+        window.skillAlertShown = false;
+      }
+    }
+ 
+    var skillHelpContent = {
+      ru: {
+        items: [
+          {
+            title: "Базовый",
+            text: "Атакующий обладает базовыми знаниями о кибератаках, может использовать только публичные эксплойты или общедоступное ПО."
+          },
+          {
+            title: "Базовый +",
+            text: "Атакующий обладает возможностями атакующих с базовым уровнем. Также атакующий может вносить изменения в эксплойты для повышения эффективности их работы, а также самостоятельно дорабатывать общедоступный инструментарий."
+          },
+          {
+            title: "Продвинутый",
+            text: "Атакующий обладает возможностями атакующего с базовым + уровнем. Также атакующий может использовать сложное специализированное ПО, владеет техниками для уклонения от обнаружения, эффективно применяет механизмы постэксплуатации, обхода средств защиты и сокрытия следов атаки. Самостоятельно разрабатывает эксплойты для общеизвестных уязвимостей."
+          },
+          {
+            title: "Экспертный",
+            text: "Атакующий обладает возможностями атакующего продвинутого уровня. Также атакующий обладает навыками обратной разработки, умеет выявлять уязвимости нулевого дня, самостоятельно разрабатывает для них эксплойты и специализированное ПО."
+          },
+          {
+            title: "Спец. службы",
+            text: "Данный инструмент не учитывает данный уровень квалификации атакующих"
+          }
+        ]
+      },
+      en: {
+        title: "Attacker qualification levels — explanation",
+        items: [
+          {
+            title: "Basic",
+            text: "The attacker has basic knowledge of cyber attacks and can only use public exploits or publicly available tools."
+          },
+          {
+            title: "Basic +",
+            text: "The attacker has the abilities of a Basic attacker. Additionally, the attacker can modify exploits to improve their effectiveness and extend publicly available tooling."
+          },
+          {
+            title: "Advanced",
+            text: "The attacker has the abilities of a Basic+ attacker. They can use complex specialized software, possess evasion techniques, effectively apply post-exploitation mechanisms, bypass defenses, and hide traces. They develop exploits for known vulnerabilities."
+          },
+          {
+            title: "Expert",
+            text: "The attacker has the abilities of an Advanced attacker and also has reverse-engineering skills, can find zero-day vulnerabilities, and develop exploits and specialized tooling for them."
+          },
+          {
+            title: "Security service",
+            text: "This tool does not account for this attacker qualification level."
+          }
+        ]
+      }
+    };
+
+
+    function showSkillTooltip(btn) {
+
+      $("#skill_tooltip").remove();
+      var lang = (typeof currentLang !== "undefined") ? currentLang : "en";
+      var content = skillHelpContent[lang] || skillHelpContent["en"];
+
+      var html = '<div id="skill_tooltip" role="dialog" aria-modal="true">';
+      content.items.forEach(function(it) {
+        html += '<div class="skill-item"><strong>' + it.title + '</strong><div>' + it.text + '</div></div>';
+      });
+      html += '</div>';
+
+      $("body").append(html);
+
+      var $tooltip = $("#skill_tooltip");
+      var btnRect = btn.getBoundingClientRect();
+      var top = btnRect.top + window.scrollY - 8; 
+      var left = btnRect.right + 12 + window.scrollX; 
+
+      var tooltipWidth = Math.min(520, $(window).width() * 0.6);
+      $tooltip.css({left: left + 'px', top: top + 'px', width: tooltipWidth + 'px'});
+
+      var rightEdge = left + tooltipWidth;
+      var viewportRight = window.scrollX + $(window).width() - 12;
+      if (rightEdge > viewportRight) {
+        var shift = rightEdge - viewportRight;
+        $tooltip.css('left', (left - shift) + 'px');
+      }
+
+
+      setTimeout(function(){ 
+        $(document).on("click.skillTooltip", function(e){
+          if ($(e.target).closest("#skill_tooltip, #skill_help_btn").length === 0) {
+            $tooltip.remove();
+            $(document).off("click.skillTooltip");
+          }
+        });
+      }, 10);
+
+    
+      $(document).on("keydown.skillTooltip", function(e) {
+        if (e.key === "Escape") {
+          $tooltip.remove();
+          $(document).off("keydown.skillTooltip");
+          $(document).off("click.skillTooltip");
+        }
+      });
+    }
+
+
+    $(function(){
+      $(document).on("click", "#skill_help_btn", function(e){
+        e.stopPropagation();
+        
+        if ($("#skill_tooltip").length) {
+          $("#skill_tooltip").remove();
+          return;
+        }
+        showSkillTooltip(this);
+      });
+    });
+    var vulnBlockCount = 0;
+    function createNewVulnBlock() {
+      vulnBlockCount++;
+      var blockId = "vuln_block_" + vulnBlockCount;
+      var vulnerabilityHeader = currentLang === "ru" ? "Уязвимость " : "Vulnerability ";
+      var vulnQuestion = currentLang === "ru" ? "Использовалась ли 1-day/0-day уязвимость?" : "Was a 1-day/0-day vulnerability used?";
+      var yesText = currentLang === "ru" ? "Да" : "Yes";
+      var noText = currentLang === "ru" ? "Нет" : "No";
+      function generateSpreadOptions() {
+        var options = "";
+        for(var key in spread_map) {
+          options += `<option value="${key}">${spread_map[key].translations[currentLang]}</option>`;
+        }
+        return options;
+      }
+      function generateVulnOptions() {
+        var options = "";
+        options += `<option value="code_execution">${vuln_map.code_execution.translations[currentLang]}</option>`;
+        options += `<option value="privilege_escalation">${vuln_map.privilege_escalation.translations[currentLang]}</option>`;
+        options += `<option value="information_disclosure">${vuln_map.information_disclosure.translations[currentLang]}</option>`;
+        options += `<option value="other">${vuln_map.other.translations[currentLang]}</option>`;
+        return options;
+      }
+      var html = 
+        '<div class="vuln-wrapper">' +
+          '<h3>' + vulnerabilityHeader + vulnBlockCount + '</h3>' +
+          '<fieldset id="' + blockId + '" class="vuln-fieldset vuln-block">' +
+            '<div class="vulnQuestion" style="display:flex; gap:32px;">' +
+              '<div>' + vulnQuestion + '</div>' +
+              '<label id="big-label"><input type="radio" name="toggle-vuln-' + blockId + '" value="' + yesText + '"> ' + yesText + '</label>' +
+              '<label id="big-label2"><input type="radio" name="toggle-vuln-' + blockId + '" value="' + noText + '" checked> ' + noText + '</label>' +
+            '</div>' +
+            '<div class="vuln-details" style="display:none;">' +
+              '<div class="flex" style="display:flex; align-items:flex-end; gap:32px; justify-content:space-between;">' +
+                '<div class="grid-10">' +
+                  '<div class="field-group">' +
+                    '<label>' + (currentLang === "ru" ? "Уровень распространенности ПО" : "Software Spread Level") + '</label>' +
+                    '<select class="spread-select">' + generateSpreadOptions() + '</select>' +
+                  '</div>' +
+                  '<div class="field-group">' +
+                    '<label>' + (currentLang === "ru" ? "Оценка" : "Rating") + '</label>' +
+                    '<input type="text" class="spread-value readonly" readonly>' +
+                  '</div>' +
+                '</div>' +
+                '<div class="field-group">' +
+                  '<label>' + (currentLang === "ru" ? "Уровень критичности" : "Criticality Level") + '</label>' +
+                  '<input type="text" class="crit-input" placeholder="' + (currentLang === "ru" ? "По CVSS 4.0" : "By CVSS 4.0") + '">' +
+                '</div>' +
+              '</div>' +
+              '<div class="grid-10">' +
+                '<div class="field-group">' +
+                  '<label>' + (currentLang === "ru" ? "Тип уязвимости" : "Vulnerability Type") + '</label>' +
+                  '<select class="vuln-select">' + generateVulnOptions() + '</select>' +
+                '</div>' +
+                '<div class="field-group">' +
+                  '<label>' + (currentLang === "ru" ? "Оценка" : "Rating") + '</label>' +
+                  '<input type="text" class="vuln-value readonly" readonly>' +
+                '</div>' +
+              '</div>' +
+              '<div class="grid-10" style="align-items:center !important; margin-top:20px;">' +
+                '<div class="vulnQuestion2" style="display:flex; align-items:center; gap:16px; justify-content:space-between;">' +
+                  '<div>' + (currentLang === "ru" ? "Наличие патча" : "Patch Availability") + '</div>' +
+                  '<div style="gap:32px; display:flex;">' +
+                    '<label id="big-label3" style="cursor:pointer;"><input type="radio" name="patch-option-' + blockId + '" value="' + yesText + '"> ' + yesText + '</label>' +
+                    '<label id="big-label4" style="cursor:pointer;"><input type="radio" name="patch-option-' + blockId + '" value="' + noText + '" checked> ' + noText + '</label>' +
+                  '</div>' +
+                '</div>' +
+                '<div class="field-group">' +
+                  '<label>' + (currentLang === "ru" ? "Коэффициент" : "Coefficient") + '</label>' +
+                  '<input type="text" class="patch-coefficient readonly" value="1" readonly>' +
+                '</div>' +
+              '</div>' +
+              '<div class="exploit-cost-container" style="margin-top:22px; margin-bottom:16px;">' +
+                '<label style="display:block; margin-bottom:8px;">' + (currentLang === "ru" ? "Стоимость эксплойта ($)" : "Exploit Cost ($)") + '</label>' +
+                '<div class="last-price" style="display:flex; gap:8px;">' +
+                  '<div class="input-wrapper">' +
+                    '<input type="text" class="cost-min readonly" readonly>' +
+                    '<label class="input-label" data-i18n="min">min</label>' +
+                  '</div>' +
+                  '<div class="input-wrapper">' +
+                    '<input type="text" class="cost-med readonly" readonly>' +
+                    '<label class="input-label" data-i18n="med">med</label>' +
+                  '</div>' +
+                  '<div class="input-wrapper">' +
+                    '<input type="text" class="cost-max readonly" readonly>' +
+                    '<label class="input-label" data-i18n="max">max</label>' +
+                  '</div>' +
+                '</div>' +
+              '</div>' +
+            '</div>' +
+          '</fieldset>' +
+        '</div>';
+      $("#vuln_container").append(html);
+      $("#vuln_container").children().last().hide().slideDown(300);
+
+      $("#" + blockId).find('input[name="toggle-vuln-' + blockId + '"]').change(function() {
+        var selectedVal = $(this).val();
+        var $currentBlock = $("#" + blockId);
+        var yesText = (currentLang === "ru") ? "Да" : "Yes";
+        
+        if (selectedVal === yesText) {
+          $currentBlock.find(".vuln-details").slideDown(300);
+          if (!window.isRestoringState && $("#vuln_container .vuln-wrapper").last().find(".vuln-fieldset").attr("id") === blockId) {
+            createNewVulnBlock();
+          }
+        } else {
+          var $details = $currentBlock.find(".vuln-details");
+          $details.slideUp(300, function(){
+            $details.find("input[type='text']").val("");
+            $details.find("select").prop("selectedIndex", 0).trigger("change");
+            if ($("#vuln_container .vuln-wrapper").length > 1) {
+              var $lastWrapper = $("#vuln_container .vuln-wrapper").last();
+              if ($lastWrapper.find('input[name^="toggle-vuln-"]:checked').val() === ((currentLang==="ru")?"Нет":"No") &&
+                  $lastWrapper.find(".vuln-details").is(":hidden")) {
+                $lastWrapper.remove();
+              }
+            }
+            updateVulnBlockNumbers();
+          });
+        }
+        recalcFinalValues();
+        updateVulnBlockNumbers();
+      });
+
+
+
+      $("#" + blockId).find(".spread-select").change(function() {
+        updateVulnSpreadValue(blockId);
+        recalcVulnCost(blockId);
+      });
+      $("#" + blockId).find(".vuln-select").change(function() {
+        updateVulnValue(blockId);
+        recalcVulnCost(blockId);
+      });
+      $("#" + blockId).find(".crit-input").on("input", function() {
+        recalcVulnCost(blockId);
+      });
+      $("#" + blockId).find('input[name="patch-option-' + blockId + '"]').change(function(){
+        recalcVulnCost(blockId);
+      });
+    }
+
+    function toggleVulnUsage(id) {
+      var $btn = $("#" + id).find(".toggle-vuln");
+      if ($btn.text() === (currentLang === "ru" ? "Нет" : "No")) {
+        $btn.text(currentLang === "ru" ? "Да" : "Yes").css({"background-color": "green"});
+        $("#" + id).find(".vuln-details").show();
+        if ($("#vuln_container .vuln-block").last().attr("id") === id) {
+          createNewVulnBlock();
+        }
+      } else {
+        $btn.text(currentLang === "ru" ? "Нет" : "No").css({"background-color": "red"});
+        $("#" + id).find(".vuln-details").hide();
+      }
+      recalcFinalValues();
+    }
+
+    function togglePatch(id) {
+      var $btn = $("#" + id).find(".toggle-patch");
+      if($btn.text() === (currentLang === "ru" ? "Нет" : "No")) {
+        $btn.text(currentLang === "ru" ? "Да" : "Yes").css({"background-color":"green"});
+      } else {
+        $btn.text(currentLang === "ru" ? "Нет" : "No").css({"background-color":"red"});
+      }
+      recalcVulnCost(id);
+    }
+
+    function updateVulnSpreadValue(id) {
+      var spreadType = $("#" + id).find(".spread-select").val();
+      var value = spread_map[spreadType] ? spread_map[spreadType].value : 0;
+      $("#" + id).find(".spread-value").val(value);
+    }
+
+    function updateVulnValue(id) {
+      var vulnType = $("#" + id).find(".vuln-select").val();
+      var value = vuln_map[vulnType] ? vuln_map[vulnType].value : 0;
+      $("#" + id).find(".vuln-value").val(value);
+    }
+
+    function recalcVulnCost(id) {
+      updateVulnSpreadValue(id);
+      updateVulnValue(id);
+      var spreadVal = parseFloatSafe($("#" + id).find(".spread-value").val() || "0");
+      var vulnVal = parseFloatSafe($("#" + id).find(".vuln-value").val() || "0");
+      var crit = parseFloatSafe($("#" + id).find(".crit-input").val() || "0");
+      var patch = $("#" + id).find('input[name="patch-option-' + id + '"]:checked').val() === (currentLang==="ru" ? "Да" : "Yes") ? 4 : 1;
+      $("#" + id).find(".patch-coefficient").val(patch);
+      var temp = (vulnVal + (crit / 2.0)) / patch;
+      var costMin = spreadVal * (temp / 1.7);
+      var costMed = spreadVal * temp;
+      var costMax = spreadVal * (temp * 1.7);
+      $("#" + id).find(".cost-min").val(costMin.toFixed(0));
+      $("#" + id).find(".cost-med").val(costMed.toFixed(0));
+      $("#" + id).find(".cost-max").val(costMax.toFixed(0));
+      recalcFinalValues();
+    }
+
+    function recalcFinalValues() {
+      var totalMin = 0, totalMed = 0, totalMax = 0;
+      $("#vuln_container .vuln-block").each(function() {
+        var usedVal = $(this).find('input[name^="toggle-vuln-"]:checked').val();
+        if (usedVal === (currentLang==="ru" ? "Да" : "Yes")) {
+          totalMin += parseFloatSafe($(this).find(".cost-min").val() || "0");
+          totalMed += parseFloatSafe($(this).find(".cost-med").val() || "0");
+          totalMax += parseFloatSafe($(this).find(".cost-max").val() || "0");
+        }
+      });
+      $("#final_min").val(totalMin.toFixed(0));
+      $("#final_med").val(totalMed.toFixed(0));
+      $("#final_max").val(totalMax.toFixed(0));
+      var isExploitChecked = $("#hacker_infra_grid_body .grid-row[data-index='18'] input.toggle-check").is(":checked");
+      if (isExploitChecked) {
+        updateButtonRow(18, getDataForButton(18));
+      } else {
+        updateButtonRow(18, [0, 0, 0]);
+      }
+
+      updateAllTotals();
+    }
+
+    var rangeStartDate = null;
+    $("#period").datepicker({
+      dateFormat: "dd.mm.yy",
+      onSelect: function(dateText, inst) {
+        if (!rangeStartDate) {
+          rangeStartDate = dateText;
+          setTimeout(function() { $("#period").datepicker("show"); }, 0);
+        } else {
+          var rangeEndDate = dateText;
+          var start = $.datepicker.parseDate("dd.mm.yy", rangeStartDate);
+          var end = $.datepicker.parseDate("dd.mm.yy", rangeEndDate);
+          if (end < start) { var temp = start; start = end; end = temp; }
+          var formattedStart = $.datepicker.formatDate("dd.mm.yy", start);
+          var formattedEnd = $.datepicker.formatDate("dd.mm.yy", end);
+          $("#period").val(formattedStart + " - " + formattedEnd);
+          rangeStartDate = null;
+          calculateDateDiffRange();
+        }
+      },
+      onClose: function(dateText, inst) {
+        if (rangeStartDate && $("#period").val().indexOf(" - ") === -1) {
+          $("#period").datepicker("show");
+        }
+      }
+    });
+    $("#period").on("change", calculateDateDiffRange);
+    function calculateDateDiffRange() {
+      var periodStr = $("#period").val();
+      if (periodStr.indexOf(" - ") !== -1) {
+        var dates = periodStr.split(" - ");
+        try {
+          var d1 = $.datepicker.parseDate("dd.mm.yy", $.trim(dates[0]));
+          var d2 = $.datepicker.parseDate("dd.mm.yy", $.trim(dates[1]));
+          var diffDays = Math.abs((d2 - d1) / (1000 * 60 * 60 * 24));
+          var mult = getSkillMultiplier();
+          $("#result_date").val(diffDays * mult + mult);
+          updateAllTotals();
+        } catch (e) { $("#result_date").val(""); }
+      } else { $("#result_date").val(""); }
+    }
+
+    function getCurrentState() {
+      var state = {};
+      state.basicMetrics = {
+        a_combobox: $("#a_combobox").val(),
+        b_combobox: $("#b_combobox").val(),
+        c_combobox: $("#c_combobox").val(),
+
+        date1: $("#date1").val(),
+        date2: $("#date2").val(),
+        period: $("#period").val(),
+        skill_combobox: $("#skill_combobox").val(),
+      };
+      state.scopeRecon = {
+        d_time: $("#d_time").val(),
+        d_cost: $("#d_cost").val()
+      };
+      state.hackerInfra = [];
+      $("#hacker_infra_grid_body .grid-row").each(function() {
+        var rowData = {
+          index: $(this).attr("data-index"),
+          checked: $(this).find("input.toggle-check").is(":checked"),
+          count: $(this).find("input.count-input").val(),
+          btn_min: $(this).find("input.btn-min").val(),
+          btn_med: $(this).find("input.btn-med").val(),
+          btn_max: $(this).find("input.btn-max").val()
+        };
+        if ($(this).attr("data-index") === "15") { rowData.input = $("#input_15").val(); }
+        if ($(this).attr("data-index") === "16") { rowData.input = $("#input_16").val(); }
+        state.hackerInfra.push(rowData);
+      });
+      state.dynamicBlocks = [];
+      $("#blocks_container .dynamic-block").each(function() {
+        var blockData = {
+          tactic: $(this).find(".tactic-input").val(),
+          technique: $(this).find(".technique-input").val(),
+          qualification: $(this).find(".qualification-select").val(),
+          time_hours: $(this).find(".time-hours").val(),
+          time_minutes: $(this).find(".time-minutes").val()
+        };
+        state.dynamicBlocks.push(blockData);
+      });
+      state.vulnBlocks = [];
+      $("#vuln_container .vuln-block").each(function() {
+        var blockId = $(this).attr("id");
+        var vulnData = {
+          used: $(this).find('input[name="toggle-vuln-' + blockId + '"]:checked').val(),
+          spread_select: $(this).find(".spread-select").val(),
+          crit_input: $(this).find(".crit-input").val(),
+          vuln_select: $(this).find(".vuln-select").val(),
+          patch_option: $(this).find('input[name="patch-option-' + blockId + '"]:checked').val()
+        };
+        state.vulnBlocks.push(vulnData);
+      });
+      state.analysisMetrics = {
+        entry_s_f: $("#entry_s_f").val(),
+        entry_m_f: $("#entry_m_f").val(),
+        entry_l_f: $("#entry_l_f").val(),
+        entry_t_d: $("#entry_t_d").val(),
+        entry_t_h: $("#entry_t_h").val()
+      };
+      state.timestamp = new Date().toISOString();
+      return state;
+    }
+    function saveCurrentState() {
+      var state = getCurrentState();
+      var saves = JSON.parse(localStorage.getItem("cscSaves") || "[]");
+      saves.push(state);
+      localStorage.setItem("cscSaves", JSON.stringify(saves));
+      refreshSavedList();
+      alert(currentLang === "ru" ? "Состояние сохранено" : "State saved");
+    }
+    $("#export_state_btn").click(function() {
+      var saves = localStorage.getItem("cscSaves") || "[]";
+      var blob = new Blob([saves], {type: "application/json"});
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement("a");
+      a.href = url;
+      a.download = "cscSaves.json";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    });
+    $("#import_state_btn").click(function() {
+      var input = $("<input type='file' accept='.json'>");
+      input.on("change", function(e) {
+        var file = e.target.files[0];
+        if(file) {
+          var reader = new FileReader();
+          reader.onload = function(e) {
+            try {
+              var imported = JSON.parse(e.target.result);
+              localStorage.setItem("cscSaves", JSON.stringify(imported));
+              refreshSavedList();
+              alert(currentLang === "ru" ? "Импорт успешен" : "Import successful");
+            } catch(err) {
+              alert((currentLang === "ru" ? "Ошибка при импорте: " : "Import error: ") + err.message);
+            }
+          };
+          reader.readAsText(file);
+        }
+      });
+      input.trigger("click");
+    });
+    function refreshSavedList() {
+      var saves = JSON.parse(localStorage.getItem("cscSaves") || "[]");
+      var $list = $("#saved_list");
+      $list.empty();
+      if (saves.length === 0) {
+        $list.append("<li style='margin-bottom:16px; padding:16px;'>" + (currentLang === "ru" ? "Нет сохранений" : "No saves") + "</li>");
+      } else {
+        $.each(saves, function(index, state) {
+          var displayTime = new Date(state.timestamp).toLocaleString();
+          var saveName = state.name || ((currentLang === "ru" ? "Сохранение " : "Save ") + (index + 1) + " - " + displayTime);
+          var $item = $("<li>").css({
+            "margin-bottom": "16px",
+            "padding": "12px 16px",
+            "border-radius": "7px",
+            "list-style": "none",
+            "background": "#fff",
+            "box-shadow": "0 4px 10px 0 rgba(156, 172, 188, 0.10)",
+            "display": "flex",
+            "align-items": "center"
+          });
+          $item.attr("data-index", index);
+          var $nameSpan = $("<span>")
+            .addClass("save-name")
+            .text(saveName)
+            .css({ "cursor": "pointer", "flex-grow": "1" })
+            .on("click", function() { loadSavedState(index); });
+          var $renameButton = $("<button>")
+            .addClass("rename-button")
+            .text(currentLang === "ru" ? "Переименовать" : "Rename")
+            .on("click", function(e) {
+              e.stopPropagation();
+              var newName = prompt(currentLang === "ru" ? "Введите новое имя для сохранения:" : "Enter a new name for the save:", saveName);
+              if (newName !== null && newName.trim() !== "") {
+                state.name = newName;
+                saves[index] = state;
+                localStorage.setItem("cscSaves", JSON.stringify(saves));
+                refreshSavedList();
+              }
+            });
+
+          var $deleteButton = $("<button>")
+            .html('<img src="img/trash.svg" class="delete-btn" alt="' + (currentLang==="ru"?"Удалить":"Delete") + '" style="width:24px; height:24px;">')
+            .css({"margin-left": "16px", "background": "none", "border": "none", "cursor": "pointer"})
+            .on("click", function(e) {
+              e.stopPropagation();
+              if (confirm(currentLang === "ru" ? "Удалить сохранение?" : "Delete save?")) {
+                var $li = $(this).closest("li");
+                $li.animate({
+                  opacity: 0,
+                  height: 0,
+                  marginTop: 0,
+                  marginBottom: 0,
+                  paddingTop: 0,
+                  paddingBottom: 0
+                }, 300, function() {
+                  var saves = JSON.parse(localStorage.getItem("cscSaves") || "[]");
+                  var index = parseInt($li.attr("data-index"));
+                  saves.splice(index, 1);
+                  localStorage.setItem("cscSaves", JSON.stringify(saves));
+                  $li.remove();
+                  if (saves.length === 0) { refreshSavedList(); }
+                  else { $("#saved_list li").each(function(i) { $(this).attr("data-index", i); }); }
+                });
+              }
+            });
+          $item.append($nameSpan, $renameButton, $deleteButton);
+          $list.append($item);
+        });
+      }
+    }
+    
+    function loadSavedState(index) {
+      dynamicBlockCount = 0;
+      var saves = JSON.parse(localStorage.getItem("cscSaves") || "[]");
+      if (index >= 0 && index < saves.length) {
+        var state = saves[index];
+        $("#a_combobox").val(state.basicMetrics.a_combobox).trigger("change");
+        $("#b_combobox").val(state.basicMetrics.b_combobox).trigger("change");
+        $("#c_combobox").val(state.basicMetrics.c_combobox).trigger("change");
+        $("#skill_combobox").val(state.basicMetrics.skill_combobox || "basic").trigger("change");
+        $("#d_time").val(state.scopeRecon.d_time).trigger("change");
+        $("#d_cost").val(state.scopeRecon.d_cost).trigger("change");
+
+        $("#date1").val(state.basicMetrics.date1);
+        $("#date2").val(state.basicMetrics.date2);
+        $("#period").val(state.basicMetrics.period);
+        calculateDateDiff();
+        calculateDateDiffRange();
+        $("#hacker_infra_grid_body .grid-row").each(function() {
+          var idx = $(this).attr("data-index");
+          var row = state.hackerInfra.find(function(r) { return r.index === idx; });
+          if (row) {
+            $(this).find("input.toggle-check").prop("checked", row.checked).trigger("change");
+            $(this).find("input.count-input").val(row.count);
+            $(this).find("input.btn-min").val(row.btn_min);
+            $(this).find("input.btn-med").val(row.btn_med);
+            $(this).find("input.btn-max").val(row.btn_max);
+            if (idx === "15") { $("#input_15").val(row.input).trigger("input"); }
+            if (idx === "16") { $("#input_16").val(row.input).trigger("input"); }
+          }
+        });
+        window.isRestoringDynamicBlocks = true;
+        $("#blocks_container").empty();
+        $.each(state.dynamicBlocks, function(i, blockData) {
+          createNewDynamicBlock();
+          var $block = $("#blocks_container .dynamic-block").last();
+          $block.find(".tactic-input").val(blockData.tactic).trigger("change");
+          $block.find(".technique-input").val(blockData.technique).trigger("change");
+          $block.find(".qualification-select").val(blockData.qualification).trigger("change");
+          $block.find(".time-hours").val(blockData.time_hours).trigger("input");
+          $block.find(".time-minutes").val(blockData.time_minutes).trigger("input");
+        });
+        window.isRestoringDynamicBlocks = false;
+        $("#vuln_container").empty();
+        vulnBlockCount = 0;
+        window.isRestoringState = true;
+        $.each(state.vulnBlocks, function(i, vulnData) {
+          createNewVulnBlock();
+          var $block = $("#vuln_container .vuln-block").last();
+          var blockId = $block.attr("id");
+          var yesText = (currentLang === "ru") ? "Да" : "Yes";
+          var noText  = (currentLang === "ru") ? "Нет" : "No";
+          var usedValue = (vulnData.used === yesText) ? yesText : noText;
+          $block.find('input[name="toggle-vuln-' + blockId + '"][value="' + usedValue + '"]')
+                .prop("checked", true)
+                .trigger("change");
+          $block.find(".spread-select").val(vulnData.spread_select).trigger("change");
+          $block.find(".crit-input").val(vulnData.crit_input).trigger("input");
+          $block.find(".vuln-select").val(vulnData.vuln_select).trigger("change");
+          var patchValue = (vulnData.patch_option === yesText) ? yesText : noText;
+          $block.find('input[name="patch-option-' + blockId + '"][value="' + patchValue + '"]')
+                .prop("checked", true)
+                .trigger("change");
+        });
+        window.isRestoringState = false;
+        
+        createNewVulnBlock();
+        updateVulnBlockNumbers();
+        
+        updateAllTotals();
+        checkSkillConsistency();
+        alert(currentLang==="ru"?"Состояние загружено":"State loaded");
+        $("#tabs").tabs("option", "active", 0);
+      }
+    }
+
+    $(function() {
+      refreshSavedList();
+      $("#save_state_btn").click(function() {
+        saveCurrentState();
+      });
+    });
+    $("#clear_state_btn").click(function() {
+      if (confirm(currentLang==="ru"?"Вы уверены, что хотите сбросить значения до стандартных?":"Are you sure you want to reset to default values?")) {
+        location.reload();
+      }
+    });
+    $("#clear_saves_btn").click(function() {
+      if (confirm(currentLang==="ru"?"Вы уверены, что хотите удалить все сохранения? Рекомендуется их экспортировать.":"Are you sure you want to delete all saves? All saves will be lost, consider exporting them")) {
+        localStorage.clear();
+        location.reload();
+      }
+    });
+    function updateVulnBlockNumbers() {
+      var prefix = currentLang === "ru" ? "Уязвимость " : "Vulnerability ";
+      $("#vuln_container .vuln-wrapper").each(function(i) {
+        $(this).find("h3").text(prefix + (i + 1));
+      });
+    }
+
+  </script>
+</body>
+</html>
