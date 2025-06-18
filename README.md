@@ -2,6 +2,7 @@
 Cyberattack Score Calculator (CSC). A tool for calculating the cost of a cyber attack.
 This tool is designed to assess the costs incurred by hackers when conducting a successful attack on an organization. 
 Before using, you should install fonts in the "fonts" folder.
+Or you can use the online version https://pt-cyberanalytics.github.io/CSC/
 
 ## Total Values
 Here the result of the cyber attack cost will be displayed. It is worth noting that many parameters are calculated taking into account the minimum, average and maximum values, which creates space for the final assessment. By default, you can focus on the average value.
