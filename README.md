@@ -5,7 +5,7 @@ Before using, you should install fonts in the "fonts" folder.
 Or you can use the online version https://pt-cyberanalytics.github.io/CSC/
 
 # Disclaimer
-- The technique is not applicable to attacks carried out by state ART groups.
+- This tool is not applicable to attacks carried out by state APT groups.
 - The cost of a cyberattack is not a static quantity and can change over time, as well as when any changes are made to the attacked System.
 - In the case of security analysis services, there is no dependence on the cost of the services provided and the calculation of the cost of a cyber attack using this method.
 - All calculations are carried out only according to available information, any hidden factors cannot be taken into account in the calculations.
