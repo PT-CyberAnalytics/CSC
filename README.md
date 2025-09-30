@@ -57,10 +57,10 @@ A sequence of similar hacker actions can be combined under one tactic. For examp
 ## Required qualifications
 The attacker's qualifications are assessed twice.
 When evaluating the vector, it is necessary to evaluate the complexity of each step in accordance with the required qualifications of the attacker:
-- Basic. Basic knowledge of cyber attacks is sufficient to use the technique; public exploits or publicly distributed software were used
-- Basic+. Basic knowledge of attacks on information systems was sufficient to use the technique, but public exploits had to be modified and refined to increase the effectiveness of the attack.
-- Advanced. Complex specialized software, modification and refinement of public exploits, knowledge of post-exploitation techniques, and techniques for bypassing security tools and hiding traces of an attack were required to use the technique.
-- Expert. Deep knowledge and skills in conducting cyber attacks, reverse engineering software, knowledge of techniques for bypassing security tools, hiding traces, and the ability to identify zero-day vulnerabilities, independently develop exploits and other software were required to use the technique.
+- Basic. The attacker has basic knowledge of cyber attacks and can only use public exploits or publicly available tools.
+- Basic +. The attacker has the abilities of a Basic attacker. Additionally, the attacker can modify exploits to improve their effectiveness and extend publicly available tooling.
+- Advanced. The attacker has the abilities of a Basic+ attacker. They can use complex specialized software, possess evasion techniques, effectively apply post-exploitation mechanisms, bypass defenses, and hide traces. They develop exploits for known vulnerabilities.
+- Expert. The attacker has the abilities of an Advanced attacker and also has reverse-engineering skills, can find zero-day vulnerabilities, and develop exploits and specialized tooling for them.
 
 Next, depending on the most difficult step in the vector, it is necessary to evaluate the attacker's skill level by the highest value.
 The corresponding value must be specified for the "Attacker Qualification Level" metric.
