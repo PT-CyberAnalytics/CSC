@@ -4,6 +4,12 @@ This tool is designed to assess the costs incurred by hackers when conducting a 
 Before using, you should install fonts in the "fonts" folder.
 Or you can use the online version https://pt-cyberanalytics.github.io/CSC/
 
+# Disclaimer
+- The technique is not applicable to attacks carried out by state ART groups.
+- The cost of a cyberattack is not a static quantity and can change over time, as well as when any changes are made to the attacked System.
+- In the case of security analysis services, there is no dependence on the cost of the services provided and the calculation of the cost of a cyber attack using this method.
+- All calculations are carried out only according to available information, any hidden factors cannot be taken into account in the calculations.
+
 ## Total Values
 Here the result of the cyber attack cost will be displayed. It is worth noting that many parameters are calculated taking into account the minimum, average and maximum values, which creates space for the final assessment. By default, you can focus on the average value.
 
@@ -28,7 +34,7 @@ In this section, you must specify the number of vulnerabilities for which hacker
 - Regional. Software popular in a certain region or country, often created to meet local requirements or standards. Vulnerabilities are of interest to attackers focused on a specific region. Examples: Bitrix, Webtutor, SAP Business One.
 - Widely used. Software used by a large number of organizations and corporate users around the world. Vulnerabilities in such products are valued due to the ability to attack both large corporations and small and medium businesses. Examples: MySQL, Cisco ASA, Vmware ESXi.
 - Mass. Software installed on most user devices around the world. Such vulnerabilities are extremely popular, as they allow you to attack a huge number of potential targets. Examples: Chrome, Telegram, MS Office, Zoom.
-- Systemic. Operating systems that control user devices. Vulnerabilities in them are the most valuable, as they provide access to the basic level of device control and allow complex attacks to be carried out worldwide. Examples: Windows, Linux, macOS, Android.
+- System. Operating systems that control user devices. Vulnerabilities in them are the most valuable, as they provide access to the basic level of device control and allow complex attacks to be carried out worldwide. Examples: Windows, Linux, macOS, Android.
 
 "Vulnerability type". Filled in according to the vulnerability class:
 - Code execution. For example: RCE, RFI.
@@ -49,11 +55,15 @@ The attack chain is a detailed description of the hackers' actions based on the 
 A sequence of similar hacker actions can be combined under one tactic. For example, if hackers consistently executed multiple commands to examine a compromised node or system (id, uname, ifconfig, ip a, whoami, ...), then you don't have to describe each technique in detail, but specify the general tactic "Detection", specify a dash instead of technique and set the time for the sum of these steps.
 
 ## Required qualifications
-Filled in according to the required hacker training level to perform a specific step:
+The attacker's qualifications are assessed twice.
+When evaluating the vector, it is necessary to evaluate the complexity of each step in accordance with the required qualifications of the attacker:
 - Basic. Basic knowledge of cyber attacks is sufficient to use the technique; public exploits or publicly distributed software were used
 - Basic+. Basic knowledge of attacks on information systems was sufficient to use the technique, but public exploits had to be modified and refined to increase the effectiveness of the attack.
 - Advanced. Complex specialized software, modification and refinement of public exploits, knowledge of post-exploitation techniques, and techniques for bypassing security tools and hiding traces of an attack were required to use the technique.
-- Top. Deep knowledge and skills in conducting cyber attacks, reverse engineering software, knowledge of techniques for bypassing security tools, hiding traces, and the ability to identify zero-day vulnerabilities, independently develop exploits and other software were required to use the technique.
+- Expert. Deep knowledge and skills in conducting cyber attacks, reverse engineering software, knowledge of techniques for bypassing security tools, hiding traces, and the ability to identify zero-day vulnerabilities, independently develop exploits and other software were required to use the technique.
+
+Next, depending on the most difficult step in the vector, it is necessary to evaluate the attacker's skill level by the highest value.
+The corresponding value must be specified for the "Attacker Qualification Level" metric.
 
 ## Time
 "Time (hours)" and "Time (minutes)": initially filled in automatically from preset values ​​for each technique. If the attack report or security analysis specifies a different time frame, this value should be changed.
