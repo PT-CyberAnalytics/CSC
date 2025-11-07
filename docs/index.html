@@ -2,301 +2,301 @@
 
 <html>
 <head>
-  <meta charset="UTF-8">
-  <title>Cyberattack Score Calculator</title>
-  <link type="image/x-icon" href="img/Cyber-Analytics-icon.ico" rel="shortcut icon">
-  <link type="image/x-icon" href="img/Cyber-Analytics-icon.ico" rel="icon">
-  
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.8/jquery.inputmask.min.js"></script>
+    <meta charset="UTF-8">
+    <title>Cyberattack Score Calculator</title>
+    <link type="image/x-icon" href="img/Cyber-Analytics-icon.ico" rel="shortcut icon">
+    <link type="image/x-icon" href="img/Cyber-Analytics-icon.ico" rel="icon">
 
-  <link rel="stylesheet" href="css/jquery-ui.css">
-  <link rel="stylesheet" href="css/style.css">
-  <script>
-    (function() {
-      var lang = localStorage.getItem("currentLang") || "en";
-      if (lang === "ru") {
-        var css = 
-          '#toggleLang + .toggle-wrapper .toggle-circle { transform: translateX(30px) !important; transition: none !important; }';
-        var style = document.createElement('style');
-        style.type = 'text/css';
-        style.appendChild(document.createTextNode(css));
-        document.head.appendChild(style);
-      }
-    })();
-  </script>
-  <style>
-    
-  </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.8/jquery.inputmask.min.js"></script>
+
+    <link rel="stylesheet" href="css/jquery-ui.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script>
+        (function() {
+          var lang = localStorage.getItem("currentLang") || "en";
+          if (lang === "ru") {
+            var css =
+              '#toggleLang + .toggle-wrapper .toggle-circle { transform: translateX(30px) !important; transition: none !important; }';
+            var style = document.createElement('style');
+            style.type = 'text/css';
+            style.appendChild(document.createTextNode(css));
+            document.head.appendChild(style);
+          }
+        })();
+    </script>
+    <style>
+
+    </style>
 </head>
 <body>
-  <div id="tabs" class="tabs">
+<div id="tabs" class="tabs">
     <div class="header-bar">
-      <nav>
-        <div class="logo-container"><img src="img/logo.svg" alt="CA" class="logo"> CSC</div>
-        <ul>
-          <li><a href="#tab-1" data-i18n="tab1">Основная вкладка</a></li>
-          <li><a href="#tab-2" data-i18n="tab2">1-day/0-day уязвимость</a></li>
-          <li><a href="#tab-3" data-i18n="tab3">Сохранения</a></li>
-        </ul>
+        <nav>
+            <div class="logo-container"><img src="img/logo.svg" alt="CA" class="logo"> CSC</div>
+            <ul>
+                <li><a href="#tab-1" data-i18n="tab1">Основная вкладка</a></li>
+                <li><a href="#tab-2" data-i18n="tab2">1-day/0-day уязвимость</a></li>
+                <li><a href="#tab-3" data-i18n="tab3">Сохранения</a></li>
+            </ul>
 
-<div class="lang-toggle">
-  <input type="checkbox" id="toggleLang" />
-  <label for="toggleLang" class="toggle-wrapper">
-    <div class="toggle-text">
-      <span class="en">EN</span>
-      <span class="ru">RU</span>
-    </div>
-    <div class="toggle-circle"></div>
-  </label>
-</div>
-      </nav>
+            <div class="lang-toggle">
+                <input type="checkbox" id="toggleLang" />
+                <label for="toggleLang" class="toggle-wrapper">
+                    <div class="toggle-text">
+                        <span class="en">EN</span>
+                        <span class="ru">RU</span>
+                    </div>
+                    <div class="toggle-circle"></div>
+                </label>
+            </div>
+        </nav>
     </div>
 
     <div id="tab-1" class="tab-content">
-      <div class="flex-top">
-        <div class="top-right">
-          <div class="sticky-div">
-            <fieldset class="nav-panel">
-              <a href="#tabs"><img src="img/metrics.svg" alt="Metrics"><span data-i18n="metrics">Метрики</span></a>
-              <a href="#infra"><img src="img/infra.svg" alt="Infrastructure"><span data-i18n="infrastructure">Инфраструктура</span></a>
-              <a href="#dynamic_blocks"><img src="img/chain.svg" alt="Attack"><span data-i18n="attack_chain">Цепь атаки</span></a>
-            </fieldset>
-            <h2 data-i18n="total_values">Итоговые значения</h2>
-            <fieldset id="results-fieldset">
-              <div class="">
-                <div class="result-time">
-                  <div class="input-wrapper">
-                    <label for="entry_t_d" data-i18n="time_days" class="small-line">Время(в сутках)</label>
-                    <input type="text" id="entry_t_d" class="readonly" style="padding-top: 8px;" readonly>
-                  </div>
-                  <div class="divider"></div>
-                  <div class="input-wrapper">
-                    <label for="entry_t_h" data-i18n="time_hours" class="small-line">Время(в часах)</label>
-                    <input type="text" id="entry_t_h" class="readonly" style="padding-top: 8px;" readonly>
-                  </div>
+        <div class="flex-top">
+            <div class="top-right">
+                <div class="sticky-div">
+                    <fieldset class="nav-panel">
+                        <a href="#tabs"><img src="img/metrics.svg" alt="Metrics"><span data-i18n="metrics">Метрики</span></a>
+                        <a href="#infra"><img src="img/infra.svg" alt="Infrastructure"><span data-i18n="infrastructure">Инфраструктура</span></a>
+                        <a href="#dynamic_blocks"><img src="img/chain.svg" alt="Attack"><span data-i18n="attack_chain">Цепь атаки</span></a>
+                    </fieldset>
+                    <h2 data-i18n="total_values">Итоговые значения</h2>
+                    <fieldset id="results-fieldset">
+                        <div class="">
+                            <div class="result-time">
+                                <div class="input-wrapper">
+                                    <label for="entry_t_d" data-i18n="time_days" class="small-line">Время(в сутках)</label>
+                                    <input type="text" id="entry_t_d" class="readonly" style="padding-top: 8px;" readonly>
+                                </div>
+                                <div class="divider"></div>
+                                <div class="input-wrapper">
+                                    <label for="entry_t_h" data-i18n="time_hours" class="small-line">Время(в часах)</label>
+                                    <input type="text" id="entry_t_h" class="readonly" style="padding-top: 8px;" readonly>
+                                </div>
+                            </div>
+                            <label data-i18n="attack_cost">Итоговая стоимость атаки ($)</label>
+                            <div class="last-price">
+                                <div class="input-wrapper">
+                                    <input type="text" id="entry_s_f" class="readonly" readonly>
+                                    <label for="entry_s_f" class="input-label" data-i18n="min">min</label>
+                                </div>
+                                <div class="input-wrapper">
+                                    <input type="text" id="entry_m_f" class="readonly" readonly>
+                                    <label for="entry_m_f" class="input-label" data-i18n="med">med</label>
+                                </div>
+                                <div class="input-wrapper">
+                                    <input type="text" id="entry_l_f" class="readonly" readonly>
+                                    <label for="entry_l_f" class="input-label" data-i18n="max">max</label>
+                                </div>
+                            </div>
+                            <div class="save-button-container">
+                                <button id="save_state_btn" data-i18n="save">Сохранить</button>
+                                <button id="clear_state_btn" data-i18n="clear">Очистить</button>
+                            </div>
+                        </div>
+                    </fieldset>
                 </div>
-                <label data-i18n="attack_cost">Итоговая стоимость атаки ($)</label>
-                <div class="last-price">
-                  <div class="input-wrapper">
-                    <input type="text" id="entry_s_f" class="readonly" readonly>
-                    <label for="entry_s_f" class="input-label" data-i18n="min">min</label>
-                  </div>
-                  <div class="input-wrapper">
-                    <input type="text" id="entry_m_f" class="readonly" readonly>
-                    <label for="entry_m_f" class="input-label" data-i18n="med">med</label>
-                  </div>
-                  <div class="input-wrapper">
-                    <input type="text" id="entry_l_f" class="readonly" readonly>
-                    <label for="entry_l_f" class="input-label" data-i18n="max">max</label>
-                  </div>
-                </div>
-                <div class="save-button-container">
-                  <button id="save_state_btn" data-i18n="save">Сохранить</button>
-                  <button id="clear_state_btn" data-i18n="clear">Очистить</button>
-                </div>
-              </div>
-            </fieldset>
-          </div>
-        </div>
+            </div>
 
-        <div class="top-left">
-          <h2 data-i18n="basic_metrics">Базовые метрики</h2>
-          <fieldset id="basic_metrics">
-            <div id="basic_metrics_grid" class="grid-table">
-              <div class="grid-body" id="basic_metrics_grid_body">
-                <div class="grid-row" style="padding-bottom: 0px !important;">
-                  <label for="a_combobox" data-i18n="company_industry">Отрасль атакованной компании</label>
-                  <label style="grid-column: 2 / 5;" data-i18n="market_access_cost">Стоимость доступа на черном рынке ($)</label>
-                </div>
-                <div class="grid-row" style="padding-top: 8px !important;">
-                  <div>
-                    <select id="a_combobox"></select>
-                  </div>
-                  <div class="input-wrapper">
-                    <input type="text" id="a_min" class="readonly" readonly>
-                    <label for="a_min" class="input-label" data-i18n="min">min</label>
-                  </div>
-                  <div class="input-wrapper">
-                    <input type="text" id="a_med" class="readonly" readonly>
-                    <label for="a_med" class="input-label" data-i18n="med">med</label>
-                  </div>
-                  <div class="input-wrapper">
-                    <input type="text" id="a_max" class="readonly" readonly>
-                    <label for="a_max" class="input-label" data-i18n="max">max</label>
-                  </div>
-                </div>
-                <div class="grid-row">
-                  <div>
-                    <label for="b_combobox" data-i18n="cyber_security_maturity">Зрелость ИБ</label>
-                    <select id="b_combobox"></select>
-                  </div>
-                  <div>
-                    <label data-i18n="coefficient">Коэффициент:</label>
-                    <input type="text" id="b_entry" class="readonly" readonly>
-                  </div>
-                  <div></div>
-                  <div></div>
-                </div>
-                <div class="grid-row">
-                  <div>
-                    <label for="c_combobox" data-i18n="countermeasures">Противодействие</label>
-                    <select id="c_combobox"></select>
-                  </div>
-                  <div>
-                    <label data-i18n="coefficient">Коэффициент</label>
-                    <input type="text" id="c_entry" class="readonly" readonly>
-                  </div>
-                  <div></div>
-                  <div></div>
-                </div>
-                <div class="grid-row">
-                  <div>
-                    <div class="help">
-                    <label for="skill_combobox" data-i18n="attacker_skill">Уровень квалификации атакующих</label><div style="display:flex; align-items:flex-end; padding-bottom:4px;">
-                    <button id="skill_help_btn" aria-label="Help" title="" class="help-btn">i</button>
-                  </div>
-                    </div><select id="skill_combobox"></select>
-                  </div>
+            <div class="top-left">
+                <h2 data-i18n="basic_metrics">Базовые метрики</h2>
+                <fieldset id="basic_metrics">
+                    <div id="basic_metrics_grid" class="grid-table">
+                        <div class="grid-body" id="basic_metrics_grid_body">
+                            <div class="grid-row" style="padding-bottom: 0px !important;">
+                                <label for="a_combobox" data-i18n="company_industry">Отрасль атакованной компании</label>
+                                <label style="grid-column: 2 / 5;" data-i18n="market_access_cost">Стоимость доступа на черном рынке ($)</label>
+                            </div>
+                            <div class="grid-row" style="padding-top: 8px !important;">
+                                <div>
+                                    <select id="a_combobox"></select>
+                                </div>
+                                <div class="input-wrapper">
+                                    <input type="text" id="a_min" class="readonly" readonly>
+                                    <label for="a_min" class="input-label" data-i18n="min">min</label>
+                                </div>
+                                <div class="input-wrapper">
+                                    <input type="text" id="a_med" class="readonly" readonly>
+                                    <label for="a_med" class="input-label" data-i18n="med">med</label>
+                                </div>
+                                <div class="input-wrapper">
+                                    <input type="text" id="a_max" class="readonly" readonly>
+                                    <label for="a_max" class="input-label" data-i18n="max">max</label>
+                                </div>
+                            </div>
+                            <div class="grid-row">
+                                <div>
+                                    <label for="b_combobox" data-i18n="cyber_security_maturity">Зрелость ИБ</label>
+                                    <select id="b_combobox"></select>
+                                </div>
+                                <div>
+                                    <label data-i18n="coefficient">Коэффициент:</label>
+                                    <input type="text" id="b_entry" class="readonly" readonly>
+                                </div>
+                                <div></div>
+                                <div></div>
+                            </div>
+                            <div class="grid-row">
+                                <div>
+                                    <label for="c_combobox" data-i18n="countermeasures">Противодействие</label>
+                                    <select id="c_combobox"></select>
+                                </div>
+                                <div>
+                                    <label data-i18n="coefficient">Коэффициент</label>
+                                    <input type="text" id="c_entry" class="readonly" readonly>
+                                </div>
+                                <div></div>
+                                <div></div>
+                            </div>
+                            <div class="grid-row">
+                                <div>
+                                    <div class="help">
+                                        <label for="skill_combobox" data-i18n="attacker_skill">Уровень квалификации атакующих</label><div style="display:flex; align-items:flex-end; padding-bottom:4px;">
+                                        <button id="skill_help_btn" aria-label="Help" title="" class="help-btn">i</button>
+                                    </div>
+                                    </div><select id="skill_combobox"></select>
+                                </div>
 
-                  <div>
-                    <label data-i18n="coefficient">Коэффициент</label>
-                    <div style="display:flex; align-items:center; gap:12px;">
-                      <input type="text" id="skill_entry" class="readonly" readonly style="width:100px;">
+                                <div>
+                                    <label data-i18n="coefficient">Коэффициент</label>
+                                    <div style="display:flex; align-items:center; gap:12px;">
+                                        <input type="text" id="skill_entry" class="readonly" readonly style="width:100px;">
+                                    </div>
+                                </div>
+
+
+
+
+                                <div></div>
+                            </div>
+                            <div class="grid-row">
+                                <div>
+                                    <label for="period" data-i18n="attack_period">Период проведения работ/атаки</label>
+                                    <input type="text" id="period" placeholder="Выберите период" data-i18n-placeholder="select_period">
+
+                                </div>
+                                <div>
+                                    <label id="infra" data-i18n="service_cost" style="width: 120px">Стоимость ($)</label>
+                                    <input type="text" id="result_date" class="readonly" readonly>
+                                </div>
+
+                            </div>
+                            <div class="grid-row" style="border-top: 1.6px solid rgba(216, 224, 235, 0.5);" >
+                                <div data-i18n="scope_collection_method" style="font-size: 20px;">
+                                    Сбор скоупа и разведка
+                                </div>
+                                <div>
+                                    <label  data-i18n="collection_time">Время(сутки)</label>
+                                    <input type="text" id="d_time" class="time-input" value="20">
+                                </div>
+                                <div>
+                                    <label data-i18n="collection_cost" style="width: 120px">Стоимость ($)</label>
+                                    <input type="text" id="d_cost" class="readonly" readonly>
+                                </div>
+                                <div></div>
+                            </div>
+
+                        </div>
                     </div>
-                  </div>
+                </fieldset>
 
+                <h2 data-i18n="hacker_infra">Инфраструктура хакеров</h2>
+                <fieldset id="hacker_infra">
+                    <div id="hacker_infra_grid" class="grid-table">
+                        <div class="grid-header">
+                            <div data-i18n="service">Сервис</div>
+                            <div data-i18n="count">Количество</div>
+                            <div data-i18n="cost">Стоимость ($)</div>
+                        </div>
+                        <div class="grid-body" id="hacker_infra_grid_body">
+                        </div>
+                    </div>
+                </fieldset>
 
-                  
-
-                  <div></div>
-                </div>
-                <div class="grid-row">
-                  <div>
-                    <label for="period" data-i18n="attack_period">Период проведения работ/атаки</label>
-                    <input type="text" id="period" placeholder="Выберите период" data-i18n-placeholder="select_period">
-
-                  </div>
-                  <div>
-                    <label id="infra" data-i18n="service_cost" style="width: 120px">Стоимость ($)</label>
-                    <input type="text" id="result_date" class="readonly" readonly>
-                  </div>
-                  
-                </div>
-                <div class="grid-row" style="border-top: 1.6px solid rgba(216, 224, 235, 0.5);" >
-                  <div data-i18n="scope_collection_method" style="font-size: 20px;">
-                    Сбор скоупа и разведка
-                  </div>
-                  <div>
-                    <label  data-i18n="collection_time">Время(сутки)</label>
-                    <input type="text" id="d_time" class="time-input" value="20">
-                  </div>
-                  <div>
-                    <label data-i18n="collection_cost" style="width: 120px">Стоимость ($)</label>
-                    <input type="text" id="d_cost" class="readonly" readonly>
-                  </div>
-                  <div></div>
-                </div>
-                
-              </div>
+                <h2 data-i18n="attack_chain_title">Цепочка атаки хакеров</h2>
+                <fieldset id="dynamic_blocks">
+                    <div id="blocks_container">
+                    </div>
+                </fieldset>
             </div>
-          </fieldset>
-
-          <h2 data-i18n="hacker_infra">Инфраструктура хакеров</h2>
-          <fieldset id="hacker_infra">
-            <div id="hacker_infra_grid" class="grid-table">
-              <div class="grid-header">
-                <div data-i18n="service">Сервис</div>
-                <div data-i18n="count">Количество</div>
-                <div data-i18n="cost">Стоимость ($)</div>
-              </div>
-              <div class="grid-body" id="hacker_infra_grid_body">
-              </div>
-            </div>
-          </fieldset>
-
-          <h2 data-i18n="attack_chain_title">Цепочка атаки хакеров</h2>
-          <fieldset id="dynamic_blocks">
-            <div id="blocks_container">
-            </div>
-          </fieldset>
         </div>
-      </div>
     </div>
 
     <div id="tab-2" class="tab-content">
-      <div class="flex-top">
-        <div class="top-right">
-          <h3 data-i18n="total_exploit_cost">Общая стоимость эксплойтов ($)</h3>
-          <fieldset id="final_values">
-            <div class="last-price">
-              <div class="input-wrapper">
-                <input type="text" id="final_min" class="readonly" readonly>
-                <label for="final_min" class="input-label" data-i18n="min">min</label>
-              </div>
-              <div class="input-wrapper">
-                <input type="text" id="final_med" class="readonly" readonly>
-                <label for="final_med" class="input-label" data-i18n="med">med</label>
-              </div>
-              <div class="input-wrapper">
-                <input type="text" id="final_max" class="readonly" readonly>
-                <label for="final_max" class="input-label" data-i18n="max">max</label>
-              </div>
+        <div class="flex-top">
+            <div class="top-right">
+                <h3 data-i18n="total_exploit_cost">Общая стоимость эксплойтов ($)</h3>
+                <fieldset id="final_values">
+                    <div class="last-price">
+                        <div class="input-wrapper">
+                            <input type="text" id="final_min" class="readonly" readonly>
+                            <label for="final_min" class="input-label" data-i18n="min">min</label>
+                        </div>
+                        <div class="input-wrapper">
+                            <input type="text" id="final_med" class="readonly" readonly>
+                            <label for="final_med" class="input-label" data-i18n="med">med</label>
+                        </div>
+                        <div class="input-wrapper">
+                            <input type="text" id="final_max" class="readonly" readonly>
+                            <label for="final_max" class="input-label" data-i18n="max">max</label>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <h2 data-i18n="total_values">Итоговые значения</h2>
+                <fieldset id="results-fieldset-tab2">
+                    <div>
+                        <label for="entry_t_d_tab2" data-i18n="time_in_days">Время в сутках</label>
+                        <input type="text" id="entry_t_d_tab2" class="readonly" readonly>
+                        <label for="entry_t_h_tab2" data-i18n="time_in_hours">Время в часах</label>
+                        <input type="text" id="entry_t_h_tab2" class="readonly" readonly>
+                        <label data-i18n="attack_cost">Итоговая стоимость атаки($)</label>
+                        <div class="last-price">
+                            <div class="input-wrapper">
+                                <input type="text" id="entry_s_f_tab2" class="readonly" readonly>
+                                <label for="entry_s_f_tab2" class="input-label" data-i18n="min">min</label>
+                            </div>
+                            <div class="input-wrapper">
+                                <input type="text" id="entry_m_f_tab2" class="readonly" readonly>
+                                <label for="entry_m_f_tab2" class="input-label" data-i18n="med">med</label>
+                            </div>
+                            <div class="input-wrapper">
+                                <input type="text" id="entry_l_f_tab2" class="readonly" readonly>
+                                <label for="entry_l_f_tab2" class="input-label" data-i18n="max">max</label>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
             </div>
-          </fieldset>
-    
-          <h2 data-i18n="total_values">Итоговые значения</h2>
-          <fieldset id="results-fieldset-tab2">
-            <div>
-              <label for="entry_t_d_tab2" data-i18n="time_in_days">Время в сутках</label>
-              <input type="text" id="entry_t_d_tab2" class="readonly" readonly>
-              <label for="entry_t_h_tab2" data-i18n="time_in_hours">Время в часах</label>
-              <input type="text" id="entry_t_h_tab2" class="readonly" readonly>
-              <label data-i18n="attack_cost">Итоговая стоимость атаки($)</label>
-              <div class="last-price">
-                <div class="input-wrapper">
-                  <input type="text" id="entry_s_f_tab2" class="readonly" readonly>
-                  <label for="entry_s_f_tab2" class="input-label" data-i18n="min">min</label>
-                </div>
-                <div class="input-wrapper">
-                  <input type="text" id="entry_m_f_tab2" class="readonly" readonly>
-                  <label for="entry_m_f_tab2" class="input-label" data-i18n="med">med</label>
-                </div>
-                <div class="input-wrapper">
-                  <input type="text" id="entry_l_f_tab2" class="readonly" readonly>
-                  <label for="entry_l_f_tab2" class="input-label" data-i18n="max">max</label>
-                </div>
-              </div>
+
+            <div class="top-left">
+                <fieldset id="vulnerability_blocks">
+                    <div id="vuln_container">
+
+                    </div>
+                    <button id="add_vuln_block" data-i18n="add_vuln_block">Добавить блок уязвимости</button>
+                </fieldset>
             </div>
-          </fieldset>
         </div>
-    
-        <div class="top-left">
-          <fieldset id="vulnerability_blocks">
-            <div id="vuln_container">
-              
-            </div>
-            <button id="add_vuln_block" data-i18n="add_vuln_block">Добавить блок уязвимости</button>
-          </fieldset>
-        </div>
-      </div>
     </div>
 
     <div id="tab-3" class="tab-content">
-      <h2 data-i18n="saved_calculations">Сохраненные расчеты</h2>
-      <div style="display: flex; justify-content: space-between; align-items: center; width: 788px;">
-      <div class="export-import-buttons">
-        <button id="export_state_btn" data-i18n="export">Экспорт</button>
-        <button id="import_state_btn" data-i18n="import">Импорт</button>
-      </div>
-      <button id="clear_saves_btn" data-i18n="clear_saves_btn">Удалить сохранения<img src="img/trash1.svg" alt="Удалить" style="width:20px; height:20px;"></button></div>
-      <ul id="saved_list">
-      </ul>
+        <h2 data-i18n="saved_calculations">Сохраненные расчеты</h2>
+        <div style="display: flex; justify-content: space-between; align-items: center; width: 788px;">
+            <div class="export-import-buttons">
+                <button id="export_state_btn" data-i18n="export">Экспорт</button>
+                <button id="import_state_btn" data-i18n="import">Импорт</button>
+            </div>
+            <button id="clear_saves_btn" data-i18n="clear_saves_btn">Удалить сохранения<img src="img/trash1.svg" alt="Удалить" style="width:20px; height:20px;"></button></div>
+        <ul id="saved_list">
+        </ul>
     </div>
-  </div>
-  
-  <script>
+</div>
+
+<script>
     var currentLang = localStorage.getItem("currentLang") || "en";
     var skillAlertText = {
       ru: "После подсчета вектора необходимо выставить квалификацию атакующих в соответствии с самым сложным шагом, который присутствовал в векторе.\nНапример, вы оценили вектор из трех шагов следующим образом:\nШаг 1 - Базовая\nШаг 2 - Базовая\nШаг 3 - Экспертная\nТаким образом, общая квалификация команды должна быть оценена, как экспертная.",
@@ -366,7 +366,7 @@
 }
       function getSkillMultiplier() {
         var k = $("#skill_combobox").val();
-        if (!k || !DATA_SKILL[k]) return 300; 
+        if (!k || !DATA_SKILL[k]) return 300;
         return DATA_SKILL[k].multiplier;
       }
 
@@ -401,15 +401,15 @@
           .val(key)
           .text(DATA_SKILL[key].translations[currentLang]);
 
-        if (key === "special_services") { 
-          $opt.prop("disabled", true); 
+        if (key === "special_services") {
+          $opt.prop("disabled", true);
         }
         $("#skill_combobox").append($opt);
       }
-      
+
       $("#skill_combobox").val("basic").trigger("change");
     }
-    
+
 
     var DATA_A = {
       blockchain_projects: {
@@ -476,7 +476,7 @@
     var DATA_SKILL = {
       basic: {
         translations: { ru: "Базовый", en: "Basic" },
-        multiplier: 200    
+        multiplier: 200
       },
       basic_plus: {
         translations: { ru: "Базовый +", en: "Basic +" },
@@ -492,7 +492,7 @@
       },
       special_services: {
         translations: { ru: "Спец. службы", en: "Security service" },
-        multiplier: 1000 
+        multiplier: 1000
       }
     };
 
@@ -501,7 +501,7 @@
       basic_plus: 2,
       advanced: 3,
       expert: 4,
-      special_services: 5 
+      special_services: 5
     };
 
 
@@ -510,7 +510,7 @@
       if (val === "basic") return 1;
       if (val === "basic_plus") return 2;
       if (val === "advanced") return 3;
-      if (val === "top") return 4; 
+      if (val === "top") return 4;
       return 1;
     }
 
@@ -722,6 +722,10 @@
         translations: { ru: "Поиск на общедоступных сайтах (T1593)", en: "Search Open Websites/Domains (T1593)" },
         values: [2, 0]
       },
+      search_threat_vendor_data: {
+        translations: { ru: "Поиск данных TI-вендоров (T1681)", en: "Search Threat Vendor Data (T1681)" },
+        values: [8, 0]
+      },
       search_target_website: {
         translations: { ru: "Поиск на сайтах атакуемой организации (T1594)", en: "Search Victim-Owned Websites (T1594)" },
         values: [2, 0]
@@ -825,6 +829,10 @@
       native_API: {
         translations: { ru: "Нативный API (T1106)", en: "Native API (T1106)" },
         values: [0, 5]
+      },
+      poisoned_pipeline_execution: {
+        translations: { ru: "Манипуляция процессами непрерывной интеграции/разработки (CI/CD) (T1677)", en: "Poisoned Pipeline Execution (T1677)" },
+        values: [3, 15]
       },
       scheduled_task: {
         translations: { ru: "Запланированная задача (T1053)", en: "Scheduled Task/Job (T1053)" },
@@ -954,6 +962,10 @@
         translations: { ru: "Предотвращение отладки (T1622)", en: "Debugger Evasion (T1622)" },
         values: [2, 0]
       },
+      delay_execution: {
+        translations: { ru: "Задержка выполнения (T1678)", en: "Delay Execution (T1678)" },
+        values: [0, 30]
+      },
       deobfuscate_decode_files: {
         translations: { ru: "Деобфускация или декодирование файлов или данных (T1140)", en: "Deobfuscate/Decode Files or Information (T1140)" },
         values: [1, 0]
@@ -1033,6 +1045,10 @@
       rootkit: {
         translations: { ru: "Руткит (T1014)", en: "Rootkit (T1014)" },
         values: [120, 0]
+      },
+      selective_exclusion: {
+        translations: { ru: "Избирательное исключение (T1679)", en: "Selective Exclusion (T1679)" },
+        values: [0, 45]
       },
       subvert_trust_controls: {
         translations: { ru: "Нарушение работы средств контроля доверия (T1553)", en: "Subvert Trust Controls (T1553)" },
@@ -1185,6 +1201,10 @@
       group_policy_discovery: {
         translations: { ru: "Изучение групповой политики (T1615)", en: "Group Policy Discovery (T1615)" },
         values: [4, 0]
+      },
+      local_storage_discovery: {
+        translations: { ru: "Исследование локального хранилища (T1680)", en: "Local Storage Discovery (T1680)" },
+        values: [1, 30]
       },
       log_enumeration: {
         translations: { ru: "Сбор журналов (T1654)", en: "Log Enumeration (T1654)" },
@@ -1538,6 +1558,7 @@
           { ru: "Поиск в закрытых источниках (T1597)", en: "Search Closed Sources (T1597)" },
           { ru: "Поиск технической информации в общедоступных источниках (T1596)", en: "Search Open Technical Databases (T1596)" },
           { ru: "Поиск на общедоступных сайтах (T1593)", en: "Search Open Websites/Domains (T1593)" },
+          { ru: "Поиск данных TI-вендоров (T1681)", en: "Search Threat Vendor Data (T1681)" },
           { ru: "Поиск на сайтах атакуемой организации (T1594)", en: "Search Victim-Owned Websites (T1594)" }
         ]
       },
@@ -1583,6 +1604,7 @@
           { ru: "Имитация ввода данных (T1674)", en: "Input Injection (T1674)" },
           { ru: "Межпроцессное взаимодействие (T1559)", en: "Inter-Process Communication (T1559)" },
           { ru: "Нативный API (T1106)", en: "Native API (T1106)" },
+          { ru: "Манипуляция процессами непрерывной интеграции/разработки (CI/CD) (T1677)", en: "Poisoned Pipeline Execution (T1677)" },
           { ru: "Запланированная задача (T1053)", en: "Scheduled Task/Job (T1053)" },
           { ru: "Бессерверное выполнение (T1648)", en: "Serverless Execution (T1648)" },
           { ru: "Общие модули (T1129)", en: "Shared Modules (T1129)" },
@@ -1649,6 +1671,7 @@
           { ru: "Задания BITS (T1197)", en: "BITS Jobs (T1197)" },
           { ru: "Создание образа на узле (T1612)", en: "Build Image on Host (T1612)" },
           { ru: "Предотвращение отладки (T1622)", en: "Debugger Evasion (T1622)" },
+          { ru: "Задержка выполнения (T1678)", en: "Delay Execution (T1678)" },
           { ru: "Деобфускация или декодирование файлов или данных (T1140)", en: "Deobfuscate/Decode Files or Information (T1140)" },
           { ru: "Развертывание контейнера (T1610)", en: "Deploy Container (T1610)" },
           { ru: "Прямой доступ к тому (T1006)", en: "Direct Volume Access (T1006)" },
@@ -1676,6 +1699,7 @@
           { ru: "Отраженная загрузка кода (T1620)", en: "Reflective Code Loading (T1620)" },
           { ru: "Поддельный контроллер домена (T1207)", en: "Rogue Domain Controller (T1207)" },
           { ru: "Руткит (T1014)", en: "Rootkit (T1014)" },
+          { ru: "Избирательное исключение (T1679)", en: "Selective Exclusion (T1679)" },
           { ru: "Нарушение работы средств контроля доверия (T1553)", en: "Subvert Trust Controls (T1553)" },
           { ru: "Выполнение с помощью системных бинарных файлов (T1218)", en: "System Binary Proxy Execution (T1218)" },
           { ru: "Выполнение через системный сценарий (T1216)", en: "System Script Proxy Execution (T1216)" },
@@ -1730,6 +1754,7 @@
         { ru: "Изучение доверительных отношений между доменами (T1482)", en: "Domain Trust Discovery (T1482)" },
         { ru: "Изучение файлов и каталогов (T1083)", en: "File and Directory Discovery (T1083)" },
         { ru: "Изучение групповой политики (T1615)", en: "Group Policy Discovery (T1615)" },
+        { ru: "Исследование локального хранилища (T1680)", en: "Local Storage Discovery (T1680)" },
         { ru: "Сбор журналов (T1654)", en: "Log Enumeration (T1654)" },
         { ru: "Изучение сетевых служб (T1046)", en: "Network Service Discovery (T1046)" },
         { ru: "Изучение общих сетевых ресурсов (T1135)", en: "Network Share Discovery (T1135)" },
@@ -1865,7 +1890,7 @@
 
     $(function() {
 
-      
+
     $("#tabs").tabs();
     var activeTab = localStorage.getItem("activeTab");
     if (activeTab !== null) {
@@ -1886,11 +1911,11 @@
   }
     currentLang = $(this).is(":checked") ? "ru" : "en";
     localStorage.setItem("currentLang", currentLang);
-    
+
     var activeTab = $("#tabs").tabs("option", "active");
     localStorage.setItem("activeTab", activeTab);
     localStorage.setItem("scrollPosition", window.pageYOffset);
-    
+
     setTimeout(function(){
     location.reload();
   }, 0);
@@ -1914,7 +1939,7 @@
         `));
         row.append(
           $("<div></div>")
-            
+
             .html("<input type='text' class='count-input hidden-fields' value='1' placeholder=''/>")
         );
               row.append(
@@ -1992,7 +2017,7 @@
       `));
       row17.append(
     $("<div></div>")
-      
+
       .html("<input type='text' class='count-input hidden-fields' value='1' placeholder=''/>")
   );
 row17.append(
@@ -2119,9 +2144,9 @@ var cell16_2_4 = $("<div></div>")
       $("#skill_combobox").change(function() {
         var k = $(this).val();
         var mult = getSkillMultiplier();
-       
+
         $("#skill_entry").val(mult);
-       
+
         calculateDateDiff();
         calculateDateDiffRange();
         updateAllTotals();
@@ -2133,7 +2158,7 @@ var cell16_2_4 = $("<div></div>")
         $("#d_cost").val((days * 100).toFixed(0));
         updateAllTotals();
       });
-    
+
 
 
       $("#date1").change(function() {
@@ -2282,7 +2307,7 @@ var cell16_2_4 = $("<div></div>")
       row.find("input.btn-med").val(data[1]);
       row.find("input.btn-max").val(data[2]);
 
-      
+
     }
 
     function updateService15() {
@@ -2321,8 +2346,8 @@ var cell16_2_4 = $("<div></div>")
       var d_time_val = parseFloatSafe($("#d_time").val() || "0");
 
       var new_cost = d_time_val * 100;
-      $("#d_cost").val(new_cost.toFixed(0)); 
-    
+      $("#d_cost").val(new_cost.toFixed(0));
+
       var d_time_hours = d_time_val * 24;
       var sumMin = 0, sumMed = 0, sumMax = 0;
       var sumMinb = 0, sumMedb = 0, sumMaxb = 0;
@@ -2365,7 +2390,7 @@ var cell16_2_4 = $("<div></div>")
       $("#entry_m_f_tab2").val(calc_m_f.toFixed(0));
       $("#entry_l_f_tab2").val(calc_l_f.toFixed(0));
 
-      
+
     }
 
     var dynamicBlockCount = 0;
@@ -2391,7 +2416,7 @@ var cell16_2_4 = $("<div></div>")
               <input type="text" class="technique-input" disabled>
             </div>
           </div>
-          <div style="display: flex; gap: 16px; margin-bottom: 16px;">  
+          <div style="display: flex; gap: 16px; margin-bottom: 16px;">
             <div class="field-group" style="margin-bottom: 16px;">
               <label>${qualLabel}</label>
               <select class="qualification-select">
@@ -2448,8 +2473,8 @@ var cell16_2_4 = $("<div></div>")
           $(this).trigger("change");
           $block.find(".technique-input").prop("disabled", false).val("");
           var techArray = TACTICS_TO_TECHNIQUES[tacticKey].techniques || [];
-          var techsText = techArray.map(function(item){ 
-            return currentLang === "ru" ? item.ru : item.en; 
+          var techsText = techArray.map(function(item){
+            return currentLang === "ru" ? item.ru : item.en;
           });
           $block.find(".technique-input").autocomplete({ source: techsText, minLength: 0 });
         }
@@ -2524,25 +2549,25 @@ var cell16_2_4 = $("<div></div>")
         window.skillAlertShown = false;
       }
     }
- 
+
     var skillHelpContent = {
       ru: {
         items: [
           {
             title: "Базовый",
-            text: "Атакующий обладает базовыми знаниями о кибератаках, может использовать только публичные эксплойты или общедоступное ПО."
+            text: "Нарушитель обладает базовыми знаниями о проведении атак на информационные системы, может использовать публичные эксплойты либо автоматизированное ПО для проведения атак."
           },
           {
             title: "Базовый +",
-            text: "Атакующий обладает возможностями атакующих с базовым уровнем. Также атакующий может вносить изменения в эксплойты для повышения эффективности их работы, а также самостоятельно дорабатывать общедоступный инструментарий."
+            text: "Нарушитель умеет использовать узконаправленное ПО для проведения атак и реализовывать составные векторы атак, может изменять и дорабатывать публичные эксплойты и инструменты, а также владеет базовыми техниками обхода средств защиты."
           },
           {
             title: "Продвинутый",
-            text: "Атакующий обладает возможностями атакующего с базовым + уровнем. Также атакующий может использовать сложное специализированное ПО, владеет техниками для уклонения от обнаружения, эффективно применяет механизмы постэксплуатации, обхода средств защиты и сокрытия следов атаки. Самостоятельно разрабатывает эксплойты для общеизвестных уязвимостей."
+            text: "Нарушитель умеет выявлять ранее неизвестные уязвимости в малопопулярном или редко применяемом ПО, а также уязвимости нулевого дня, не требующие нестандартных техник эксплуатации. Атакующий может реализовывать нетиповые векторы атак, создавать инструменты и эксплойты для известных уязвимостей, а также владеет продвинутыми техниками обхода средств защиты."
           },
           {
             title: "Экспертный",
-            text: "Атакующий обладает возможностями атакующего продвинутого уровня. Также атакующий обладает навыками обратной разработки, умеет выявлять уязвимости нулевого дня, самостоятельно разрабатывает для них эксплойты и специализированное ПО."
+            text: "Нарушитель обладает глубокими знаниями и навыками, способен выявлять неизвестные уязвимости в широко распространенном ПО, а также уязвимости нулевого дня, требующие нестандартных техник эксплуатации. Атакующий самостоятельно разрабатывает инструментарий и эксплойты, а также способен применять техники любого уровня сложности."
           },
           {
             title: "Спец. службы",
@@ -2555,19 +2580,19 @@ var cell16_2_4 = $("<div></div>")
         items: [
           {
             title: "Basic",
-            text: "The attacker has basic knowledge of cyber attacks and can only use public exploits or publicly available tools."
+            text: "The attacker has basic knowledge of attacking information systems and can use publicly available exploits or automated software to conduct attacks."
           },
           {
             title: "Basic +",
-            text: "The attacker has the abilities of a Basic attacker. Additionally, the attacker can modify exploits to improve their effectiveness and extend publicly available tooling."
+            text: "The attacker can use specialized, narrowly focused software and build composite attack vectors; can modify and refine public exploits and tools; and possesses basic techniques for bypassing security controls."
           },
           {
             title: "Advanced",
-            text: "The attacker has the abilities of a Basic+ attacker. They can use complex specialized software, possess evasion techniques, effectively apply post-exploitation mechanisms, bypass defenses, and hide traces. They develop exploits for known vulnerabilities."
+            text: "The attacker can identify previously unknown vulnerabilities in little-used or rarely deployed software, as well as 0-day vulnerabilities that do not require nonstandard exploitation techniques. They can carry out non-typical attack vectors, develop tools and exploits for known vulnerabilities, and employ advanced techniques for bypassing security controls."
           },
           {
             title: "Expert",
-            text: "The attacker has the abilities of an Advanced attacker and also has reverse-engineering skills, can find zero-day vulnerabilities, and develop exploits and specialized tooling for them."
+            text: "The attacker has deep knowledge and skills, is able to discover unknown vulnerabilities in widely used software, including 0-day vulnerabilities that require nonstandard exploitation techniques. They independently develop tooling and exploits and can apply techniques of any level of complexity."
           },
           {
             title: "Security service",
@@ -2594,8 +2619,8 @@ var cell16_2_4 = $("<div></div>")
 
       var $tooltip = $("#skill_tooltip");
       var btnRect = btn.getBoundingClientRect();
-      var top = btnRect.top + window.scrollY - 8; 
-      var left = btnRect.right + 12 + window.scrollX; 
+      var top = btnRect.top + window.scrollY - 8;
+      var left = btnRect.right + 12 + window.scrollX;
 
       var tooltipWidth = Math.min(520, $(window).width() * 0.6);
       $tooltip.css({left: left + 'px', top: top + 'px', width: tooltipWidth + 'px'});
@@ -2608,7 +2633,7 @@ var cell16_2_4 = $("<div></div>")
       }
 
 
-      setTimeout(function(){ 
+      setTimeout(function(){
         $(document).on("click.skillTooltip", function(e){
           if ($(e.target).closest("#skill_tooltip, #skill_help_btn").length === 0) {
             $tooltip.remove();
@@ -2617,7 +2642,7 @@ var cell16_2_4 = $("<div></div>")
         });
       }, 10);
 
-    
+
       $(document).on("keydown.skillTooltip", function(e) {
         if (e.key === "Escape") {
           $tooltip.remove();
@@ -2631,7 +2656,7 @@ var cell16_2_4 = $("<div></div>")
     $(function(){
       $(document).on("click", "#skill_help_btn", function(e){
         e.stopPropagation();
-        
+
         if ($("#skill_tooltip").length) {
           $("#skill_tooltip").remove();
           return;
@@ -2662,7 +2687,7 @@ var cell16_2_4 = $("<div></div>")
         options += `<option value="other">${vuln_map.other.translations[currentLang]}</option>`;
         return options;
       }
-      var html = 
+      var html =
         '<div class="vuln-wrapper">' +
           '<h3>' + vulnerabilityHeader + vulnBlockCount + '</h3>' +
           '<fieldset id="' + blockId + '" class="vuln-fieldset vuln-block">' +
@@ -2738,7 +2763,7 @@ var cell16_2_4 = $("<div></div>")
         var selectedVal = $(this).val();
         var $currentBlock = $("#" + blockId);
         var yesText = (currentLang === "ru") ? "Да" : "Yes";
-        
+
         if (selectedVal === yesText) {
           $currentBlock.find(".vuln-details").slideDown(300);
           if (!window.isRestoringState && $("#vuln_container .vuln-wrapper").last().find(".vuln-fieldset").attr("id") === blockId) {
@@ -3074,7 +3099,7 @@ var cell16_2_4 = $("<div></div>")
         });
       }
     }
-    
+
     function loadSavedState(index) {
       dynamicBlockCount = 0;
       var saves = JSON.parse(localStorage.getItem("cscSaves") || "[]");
@@ -3139,10 +3164,10 @@ var cell16_2_4 = $("<div></div>")
                 .trigger("change");
         });
         window.isRestoringState = false;
-        
+
         createNewVulnBlock();
         updateVulnBlockNumbers();
-        
+
         updateAllTotals();
         checkSkillConsistency();
         alert(currentLang==="ru"?"Состояние загружено":"State loaded");
@@ -3174,6 +3199,6 @@ var cell16_2_4 = $("<div></div>")
       });
     }
 
-  </script>
+</script>
 </body>
 </html>
