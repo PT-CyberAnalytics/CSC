@@ -406,7 +406,7 @@ select {
   border: 1px solid #d8e0eb;
   width: 353px;
   height: 40px;
-  padding: 7px 8px;
+  padding: 6px 9px;
   font-size: 20px !important;
 }
 .qualification-select {
@@ -930,4 +930,302 @@ font-size: 20px !important;
 /* пункт уровня */
 #skill_tooltip .skill-item {
   margin-bottom: 10px;
+}
+
+.stage-bottom{
+  display: flex;
+  gap: 16px;
+  align-items: flex-end;
+}
+.stage-comment{
+  width: 353px;
+  resize: none;
+  height: 40px;
+  border-radius: 7px;
+  border: 1px solid #d8e0eb;
+  padding: 6px 9px;
+  font-size: 20px !important;
+  font-family: "TT Positive", sans-serif !important;
+}
+.stage-comment::placeholder{
+  font-size: 20px;
+  color: rgba(0, 0, 0, 0.5);
+}
+.stage-cost-label{
+  display: block;
+  margin-bottom: 8px;
+  
+}
+
+
+.stage-header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin: 10px 0;
+  position: relative;
+}
+.stage-title{
+  margin: 0;
+}
+.stage-more-btn{
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.6;
+  transition: opacity .2s ease;
+}
+.stage-more-btn:hover{ opacity: 1; }
+.stage-menu{
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 8px;
+  background: #fff;
+  border: 1px solid #d8e0eb;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px 0 rgba(156, 172, 188, 0.10);
+  padding: 6px;
+  min-width: 260px;
+  z-index: 20;
+}
+.stage-menu-item{
+  width: 100%;
+  text-align: left;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 16px;
+}
+.stage-menu-item:hover{
+  background: #ebeff5;
+}
+.stage-menu-item.danger:hover{
+  background: rgba(255, 0, 0, 0.08);
+}
+
+
+.stage-menu-item:disabled{
+  opacity: .4;
+  cursor: not-allowed;
+}
+.stage-menu-item:disabled:hover{
+  background: transparent;
+}
+.stage-menu-item.danger:disabled:hover{
+  background: transparent;
+}
+.stage-menu-item{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+.stage-menu-item .menu-ico{
+  width:16px;
+  height:16px;
+  flex:0 0 16px;
+}
+.stage-menu-item:disabled{
+  opacity:.45;
+  cursor:default;
+}
+
+/* Reorder dialog (drag & drop) */
+.reorder-hint{
+  font-size: 14px;
+  color: rgba(0,0,0,0.6);
+  margin-bottom: 12px;
+}
+
+.reorder-list{
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.reorder-item{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 12px;
+  border: 1px solid rgba(216, 224, 235, 0.9);
+  border-radius: 8px;
+  background: #fff;
+  margin-bottom: 10px;
+}
+
+.reorder-item .drag-handle{
+  cursor: grab;
+  user-select: none;
+  font-size: 18px;
+  opacity: 0.7;
+}
+
+.reorder-item .reorder-text{
+  font-size: 16px;
+}
+
+.reorder-placeholder{
+  height: 48px;
+  border: 2px dashed rgba(73, 104, 146, 0.5);
+  border-radius: 8px;
+  background: rgba(235, 239, 245, 0.6);
+  margin-bottom: 10px;
+}
+
+
+.reorder-stages-modal{
+  background-color: white;
+}
+
+/* вся плашка как "ручка" */
+.reorder-item {
+  cursor: grab;
+  user-select: none; /* чтобы текст не выделялся при перетаскивании */
+}
+
+.reorder-item:hover{
+  background-color: #f1f1f1;
+}
+
+/* во время перетаскивания */
+.reorder-item:active {
+  cursor: grabbing;
+}
+
+/* элемент, который jQuery UI реально таскает */
+.ui-sortable-helper {
+  cursor: grabbing !important;
+}
+
+
+body.modal-open {
+  overflow: hidden;
+}
+
+/* оверлей на весь экран */
+.ui-widget-overlay{
+  position: fixed !important;
+  inset: 0 !important;
+}
+
+/* само окно диалога */
+.ui-dialog{
+  position: fixed !important;
+}
+
+
+/* блокировка скролла фона (ты уже добавляешь modal-open) */
+body.modal-open { overflow: hidden; }
+
+/* сам контейнер диалога */
+.reorder-stages-modal.ui-dialog{
+  border: 1px solid #d8e0eb;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(156,172,188,.18);
+  overflow: hidden;
+}
+
+.reorder-stages-modal .ui-dialog-titlebar{
+  background: #fff;              /* <-- фон шапки */
+  border: 0;
+  border-bottom: 1px solid #eef2f7;
+}
+
+/* заголовок */
+.reorder-stages-modal .ui-dialog-title{
+  font-size: 20px;
+  font-weight: 500;
+  color: #111;
+  padding-top: 4px;
+}
+
+/* кнопка закрытия: рамка/размер */
+.reorder-stages-modal .ui-dialog-titlebar-close{
+  right: 8px;
+  width: 29px;
+  border: 0px solid #d8e0eb;
+  background: white;
+  
+}
+
+/* убираем стандартную иконку jQuery UI */
+.reorder-stages-modal .ui-dialog-titlebar-close .ui-icon{
+  background-image: none !important;
+  border: 0px !important;
+  transition: transform .2s ease;
+}
+
+/* ставим свою иконку */
+.reorder-stages-modal .ui-dialog-titlebar-close::before{
+  content:"";
+  position:absolute;
+  top:50%;
+  left:50%;
+  width:24px;
+  height:24px;
+  transform: translate(-50%, -50%) rotate(0deg);
+  transition: transform .2s ease;
+  background: url("../img/close.svg") no-repeat center / contain;
+}
+
+/* hover на кнопке, вращаем псевдоэлемент */
+.reorder-stages-modal .ui-dialog-titlebar-close:hover::before{
+  transform: translate(-50%, -50%) rotate(90deg);
+}
+
+
+/* контейнер кнопок */
+.reorder-stages-modal .ui-dialog-buttonpane{
+  background: transparent !important;
+  border-top: 0 !important;
+  padding: 16px 20px 20px !important;
+}
+
+.reorder-stages-modal .ui-dialog-buttonpane .ui-dialog-buttonset{
+  float: right;              /* вправо */
+  display: flex;
+  gap: 12px;
+}
+
+/* базовый стиль кнопок */
+.reorder-stages-modal .ui-dialog-buttonpane button{
+  font: inherit;
+  height: 40px;
+  padding: 0 22px;
+  border-radius: 7px;
+  cursor: pointer;
+  box-shadow: none !important;
+  background-image: none !important;
+}
+
+/* вторичная (Отмена) */
+.reorder-stages-modal .ui-dialog-buttonpane button.btn-secondary{
+  background: #fff !important;
+  border: 1px solid #cfd6e3 !important;
+  color: #111 !important;
+}
+
+/* primary (Сохранить) */
+.reorder-stages-modal .ui-dialog-buttonpane button.btn-primary{
+  background: #496892 !important;   /* под твой “синий” */
+  border: 1px solid #496892 !important;
+  color: #fff !important;
+}
+
+/* hover */
+.reorder-stages-modal .ui-dialog-buttonpane button.btn-primary:hover{
+  filter: brightness(0.9);
+}
+.reorder-stages-modal .ui-dialog-buttonpane button.btn-secondary:hover{
+  background: #f6f7fb !important;
 }

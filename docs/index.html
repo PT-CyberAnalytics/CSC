@@ -564,7 +564,7 @@
     var DATA_BUTTONS_1_14 = {
       C2_servers: {
         translations: { ru: "C2-серверы", en: "C2 Servers" },
-        values: [1, 4, 54]
+        values: [1, 50, 1000]
       },
       stealers: {
         translations: { ru: "Cтилеры", en: "Stealers" },
@@ -576,7 +576,7 @@
       },
       ransomware: {
         translations: { ru: "Шифровальщики", en: "Ransomware" },
-        values: [100, 2275, 7500]
+        values: [100, 3000, 50000]
       },
       VPS_VDS: {
         translations: { ru: "VPS/VDS", en: "VPS/VDS" },
@@ -604,7 +604,7 @@
       },
       phishing_kits: {
         translations: { ru: "Фишинговые наборы", en: "Phishing Kits" },
-        values: [50, 190, 10000]
+        values: [50, 200, 2000]
       },
       phishing_pages: {
         translations: { ru: "Фишинговые страницы", en: "Phishing Pages" },
@@ -612,7 +612,7 @@
       },
       bruteforce_farms: {
         translations: { ru: "Фермы для брутфорса", en: "Brute-force Farms" },
-        values: [200, 3000, 5000]
+        values: [500, 5000, 15000]
       },
       wireless_attack_kits: {
         translations: { ru: "Набор для атак <br> на беспроводные сети", en: "Wireless Network<br> Attack Kits" },
@@ -642,27 +642,27 @@
     var spread_map = {
       local: {
         translations: { ru: "Локальное", en: "Local" },
-        value: 500
+        value:600
       },
       niche: {
         translations: { ru: "Узкоспециализированное", en: "Niche" },
-        value: 3000
+        value: 3500
       },
       regional: {
         translations: { ru: "Региональное", en: "Regional" },
-        value: 5000
+        value: 6000
       },
       widely_used: {
         translations: { ru: "Широко используемое", en: "Widely Used" },
-        value: 15000
+        value: 18000
       },
       mass: {
         translations: { ru: "Массовое", en: "Mass" },
-        value: 50000
+        value: 60000
       },
       systemic: {
         translations: { ru: "Системное", en: "Systemic" },
-        value: 100000
+        value: 110000
       }
     };
 
@@ -2007,6 +2007,58 @@
       );
       gridBody.append(row21);
 
+      // --- Loader (22)
+      var row22 = $("<div></div>")
+        .addClass("grid-row")
+        .attr("data-index", "22");
+
+      var loaderText = currentLang === "ru" ? "Загрузчик" : "Loader";
+      row22.append($("<div></div>").html(`
+        <label>
+          <input type='checkbox' class="toggle-check" data-index="22" />
+          ${loaderText}
+        </label>
+      `));
+      row22.append(
+        $("<div></div>").html("<input type='text' class='count-input hidden-fields' value='1' placeholder=''/>")
+      );
+      row22.append(
+        $("<div></div>").addClass("input-wrapper").html("<input type='text' class='btn-min readonly hidden-fields' readonly value='0'><label class='input-label' data-i18n='min'>min</label>")
+      );
+      row22.append(
+        $("<div></div>").addClass("input-wrapper").html("<input type='text' class='btn-med readonly hidden-fields' readonly value='0'><label class='input-label' data-i18n='med'>med</label>")
+      );
+      row22.append(
+        $("<div></div>").addClass("input-wrapper").html("<input type='text' class='btn-max readonly hidden-fields' readonly value='0'><label class='input-label' data-i18n='max'>max</label>")
+      );
+      gridBody.append(row22);
+
+      // --- Crypter (23)
+      var row23 = $("<div></div>")
+        .addClass("grid-row")
+        .attr("data-index", "23");
+
+      var crypterText = currentLang === "ru" ? "Криптер" : "Crypter";
+      row23.append($("<div></div>").html(`
+        <label>
+          <input type='checkbox' class="toggle-check" data-index="23" />
+          ${crypterText}
+        </label>
+      `));
+      row23.append(
+        $("<div></div>").html("<input type='text' class='count-input hidden-fields' value='1' placeholder=''/>")
+      );
+      row23.append(
+        $("<div></div>").addClass("input-wrapper").html("<input type='text' class='btn-min readonly hidden-fields' readonly value='0'><label class='input-label' data-i18n='min'>min</label>")
+      );
+      row23.append(
+        $("<div></div>").addClass("input-wrapper").html("<input type='text' class='btn-med readonly hidden-fields' readonly value='0'><label class='input-label' data-i18n='med'>med</label>")
+      );
+      row23.append(
+        $("<div></div>").addClass("input-wrapper").html("<input type='text' class='btn-max readonly hidden-fields' readonly value='0'><label class='input-label' data-i18n='max'>max</label>")
+      );
+      gridBody.append(row23);
+
       var row17 = $("<div></div>").addClass("grid-row").attr("data-index", "17");
       var purchaseText = currentLang === "ru" ? "Покупка доступов<br> в инфраструктуру" : "Infrastructure Access Purchase";
       row17.append($("<div></div>").html(`
@@ -2229,6 +2281,7 @@ var cell16_2_4 = $("<div></div>")
             createNewDynamicBlock();
           }
         }
+        updateStageNumbersAndMenuStates();
       });
 
       $("#load_excel").click(function() {
@@ -2289,6 +2342,13 @@ var cell16_2_4 = $("<div></div>")
       } else if (index == 21) {
         return [10 * quantity, 50 * quantity, 100 * quantity];
       }
+      else if (index == 22) {
+        // Loader: 30 – 700 – 40000
+        return [30 * quantity, 700 * quantity, 40000 * quantity];
+      } else if (index == 23) {
+        // Crypter: 10 – 1000 – 12000
+        return [10 * quantity, 1000 * quantity, 12000 * quantity];
+      }
       return [0, 0, 0];
     }
 
@@ -2315,8 +2375,8 @@ var cell16_2_4 = $("<div></div>")
       if(val != 0) {
         buttonStates[15] = true;
         $("div.grid-row[data-index='15']").find("input.btn-min").val(val*10);
-        $("div.grid-row[data-index='15']").find("input.btn-med").val(val*100);
-        $("div.grid-row[data-index='15']").find("input.btn-max").val(val*1000);
+        $("div.grid-row[data-index='15']").find("input.btn-med").val(val*125);
+        $("div.grid-row[data-index='15']").find("input.btn-max").val(val*1990);
       } else {
         buttonStates[15] = false;
         $("div.grid-row[data-index='15']").find("input.btn-min").val(0);
@@ -2331,7 +2391,7 @@ var cell16_2_4 = $("<div></div>")
       if(val != 0) {
         buttonStates[16] = true;
         $("div.grid-row[data-index='16']").find("input.btn-min").val(val*50);
-        $("div.grid-row[data-index='16']").find("input.btn-med").val(val*2500);
+        $("div.grid-row[data-index='16']").find("input.btn-med").val(val*2000);
         $("div.grid-row[data-index='16']").find("input.btn-max").val(val*70000);
       } else {
         buttonStates[16] = false;
@@ -2396,16 +2456,55 @@ var cell16_2_4 = $("<div></div>")
     var dynamicBlockCount = 0;
     function createNewDynamicBlock() {
       dynamicBlockCount++;
+
+      var commentLabel = currentLang === "ru" ? "Комментарий" : "Comment";
+      var commentPlaceholder = currentLang === "ru" ? "Введите комментарий к этапу" : "Enter a comment for this stage";
+
+      var stageCostLabel = currentLang === "ru" ? "Стоимость этапа ($)" : "Stage cost ($)";
+
       var blockId = "dynamic_block_" + dynamicBlockCount;
       var stageTitle = currentLang === "ru" ? "Этап " : "Stage ";
       var tacticLabel = currentLang === "ru" ? "Тактика" : "Tactic";
       var techniqueLabel = currentLang === "ru" ? "Техника" : "Technique";
-      var qualLabel = currentLang === "ru" ? "Сложность реализации:" : "Complexity of implementation:";
+      var qualLabel = currentLang === "ru" ? "Сложность реализации" : "Complexity of implementation";
       var timeHoursLabel = currentLang === "ru" ? "Время (часы)" : "Time (hours)";
       var timeMinLabel = currentLang === "ru" ? "Время (мин)" : "Time (min)";
+      var moveDownText = currentLang === "ru" ? "Переместить этап на 1 вниз" : "Move stage down";
+      var moveUpText   = currentLang === "ru" ? "Переместить этап на 1 вверх" : "Move stage up";
+      var deleteText   = currentLang === "ru" ? "Удалить этап" : "Delete stage";
+      var moveInListText = currentLang === "ru" ? "Переместить в списке" : "Reorder in list";
       var html = `
         <div class="dynamic-block" id="${blockId}">
-          <div class="stage-title">${stageTitle}${dynamicBlockCount}</div>
+          <div class="stage-header">
+            <div class="stage-title">${stageTitle}${dynamicBlockCount}</div>
+
+            <button type="button" class="stage-more-btn" aria-label="More">
+              <img src="img/more.svg" width="22" height="22" alt="">
+            </button>
+
+            <div class="stage-menu" hidden>
+              <button type="button" class="stage-menu-item" data-action="move-up">
+                <img class="menu-ico" src="img/arrow-up.svg" alt="">
+                <span>${moveUpText}</span>
+              </button>
+              
+              <button type="button" class="stage-menu-item" data-action="move-down">
+                <img class="menu-ico" src="img/arrow-down.svg" alt="">
+                <span>${moveDownText}</span>
+              </button>
+
+              <button type="button" class="stage-menu-item" data-action="reorder-list">
+                <img class="menu-ico" src="img/list.svg" alt="">
+                <span>${moveInListText}</span>
+              </button>
+
+              <button type="button" class="stage-menu-item danger" data-action="delete">
+                <img class="menu-ico" src="img/trash.svg" alt="">
+                <span>${deleteText}</span>
+              </button>
+
+            </div>
+          </div>
           <div style="display: flex; gap: 16px; margin-bottom: 32px;">
             <div class="field-group">
               <label>${tacticLabel}</label>
@@ -2435,18 +2534,28 @@ var cell16_2_4 = $("<div></div>")
               <input type="text" class="time-minutes">
             </div>
           </div>
-          <div class="last-price">
-            <div class="input-wrapper">
-              <input type="text" class="calc-min readonly" readonly>
-              <label class="input-label" data-i18n="min">min</label>
+          <div class="stage-bottom">
+            <div class="field-group">
+              <label>${commentLabel}</label>
+              <textarea class="stage-comment" rows="1" placeholder="${commentPlaceholder}"></textarea>
             </div>
-            <div class="input-wrapper">
-              <input type="text" class="calc-med readonly" readonly>
-              <label class="input-label" data-i18n="med">med</label>
-            </div>
-            <div class="input-wrapper">
-              <input type="text" class="calc-max readonly" readonly>
-              <label class="input-label" data-i18n="max">max</label>
+
+            <div class="stage-cost">
+              <label class="stage-cost-label">${stageCostLabel}</label>
+              <div class="last-price">
+                <div class="input-wrapper">
+                  <input type="text" class="calc-min readonly" readonly>
+                  <label class="input-label" data-i18n="min">min</label>
+                </div>
+                <div class="input-wrapper">
+                  <input type="text" class="calc-med readonly" readonly>
+                  <label class="input-label" data-i18n="med">med</label>
+                </div>
+                <div class="input-wrapper">
+                  <input type="text" class="calc-max readonly" readonly>
+                  <label class="input-label" data-i18n="max">max</label>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -2509,6 +2618,7 @@ var cell16_2_4 = $("<div></div>")
       $block.find(".technique-input").on("change", function() {
         recalcDynamicBlock($block);
       });
+      updateStageNumbersAndMenuStates();
     }
 
     function recalcDynamicBlock($block) {
@@ -2962,9 +3072,11 @@ var cell16_2_4 = $("<div></div>")
           technique: $(this).find(".technique-input").val(),
           qualification: $(this).find(".qualification-select").val(),
           time_hours: $(this).find(".time-hours").val(),
-          time_minutes: $(this).find(".time-minutes").val()
+          time_minutes: $(this).find(".time-minutes").val(),
+          comment: $(this).find(".stage-comment").val()
         };
         state.dynamicBlocks.push(blockData);
+        
       });
       state.vulnBlocks = [];
       $("#vuln_container .vuln-block").each(function() {
@@ -3140,6 +3252,7 @@ var cell16_2_4 = $("<div></div>")
           $block.find(".qualification-select").val(blockData.qualification).trigger("change");
           $block.find(".time-hours").val(blockData.time_hours).trigger("input");
           $block.find(".time-minutes").val(blockData.time_minutes).trigger("input");
+          $block.find(".stage-comment").val(blockData.comment || "");
         });
         window.isRestoringDynamicBlocks = false;
         $("#vuln_container").empty();
@@ -3199,6 +3312,286 @@ var cell16_2_4 = $("<div></div>")
       });
     }
 
+
+    // открыть/закрыть меню по кнопке
+    $(document).on("click", ".stage-more-btn", function(e){
+      e.stopPropagation();
+      var $block = $(this).closest(".dynamic-block");
+      var $menu = $block.find(".stage-menu");
+
+      // закрыть все остальные
+      $(".stage-menu").attr("hidden", true);
+
+      // переключить текущее
+      $menu.attr("hidden", !$menu.is("[hidden]") ? true : false);
+    });
+
+    function updateStageNumbersAndMenuStates() {
+      var $blocks = $("#blocks_container .dynamic-block");
+      var nonEmptyCount = $blocks.filter(function(){ return !isStageEmpty($(this)); }).length;
+      var titlePrefix = (currentLang === "ru") ? "Этап " : "Stage ";
+
+      $blocks.each(function(i){
+        var $b = $(this);
+
+        // номер этапа = порядок в DOM
+        $b.find(".stage-title").text(titlePrefix + (i + 1));
+
+        var isFirst = (i === 0);
+        var isLast  = (i === $blocks.length - 1);
+
+        var empty = isStageEmpty($b);
+        var $next = $b.next(".dynamic-block");
+        var nextEmpty = ($next.length && isStageEmpty($next));
+
+        // пустой нельзя двигать вверх/вниз
+        $b.find('.stage-menu-item[data-action="move-up"]').prop("disabled", isFirst || empty);
+
+        // нельзя опускать, если снизу пустой (иначе пустой окажется выше)
+        $b.find('.stage-menu-item[data-action="move-down"]').prop("disabled", isLast || empty || nextEmpty);
+
+        // пустой нельзя удалять
+        $b.find('.stage-menu-item[data-action="delete"]').prop("disabled", empty);
+
+        $b.find('.stage-menu-item[data-action="reorder-list"]').prop("disabled", empty || nonEmptyCount < 2);
+      });
+    }
+
+    function ensureTrailingEmptyStage() {
+      var $blocks = $("#blocks_container .dynamic-block");
+
+      if ($blocks.length === 0) {
+        createNewDynamicBlock();
+        return;
+      }
+
+      var $last = $blocks.last();
+      var lastHasTactic = (($last.find(".tactic-input").val() || "").trim() !== "");
+      var hasEmpty = $blocks.filter(function(){
+        return (($(this).find(".tactic-input").val() || "").trim() === "");
+      }).length > 0;
+
+      // чтобы всегда был хотя бы один пустой этап для добавления
+      if (lastHasTactic && !hasEmpty) {
+        createNewDynamicBlock();
+      }
+    }
+
+    function isStageEmpty($block) {
+      return (($block.find(".tactic-input").val() || "").trim() === "");
+    }
+
+    $(document).on("click", ".stage-menu-item", function(e){
+      e.stopPropagation();
+
+      if ($(this).prop("disabled")) return;
+
+      var action = $(this).data("action");
+      var $block = $(this).closest(".dynamic-block");
+
+      if (action === "reorder-list") {
+        $(this).closest(".stage-menu").attr("hidden", true);
+        openReorderStagesDialog();
+        return;
+      }
+
+      var empty = isStageEmpty($block);
+      var $next = $block.next(".dynamic-block");
+      var nextEmpty = ($next.length && isStageEmpty($next));
+
+      if (action === "move-up" && empty) { $(this).closest(".stage-menu").attr("hidden", true); return; }
+      if (action === "move-down" && (empty || nextEmpty)) { $(this).closest(".stage-menu").attr("hidden", true); return; }
+      if (action === "delete" && empty) { $(this).closest(".stage-menu").attr("hidden", true); return; }
+
+      if (action === "move-up") {
+        var $prev = $block.prev(".dynamic-block");
+        if ($prev.length) $block.insertBefore($prev);
+      }
+
+      if (action === "move-down") {
+        var $next = $block.next(".dynamic-block");
+        if ($next.length) $block.insertAfter($next);
+      }
+
+      if (action === "delete") {
+        var stageNum = $("#blocks_container .dynamic-block").index($block) + 1;
+      var tactic = ($block.find(".tactic-input").val() || "").trim();
+
+      if (!tactic) {
+        tactic = (currentLang === "ru") ? "(Тактика не выбрана)" : "(No tactic selected)";
+      }
+
+      var ok = confirm(
+        (currentLang === "ru")
+          ? ("Удалить этап " + stageNum + ":\n" + tactic + "?")
+          : ("Delete stage " + stageNum + ":\n" + tactic + "?")
+      );
+        if (!ok) {
+          $(this).closest(".stage-menu").attr("hidden", true);
+          return;
+        }
+
+        $(this).closest(".stage-menu").attr("hidden", true);
+
+        $block.slideUp(200, function(){
+          $(this).remove();
+          updateStageNumbersAndMenuStates();
+          ensureTrailingEmptyStage();
+          updateAllTotals();
+          checkSkillConsistency();
+        });
+
+        return; // важно: дальше не идём
+      }
+
+      $(this).closest(".stage-menu").attr("hidden", true);
+      updateStageNumbersAndMenuStates();
+      updateAllTotals();
+      checkSkillConsistency();
+    });
+
+    // закрывать меню при клике вне
+    $(document).on("click", function(){
+      $(".stage-menu").attr("hidden", true);
+    });
+
+    function openReorderStagesDialog() {
+  // Берём только непустые этапы (как у тебя в логике "пустой этап" = tactic пустая)
+  var $allBlocks = $("#blocks_container .dynamic-block");
+  var $filled = $allBlocks.filter(function(){ return !isStageEmpty($(this)); });
+
+  if ($filled.length < 2) {
+    alert(currentLang === "ru"
+      ? "Для перестановки нужно минимум 2 заполненных этапа."
+      : "You need at least 2 filled stages to reorder."
+    );
+    return;
+  }
+
+  // Создаём диалог один раз и переиспользуем
+  var $dlg = $("#reorderStagesDialog");
+  if (!$dlg.length) {
+    $("body").append(`
+      <div id="reorderStagesDialog" style="display:none;">
+        <div class="reorder-hint">
+          ${currentLang === "ru" ? "Перетащите этапы мышью и нажмите «Сохранить»." : "Drag stages and click “Save”."}
+        </div>
+        <ul id="reorderStagesList" class="reorder-list"></ul>
+      </div>
+    `);
+    $dlg = $("#reorderStagesDialog");
+  } else {
+    // обновить подсказку при другом языке/перезагрузках
+    $dlg.find(".reorder-hint").html(
+      currentLang === "ru"
+        ? "Перетащите этапы мышью и нажмите «Сохранить»."
+        : "Drag stages and click “Save”."
+    );
+  }
+
+  var $list = $("#reorderStagesList");
+  $list.empty();
+
+  // Заполняем список текущими этапами в текущем порядке
+  $filled.each(function(){
+    var $b = $(this);
+    var id = $b.attr("id");
+
+    var tactic = ($b.find(".tactic-input").val() || "").trim();
+    var tech   = ($b.find(".technique-input").val() || "").trim();
+    var label = "";
+    if (tactic && tech) {
+      label = tactic + " — " + tech;   // или " / " вместо " — "
+    } else if (tactic) {
+      label = tactic;
+    } else if (tech) {
+      label = tech;
+    } else {
+      label = (currentLang === "ru" ? "Этап" : "Stage");
+    }
+
+    var $li = $("<li class='reorder-item'></li>").attr("data-block-id", id);
+    $li.append("<span class='drag-handle' aria-hidden='true'>☰</span>");
+    $li.append($("<span class='reorder-text'></span>").text(label));
+    $list.append($li);
+  });
+
+  // sortable (jQuery UI уже подключен)
+  $list.sortable({
+    axis: "y",
+    placeholder: "reorder-placeholder",
+    tolerance: "pointer"
+  });
+
+  // Открываем jQuery UI dialog
+  $dlg.dialog({
+    modal: true,
+    width: 660,
+    dialogClass: "reorder-stages-modal",
+    title: (currentLang === "ru" ? "Переместить этапы" : "Reorder stages"),
+    closeOnEscape: true,
+    resizable: false,
+    draggable: false,
+    buttons: [
+      {
+        text: (currentLang === "ru" ? "Отмена" : "Cancel"),
+        click: function() { $(this).dialog("close"); }
+      },
+      {
+        text: (currentLang === "ru" ? "Сохранить" : "Save"),
+        click: function() {
+          var orderedIds = $("#reorderStagesList .reorder-item").map(function(){
+            return $(this).attr("data-block-id");
+          }).get();
+
+          var $container = $("#blocks_container");
+
+          // На всякий случай отделим пустые этапы и вернём их в конец
+          var $empties = $container.children(".dynamic-block").filter(function(){
+            return isStageEmpty($(this));
+          }).detach();
+
+          // Перестраиваем DOM-порядок заполненных этапов
+          orderedIds.forEach(function(id){
+            var $block = $("#" + id);
+            if ($block.length) $container.append($block);
+          });
+
+          // Возвращаем пустые этапы в конец (обычно он один)
+          $container.append($empties);
+
+          // Гарантируем наличие "хвостового" пустого этапа
+          ensureTrailingEmptyStage();
+
+          // Обновляем номера/состояния/итоги
+          updateStageNumbersAndMenuStates();
+          updateAllTotals();
+          checkSkillConsistency();
+
+          $(this).dialog("close");
+        }
+      }
+    ],
+    open: function () {
+      $("body").addClass("modal-open");
+
+      // навесить классы на кнопки
+      var $dlg = $(this).closest(".ui-dialog");
+      var $btns = $dlg.find(".ui-dialog-buttonpane button");
+
+      $btns.eq(0).addClass("btn-secondary"); // Отмена
+      $btns.eq(1).addClass("btn-primary");   // Сохранить
+
+      setTimeout(function () {
+        $("#reorderStagesList").sortable("refresh");
+      }, 0);
+    },
+    close: function () {
+      $("body").removeClass("modal-open"); // ✅ возвращаем скролл
+    }
+    
+  });
+}
 </script>
 </body>
 </html>
