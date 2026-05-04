@@ -975,27 +975,19 @@
         values: [2, 0]
       },
       execution_guardrails: {
-        translations: { ru: "Ограничсения на исполнение (T1480)", en: "Execution Guardrails (T1480)" },
+        translations: { ru: "Ограничения на исполнение (T1480)", en: "Execution Guardrails (T1480)" },
         values: [4, 0]
       },
-      exploitation_for_defense_evasion: {
-        translations: { ru: "Эксплуатация уязвимостей для предотвращения обнаружения (T1211)", en: "Exploitation for Defense Evasion (T1211)" },
+      exploitation_for_stealth: {
+        translations: { ru: "Эксплуатация для скрытности (T1211)", en: "Exploitation for Stealth (T1211)" },
         values: [24, 0]
       },
       file_directory_permissions_modification: {
-        translations: { ru: "Изменение разрещений для файлов и каталогов (T1222)", en: "File and Directory Permissions Modification (T1222)" },
+        translations: { ru: "Изменение разрешений для файлов и каталогов (T1222)", en: "File and Directory Permissions Modification (T1222)" },
         values: [2, 0]
       },
       hide_artifacts: {
         translations: { ru: "Сокрытие артефактов (T1564)", en: "Hide Artifacts (T1564)" },
-        values: [4, 0]
-      },
-      impair_defenses: {
-        translations: { ru: "Ослабление защиты (T1562)", en: "Impair Defenses (T1562)" },
-        values: [4, 0]
-      },
-      impersonation: {
-        translations: { ru: "Имперсонация (T1656)", en: "Impersonation (T1656)" },
         values: [4, 0]
       },
       indicator_removal: {
@@ -1263,7 +1255,7 @@
         values: [4, 0]
       },
       system_owner_user_discovery: {
-        translations: { ru: "Изучение владельца или пользоваталей системы (T1033)", en: "System Owner/User Discovery (T1033)" },
+        translations: { ru: "Изучение владельца или пользователей системы (T1033)", en: "System Owner/User Discovery (T1033)" },
         values: [2, 0]
       },
       system_service_discovery: {
@@ -1510,10 +1502,6 @@
         translations: { ru: "Завершение работы или перезагрузка системы (T1529)", en: "System Shutdown/Reboot (T1529)" },
         values: [1, 0]
       },
-      wifi_networks: {
-        translations: { ru: "Беспроводные сети (T1676)", en: "Wi-Fi Networks (T1676)" },
-        values: [8, 0]
-      },
       esxi_administration_command: {
         translations: { ru: "Команды администрирования ESXi (T1675)", en: "ESXi Administration Command (T1675)" },
         values: [0, 5]
@@ -1538,9 +1526,41 @@
         translations: { ru: "Email Bombing (T1667)", en: "Email Bombing (T1667)" },
         values: [4, 0]
       },
-      email_spoofing: {
-        translations: { ru: "Подмена электронной почты (T1672)", en: "Email Spoofing (T1672)" },
+      query_public_ai_services: {
+        translations: { ru: "Запросы к публичным AI-сервисам (T1682)", en: "Query Public AI Services (T1682)" },
         values: [1, 0]
+      },
+      generate_content: {
+        translations: { ru: "Генерация контента (T1683)", en: "Generate Content (T1683)" },
+        values: [3, 0]
+      },
+      social_engineering: {
+        translations: { ru: "Социальная инженерия (T1684)", en: "Social Engineering (T1684)" },
+        values: [4, 0]
+      },
+      disable_or_modify_tools: {
+        translations: { ru: "Отключение или модификация средств защиты (T1685)", en: "Disable or Modify Tools (T1685)" },
+        values: [4, 0]
+      },
+      disable_or_modify_system_firewall: {
+        translations: { ru: "Отключение или модификация системного межсетевого экрана (T1686)", en: "Disable or Modify System Firewall (T1686)" },
+        values: [1, 30]
+      },
+      exploitation_for_defense_impairment: {
+        translations: { ru: "Эксплуатация для нарушения защиты (T1687)", en: "Exploitation for Defense Impairment (T1687)" },
+        values: [6, 0]
+      },
+      safe_mode_boot: {
+        translations: { ru: "Загрузка в безопасном режиме (T1688)", en: "Safe Mode Boot (T1688)" },
+        values: [3, 0]
+      },
+      downgrade_attack: {
+        translations: { ru: "Атака понижения версии (T1689)", en: "Downgrade Attack (T1689)" },
+        values: [4, 0]
+      },
+      prevent_command_history_logging: {
+        translations: { ru: "Отключение журналирования команд (T1690)", en: "Prevent Command History Logging (T1690)" },
+        values: [0, 30]
       }
     };
 
@@ -1554,7 +1574,8 @@
           { ru: "Сбор информации об атакуемых пользователях (T1589)", en: "Gather Victim Identity Information (T1589)" },
           { ru: "Сбор информации об атакуемой сетевой инфраструктуре (T1590)", en: "Gather Victim Network Information (T1590)" },
           { ru: "Сбор бизнес-информации об атакуемой организации (T1591)", en: "Gather Victim Org Information (T1591)" },
-          { ru: "Фишинг с целью сбора сведений (T1585)", en: "Phishing for Information (T1585)" },
+          { ru: "Фишинг с целью сбора сведений (T1598)", en: "Phishing for Information (T1598)" },
+          { ru: "Запросы к публичным AI-сервисам (T1682)", en: "Query Public AI Services (T1682)" },
           { ru: "Поиск в закрытых источниках (T1597)", en: "Search Closed Sources (T1597)" },
           { ru: "Поиск технической информации в общедоступных источниках (T1596)", en: "Search Open Technical Databases (T1596)" },
           { ru: "Поиск на общедоступных сайтах (T1593)", en: "Search Open Websites/Domains (T1593)" },
@@ -1571,6 +1592,7 @@
           { ru: "Компрометация сторонней инфраструктуры (T1584)", en: "Compromise Infrastructure (T1584)" },
           { ru: "Разработка собственных средств (T1587)", en: "Develop Capabilities (T1587)" },
           { ru: "Создание учетных записей (T1585)", en: "Establish Accounts (T1585)" },
+          { ru: "Генерация контента (T1683)", en: "Generate Content (T1683)" },
           { ru: "Подготовка необходимых средств (T1588)", en: "Obtain Capabilities (T1588)" },
           { ru: "Размещение средств (T1608)", en: "Stage Capabilities (T1608)" }
         ]
@@ -1587,20 +1609,21 @@
           { ru: "Распространение через съемные носители (T1091)", en: "Replication Through Removable Media (T1091)" },
           { ru: "Компрометация цепочки поставок (T1195)", en: "Supply Chain Compromise (T1195)" },
           { ru: "Доверительные отношения (T1199)", en: "Trusted Relationships (T1199)" },
-          { ru: "Существующие учетные записи (T1078)", en: "Valid Accounts (T1078)" },
-          { ru: "Беспроводные сети (T1676)", en: "Wi-Fi Networks (T1676)" }
+          { ru: "Существующие учетные записи (T1078)", en: "Valid Accounts (T1078)" }
         ]
       },
 
       execution: {
         translations: { ru: "Выполнение", en: "Execution" },
         techniques: [
+          { ru: "Задания BITS (T1197)", en: "BITS Jobs (T1197)" },
           { ru: "Средства администрирования облака (T1651)", en: "Cloud Administration Command (T1651)" },
           { ru: "Интерпретаторы командной строки и сценариев (T1059)", en: "Command and Scripting Interpreter (T1059)" },
           { ru: "Средства администрирования контейнера (T1609)", en: "Container Administration Command (T1609)" },
           { ru: "Развертывание контейнера (T1610)", en: "Deploy Container (T1610)" },
           { ru: "Команды администрирования ESXi (T1675)", en: "ESXi Administration Command (T1675)" },
           { ru: "Эксплуатация уязвимостей в клиентском ПО (T1203)", en: "Exploitation for Client Execution (T1203)" },
+          { ru: "Перехват потока исполнения (T1574)", en: "Hijack Execution Flow (T1574)" },
           { ru: "Имитация ввода данных (T1674)", en: "Input Injection (T1674)" },
           { ru: "Межпроцессное взаимодействие (T1559)", en: "Inter-Process Communication (T1559)" },
           { ru: "Нативный API (T1106)", en: "Native API (T1106)" },
@@ -1610,6 +1633,7 @@
           { ru: "Общие модули (T1129)", en: "Shared Modules (T1129)" },
           { ru: "Средства развертывания ПО (T1072)", en: "Software Deployment Tools (T1072)" },
           { ru: "Системные службы (T1569)", en: "System Services (T1569)" },
+          { ru: "Выполнение через доверенные утилиты разработчика (T1127)", en: "Trusted Developer Utilities Proxy Execution (T1127)" },
           { ru: "Выполнение с участием пользователя (T1204)", en: "User Execution (T1204)" },
           { ru: "Инструментарий управления Windows (T1047)", en: "Windows Management Instrumentation (T1047)" }
         ]
@@ -1630,7 +1654,6 @@
           { ru: "Выполнение по событию (T1546)", en: "Event Triggered Execution (T1546)" },
           { ru: "Исключительный контроль (T1668)", en: "Exclusive Control (T1668)" },
           { ru: "Внешние службы удаленного доступа (T1133)", en: "External Remote Services (T1133)" },
-          { ru: "Перехват потока исполнения (T1574)", en: "Hijack Execution Flow (T1574)" },
           { ru: "Внедрение кода в образ (T1525)", en: "Implant Internal Image (T1525)" },
           { ru: "Изменение процесса аутентификации (T1556)", en: "Modify Authentication Process (T1556)" },
           { ru: "Запуск приложения Office (T1137)", en: "Office Application Startup (T1137)" },
@@ -1647,80 +1670,86 @@
         translations: { ru: "Повышение привилегий", en: "Privilege Escalation" },
         techniques: [
           { ru: "Обход механизмов контроля привилегий (T1548)", en: "Abuse Elevation Control Mechanism (T1548)" },
-          { ru: "Мапипуляции с токенами доступа (T1134)", en: "Access Token Manipulation (T1134)" },
-          { ru: "Манипуляции с учетной запиью (T1098)", en: "Account Manipulation (T1098)" },
+          { ru: "Манипуляции с токенами доступа (T1134)", en: "Access Token Manipulation (T1134)" },
+          { ru: "Манипуляции с учётной записью (T1098)", en: "Account Manipulation (T1098)" },
           { ru: "Автозапуск при загрузке или входе в систему (T1547)", en: "Boot or Logon Autostart Execution (T1547)" },
           { ru: "Сценарии инициализации при загрузке или входе в систему (T1037)", en: "Boot or Logon Initialization Scripts (T1037)" },
           { ru: "Создание или изменение системных процессов (T1543)", en: "Create or Modify System Process (T1543)" },
-          { ru: "Изменение политики домена или тенант (T1484)", en: "Domain or Tenant Policy Modification (T1484)" },
+          { ru: "Изменение политики домена или тенанта (T1484)", en: "Domain or Tenant Policy Modification (T1484)" },
           { ru: "Выход за пределы контейнера (T1611)", en: "Escape to Host (T1611)" },
           { ru: "Выполнение по событию (T1546)", en: "Event Triggered Execution (T1546)" },
           { ru: "Эксплуатация уязвимостей для повышения привилегий (T1068)", en: "Exploitation for Privilege Escalation (T1068)" },
-          { ru: "Перехват потока исполнения (T1574)", en: "Hijack Execution Flow (T1574)" },
           { ru: "Внедрение кода в процессы (T1055)", en: "Process Injection (T1055)" },
           { ru: "Запланированная задача (T1053)", en: "Scheduled Task/Job (T1053)" },
           { ru: "Существующие учетные записи (T1078)", en: "Valid Accounts (T1078)" }
         ]
       },
 
-      "detection_avoidance": {
-        translations: { ru: "Предотвращение обнаружения", en: "Defense Evasion" },
+      stealth: {
+        translations: { ru: "Скрытность", en: "Stealth" },
         techniques: [
-          { ru: "Обход механизмов контроля привилегий (T1548)", en: "Abuse Elevation Control Mechanism (T1548)" },
           { ru: "Манипуляции с токенами доступа (T1134)", en: "Access Token Manipulation (T1134)" },
           { ru: "Задания BITS (T1197)", en: "BITS Jobs (T1197)" },
           { ru: "Создание образа на узле (T1612)", en: "Build Image on Host (T1612)" },
           { ru: "Предотвращение отладки (T1622)", en: "Debugger Evasion (T1622)" },
           { ru: "Задержка выполнения (T1678)", en: "Delay Execution (T1678)" },
           { ru: "Деобфускация или декодирование файлов или данных (T1140)", en: "Deobfuscate/Decode Files or Information (T1140)" },
-          { ru: "Развертывание контейнера (T1610)", en: "Deploy Container (T1610)" },
           { ru: "Прямой доступ к тому (T1006)", en: "Direct Volume Access (T1006)" },
-          { ru: "Изменение политики домена или тенанта (T1484)", en: "Domain or Tenant Policy Modification (T1484)" },
-          { ru: "Подмена электронной почты (T1672)", en: "Email Spoofing (T1672)" },
-          { ru: "Ограничсения на исполнение (T1480)", en: "Execution Guardrails (T1480)" },
-          { ru: "Эксплуатация уязвимостей для предотвращения обнаружения (T1211)", en: "Exploitation for Defense Evasion (T1211)" },
-          { ru: "Изменение разрещений для файлов и каталогов (T1222)", en: "File and Directory Permissions Modification (T1222)" },
+          { ru: "Ограничения на исполнение (T1480)", en: "Execution Guardrails (T1480)" },
+          { ru: "Эксплуатация для скрытности (T1211)", en: "Exploitation for Stealth (T1211)" },
           { ru: "Сокрытие артефактов (T1564)", en: "Hide Artifacts (T1564)" },
           { ru: "Перехват потока исполнения (T1574)", en: "Hijack Execution Flow (T1574)" },
-          { ru: "Ослабление защиты (T1562)", en: "Impair Defenses (T1562)" },
-          { ru: "Имперсонация (T1656)", en: "Impersonation (T1656)" },
           { ru: "Устранение индикаторов (T1070)", en: "Indicator Removal (T1070)" },
           { ru: "Непрямое выполнение команд (T1202)", en: "Indirect Command Execution (T1202)" },
           { ru: "Маскировка (T1036)", en: "Masquerading (T1036)" },
-          { ru: "Изменение процесса аутентификации (T1556)", en: "Modify Authentication Process (T1556)" },
-          { ru: "Изменение облачной вычислительной инфраструктуры (T1666)", en: "Modify Cloud Resource Hierarchy (T1666)" },
-          { ru: "Изменение реестра (T1112)", en: "Modify Registry (T1112)" },
-          { ru: "Изменение образа системы (T1601)", en: "Modify System Image (T1601)" },
-          { ru: "Преодоление границ сети (T1599)", en: "Network Boundary Bridging (T1599)" },
           { ru: "Обфусцированные файлы или данные (T1027)", en: "Obfuscated Files or Information (T1027)" },
-          { ru: "Изменения файла PLIST (T1647)", en: "Plist File Modification (T1647)" },
           { ru: "Загрузка раньше ОС (T1542)", en: "Pre-OS Boot (T1542)" },
           { ru: "Внедрение кода в процессы (T1055)", en: "Process Injection (T1055)" },
           { ru: "Отраженная загрузка кода (T1620)", en: "Reflective Code Loading (T1620)" },
-          { ru: "Поддельный контроллер домена (T1207)", en: "Rogue Domain Controller (T1207)" },
           { ru: "Руткит (T1014)", en: "Rootkit (T1014)" },
           { ru: "Избирательное исключение (T1679)", en: "Selective Exclusion (T1679)" },
-          { ru: "Нарушение работы средств контроля доверия (T1553)", en: "Subvert Trust Controls (T1553)" },
+          { ru: "Социальная инженерия (T1684)", en: "Social Engineering (T1684)" },
           { ru: "Выполнение с помощью системных бинарных файлов (T1218)", en: "System Binary Proxy Execution (T1218)" },
           { ru: "Выполнение через системный сценарий (T1216)", en: "System Script Proxy Execution (T1216)" },
           { ru: "Внедрение в шаблоны (T1221)", en: "Template Injection (T1221)" },
           { ru: "Передача управляющих сигналов в трафике (T1205)", en: "Traffic Signaling (T1205)" },
           { ru: "Выполнение через доверенные утилиты разработчика (T1127)", en: "Trusted Developer Utilities Proxy Execution (T1127)" },
           { ru: "Облачные инфраструктуры в редко используемых регионах (T1535)", en: "Unused/Unsupported Cloud Regions (T1535)" },
-          { ru: "Использование альтернативных сущностей для аутентификации (T1550)", en: "Use Alternate Authentication Material (T1550)" },
           { ru: "Существующие учетные записи (T1078)", en: "Valid Accounts (T1078)" },
           { ru: "Обход виртуализации или песочницы (T1497)", en: "Virtualization/Sandbox Evasion (T1497)" },
-          { ru: "Понижение надежности шифрования (T1600)", en: "Weaken Encryption (T1600)" },
           { ru: "Использование сценариев XSL (T1220)", en: "XSL Script Processing (T1220)" }
         ]
       },
 
-      "Credential Access": {
+      defense_impairment: {
+        translations: { ru: "Нарушение защиты", en: "Defense Impairment" },
+        techniques: [
+          { ru: "Отключение или модификация системного межсетевого экрана (T1686)", en: "Disable or Modify System Firewall (T1686)" },
+          { ru: "Отключение или модификация средств защиты (T1685)", en: "Disable or Modify Tools (T1685)" },
+          { ru: "Изменение политики домена или тенанта (T1484)", en: "Domain or Tenant Policy Modification (T1484)" },
+          { ru: "Атака понижения версии (T1689)", en: "Downgrade Attack (T1689)" },
+          { ru: "Эксплуатация для нарушения защиты (T1687)", en: "Exploitation for Defense Impairment (T1687)" },
+          { ru: "Изменение разрешений для файлов и каталогов (T1222)", en: "File and Directory Permissions Modification (T1222)" },
+          { ru: "Изменение процесса аутентификации (T1556)", en: "Modify Authentication Process (T1556)" },
+          { ru: "Изменение облачной вычислительной инфраструктуры (T1666)", en: "Modify Cloud Resource Hierarchy (T1666)" },
+          { ru: "Изменение реестра (T1112)", en: "Modify Registry (T1112)" },
+          { ru: "Изменение образа системы (T1601)", en: "Modify System Image (T1601)" },
+          { ru: "Преодоление границ сети (T1599)", en: "Network Boundary Bridging (T1599)" },
+          { ru: "Изменения файла PLIST (T1647)", en: "Plist File Modification (T1647)" },
+          { ru: "Отключение журналирования команд (T1690)", en: "Prevent Command History Logging (T1690)" },
+          { ru: "Поддельный контроллер домена (T1207)", en: "Rogue Domain Controller (T1207)" },
+          { ru: "Загрузка в безопасном режиме (T1688)", en: "Safe Mode Boot (T1688)" },
+          { ru: "Нарушение работы средств контроля доверия (T1553)", en: "Subvert Trust Controls (T1553)" },
+          { ru: "Понижение надежности шифрования (T1600)", en: "Weaken Encryption (T1600)" }
+        ]
+      },
+
+      credential_access: {
         translations: { ru: "Получение учетных данных", en: "Credential Access" },
         techniques: [
           { ru: "Злоумышленник посередине (T1557)", en: "Adversary-in-the-Middle (T1557)" },
           { ru: "Метод перебора (T1110)", en: "Brute Force (T1110)" },
-          { ru: "Учетные даннные из хранилищ паролей (T1555)", en: "Credentials from Password Stores (T1555)" },
+          { ru: "Учетные данные из хранилищ паролей (T1555)", en: "Credentials from Password Stores (T1555)" },
           { ru: "Эксплуатация уязвимостей для получения учетных данных (T1212)", en: "Exploitation for Credential Access (T1212)" },
           { ru: "Принудительная аутентификация (T1187)", en: "Forced Authentication (T1187)" },
           { ru: "Подделка учетных данных для веб ресурсов (T1606)", en: "Forge Web Credentials (T1606)" },
@@ -1770,7 +1799,7 @@
         { ru: "Изучение местоположения системы (T1614)", en: "System Location Discovery (T1614)" },
         { ru: "Изучение конфигурации сети (T1016)", en: "System Network Configuration Discovery (T1016)" },
         { ru: "Изучение сетевых подключений (T1049)", en: "System Network Connections Discovery (T1049)" },
-        { ru: "Изучение владельца или пользоваталей системы (T1033)", en: "System Owner/User Discovery (T1033)" },
+        { ru: "Изучение владельца или пользователей системы (T1033)", en: "System Owner/User Discovery (T1033)" },
         { ru: "Изучение системных служб (T1007)", en: "System Service Discovery (T1007)" },
         { ru: "Изучение системного времени (T1124)", en: "System Time Discovery (T1124)" },
         { ru: "Изучение виртуальной машины (T1673)", en: "Virtual Machine Discovery (T1673)" },
