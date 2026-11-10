@@ -687,880 +687,1139 @@
 
     var TECHNIQUE_TIMES = {
       active_scanning: {
+        id: "T1595",
         translations: { ru: "Активное сканирование (T1595)", en: "Active Scanning (T1595)" },
         values: [4, 0]
       },
       target_nodes_info: {
+        id: "T1592",
         translations: { ru: "Сбор информации об атакуемых узлах (T1592)", en: "Gather Victim Host Information (T1592)" },
         values: [4, 0]
       },
       target_users_info: {
+        id: "T1589",
         translations: { ru: "Сбор информации об атакуемых пользователях (T1589)", en: "Gather Victim Identity Information (T1589)" },
         values: [8, 0]
       },
       network_infra_info: {
+        id: "T1590",
         translations: { ru: "Сбор информации об атакуемой сетевой инфраструктуре (T1590)", en: "Gather Victim Network Information (T1590)" },
         values: [4, 0]
       },
       business_info: {
+        id: "T1591",
         translations: { ru: "Сбор бизнес-информации об атакуемой организации (T1591)", en: "Gather Victim Org Information (T1591)" },
         values: [8, 0]
       },
       phishing_for_info: {
+        id: "T1598",
         translations: { ru: "Фишинг с целью сбора сведений (T1598)", en: "Phishing for Information (T1598)" },
         values: [48, 0]
       },
       search_closed_sources: {
+        id: "T1597",
         translations: { ru: "Поиск в закрытых источниках (T1597)", en: "Search Closed Sources (T1597)" },
         values: [120, 0]
       },
       search_public_tech_info: {
+        id: "T1596",
         translations: { ru: "Поиск технической информации в общедоступных источниках (T1596)", en: "Search Open Technical Databases (T1596)" },
         values: [2, 0]
       },
       search_public_websites: {
+        id: "T1593",
         translations: { ru: "Поиск на общедоступных сайтах (T1593)", en: "Search Open Websites/Domains (T1593)" },
         values: [2, 0]
       },
       search_threat_vendor_data: {
+        id: "T1681",
         translations: { ru: "Поиск данных TI-вендоров (T1681)", en: "Search Threat Vendor Data (T1681)" },
         values: [8, 0]
       },
       search_target_website: {
+        id: "T1594",
         translations: { ru: "Поиск на сайтах атакуемой организации (T1594)", en: "Search Victim-Owned Websites (T1594)" },
         values: [2, 0]
       },
       purchase_access: {
+        id: "T1650",
         translations: { ru: "Приобретение доступа (T1650)", en: "Acquire Access (T1650)" },
         values: [12, 0]
       },
       purchase_infra: {
+        id: "T1583",
         translations: { ru: "Приобретение инфраструктуры (T1583)", en: "Acquire Infrastructure (T1583)" },
         values: [2, 0]
       },
       compromise_accounts: {
+        id: "T1586",
         translations: { ru: "Компрометация учетных записей (T1586)", en: "Compromise Accounts (T1586)" },
         values: [2, 0]
       },
       compromise_third_party_infra: {
+        id: "T1584",
         translations: { ru: "Компрометация сторонней инфраструктуры (T1584)", en: "Compromise Infrastructure (T1584)" },
         values: [4, 0]
       },
       develop_custom_tools: {
+        id: "T1587",
         translations: { ru: "Разработка собственных средств (T1587)", en: "Develop Capabilities (T1587)" },
         values: [72, 0]
       },
       create_accounts: {
+        id: "T1585",
         translations: { ru: "Создание учетных записей (T1585)", en: "Establish Accounts (T1585)" },
         values: [0, 10]
       },
       prepare_required_tools: {
+        id: "T1588",
         translations: { ru: "Подготовка необходимых средств (T1588)", en: "Obtain Capabilities (T1588)" },
         values: [1, 0]
       },
       deploy_tools: {
+        id: "T1608",
         translations: { ru: "Размещение средств (T1608)", en: "Stage Capabilities (T1608)" },
         values: [0, 30]
       },
       content_injection: {
+        id: "T1659",
         translations: { ru: "Внедрение контента (T1659)", en: "Content Injection (T1659)" },
         values: [2, 0]
       },
       drive_by_compromise: {
+        id: "T1189",
         translations: { ru: "Теневая (drive-by) компрометация (T1189)", en: "Drive-by Compromise (T1189)" },
         values: [2, 0]
       },
       public_app_vulnerabilities: {
+        id: "T1190",
         translations: { ru: "Недостатки в общедоступном приложении (T1190)", en: "Exploit Public-Facing Application (T1190)" },
         values: [4, 0]
       },
       external_remote_services: {
+        id: "T1133",
         translations: { ru: "Внешние службы удаленного доступа (T1133)", en: "External Remote Services (T1133)" },
         values: [0, 30]
       },
       connect_additional_devices: {
+        id: "T1200",
         translations: { ru: "Подключение дополнительных устройств (T1200)", en: "Hardware Additions (T1200)" },
         values: [24, 0]
       },
       phishing: {
+        id: "T1566",
         translations: { ru: "Фишинг (T1566)", en: "Phishing (T1566)" },
         values: [24, 0]
       },
       removable_media_propagation: {
+        id: "T1091",
         translations: { ru: "Распространение через съемные носители (T1091)", en: "Replication Through Removable Media (T1091)" },
         values: [4, 0]
       },
       supply_chain_compromise: {
+        id: "T1195",
         translations: { ru: "Компрометация цепочки поставок (T1195)", en: "Supply Chain Compromise (T1195)" },
         values: [168, 0]
       },
       trusted_relationships: {
-        translations: { ru: "Доверительные отношения (T1199)", en: "Trusted Relationships (T1199)" },
+        id: "T1199",
+        translations: { ru: "Доверительные отношения (T1199)", en: "Trusted Relationship (T1199)" },
         values: [48, 0]
       },
       existing_accounts: {
+        id: "T1078",
         translations: { ru: "Существующие учетные записи (T1078)", en: "Valid Accounts (T1078)" },
         values: [0, 30]
       },
       cloud_admin_tools: {
+        id: "T1651",
         translations: { ru: "Средства администрирования облака (T1651)", en: "Cloud Administration Command (T1651)" },
         values: [0, 15]
       },
       command_line_interpreters: {
+        id: "T1059",
         translations: { ru: "Интерпретаторы командной строки и сценариев (T1059)", en: "Command and Scripting Interpreter (T1059)" },
         values: [0, 5]
       },
       container_admin_tools: {
+        id: "T1609",
         translations: { ru: "Средства администрирования контейнера (T1609)", en: "Container Administration Command (T1609)" },
         values: [0, 15]
       },
       container_deployment: {
+        id: "T1610",
         translations: { ru: "Развертывание контейнера (T1610)", en: "Deploy Container (T1610)" },
         values: [0, 15]
       },
       exploit_client_vuln: {
+        id: "T1203",
         translations: { ru: "Эксплуатация уязвимостей в клиентском ПО (T1203)", en: "Exploitation for Client Execution (T1203)" },
         values: [4, 0]
       },
       interprocess_comm: {
+        id: "T1559",
         translations: { ru: "Межпроцессное взаимодействие (T1559)", en: "Inter-Process Communication (T1559)" },
         values: [0, 5]
       },
       native_API: {
+        id: "T1106",
         translations: { ru: "Нативный API (T1106)", en: "Native API (T1106)" },
         values: [0, 5]
       },
       poisoned_pipeline_execution: {
+        id: "T1677",
         translations: { ru: "Манипуляция процессами непрерывной интеграции/разработки (CI/CD) (T1677)", en: "Poisoned Pipeline Execution (T1677)" },
         values: [3, 15]
       },
       scheduled_task: {
+        id: "T1053",
         translations: { ru: "Запланированная задача (T1053)", en: "Scheduled Task/Job (T1053)" },
         values: [0, 5]
       },
       serverless_execution: {
+        id: "T1648",
         translations: { ru: "Бессерверное выполнение (T1648)", en: "Serverless Execution (T1648)" },
         values: [0, 15]
       },
       common_modules: {
+        id: "T1129",
         translations: { ru: "Общие модули (T1129)", en: "Shared Modules (T1129)" },
         values: [0, 30]
       },
       software_deployment_tools: {
+        id: "T1072",
         translations: { ru: "Средства развертывания ПО (T1072)", en: "Software Deployment Tools (T1072)" },
         values: [1, 0]
       },
       system_services: {
+        id: "T1569",
         translations: { ru: "Системные службы (T1569)", en: "System Services (T1569)" },
         values: [0, 5]
       },
       user_involved_execution: {
+        id: "T1204",
         translations: { ru: "Выполнение с участием пользователя (T1204)", en: "User Execution (T1204)" },
         values: [24, 0]
       },
       windows_management_tools: {
+        id: "T1047",
         translations: { ru: "Инструментарий управления Windows (T1047)", en: "Windows Management Instrumentation (T1047)" },
         values: [0, 5]
       },
       account_manipulation: {
+        id: "T1098",
         translations: { ru: "Манипуляции с учетной записью (T1098)", en: "Account Manipulation (T1098)" },
         values: [2, 0]
       },
       BITS_jobs: {
+        id: "T1197",
         translations: { ru: "Задания BITS (T1197)", en: "BITS Jobs (T1197)" },
         values: [2, 0]
       },
       boot_or_logon_autostart: {
+        id: "T1547",
         translations: { ru: "Автозапуск при загрузке или входе в систему (T1547)", en: "Boot or Logon Autostart Execution (T1547)" },
         values: [2, 0]
       },
       boot_or_logon_init_scripts: {
+        id: "T1037",
         translations: { ru: "Сценарии инициализации при загрузке или входе в систему (T1037)", en: "Boot or Logon Initialization Scripts (T1037)" },
         values: [2, 0]
       },
       browser_extensions: {
-        translations: { ru: "Расширения браузеров (T1176)", en: "Browser Extensions (T1176)" },
+        id: "T1176",
+        translations: { ru: "Расширения ПО (T1176)", en: "Software Extensions (T1176)" },
         values: [4, 0]
       },
       compromise_host_software_binary: {
+        id: "T1554",
         translations: { ru: "Компрометация бинарных файлов ПО узла (T1554)", en: "Compromise Host Software Binary (T1554)" },
         values: [4, 0]
       },
       create_account: {
+        id: "T1136",
         translations: { ru: "Создание учетной записи (T1136)", en: "Create Account (T1136)" },
         values: [0, 30]
       },
       create_or_modify_system_process: {
+        id: "T1543",
         translations: { ru: "Создание или изменение системных процессов (T1543)", en: "Create or Modify System Process (T1543)" },
         values: [4, 0]
       },
       event_triggered_execution: {
+        id: "T1546",
         translations: { ru: "Выполнение по событию (T1546)", en: "Event Triggered Execution (T1546)" },
         values: [4, 0]
       },
       hijack_execution_flow: {
+        id: "T1574",
         translations: { ru: "Перехват потока исполнения (T1574)", en: "Hijack Execution Flow (T1574)" },
         values: [4, 0]
       },
       implant_internal_image: {
+        id: "T1525",
         translations: { ru: "Внедрение кода в образ (T1525)", en: "Implant Internal Image (T1525)" },
         values: [24, 0]
       },
       modify_auth_process: {
+        id: "T1556",
         translations: { ru: "Изменение процесса аутентификации (T1556)", en: "Modify Authentication Process (T1556)" },
         values: [48, 0]
       },
       office_app_startup: {
+        id: "T1137",
         translations: { ru: "Запуск приложения Office (T1137)", en: "Office Application Startup (T1137)" },
         values: [4, 0]
       },
       power_settings: {
+        id: "T1653",
         translations: { ru: "Настройки питания (T1653)", en: "Power Settings (T1653)" },
         values: [4, 0]
       },
       pre_OS_boot: {
+        id: "T1542",
         translations: { ru: "Загрузка раньше ОС (T1542)", en: "Pre-OS Boot (T1542)" },
         values: [48, 0]
       },
       server_software_component: {
+        id: "T1505",
         translations: { ru: "Компонент серверного ПО (T1505)", en: "Server Software Component (T1505)" },
         values: [24, 0]
       },
       traffic_signaling: {
+        id: "T1205",
         translations: { ru: "Передача управляющих сигналов в трафике (T1205)", en: "Traffic Signaling (T1205)" },
         values: [24, 0]
       },
       abuse_elevation_control_mechanism: {
+        id: "T1548",
         translations: { ru: "Обход механизмов контроля привилегий (T1548)", en: "Abuse Elevation Control Mechanism (T1548)" },
         values: [4, 0]
       },
       access_token_manipulation: {
+        id: "T1134",
         translations: { ru: "Манипуляции с токенами доступа (T1134)", en: "Access Token Manipulation (T1134)" },
         values: [2, 0]
       },
       domain_or_tenant_policy_modification: {
-        translations: { ru: "Изменение политики домена или тенант (T1484)", en: "Domain or Tenant Policy Modification (T1484)" },
+        id: "T1484",
+        translations: { ru: "Изменение политики домена или тенанта (T1484)", en: "Domain or Tenant Policy Modification (T1484)" },
         values: [48, 0]
       },
       escape_to_host: {
+        id: "T1611",
         translations: { ru: "Выход за пределы контейнера (T1611)", en: "Escape to Host (T1611)" },
         values: [24, 0]
       },
       exploitation_for_privilege_escalation: {
+        id: "T1068",
         translations: { ru: "Эксплуатация уязвимостей для повышения привилегий (T1068)", en: "Exploitation for Privilege Escalation (T1068)" },
         values: [24, 0]
       },
       process_injection: {
+        id: "T1055",
         translations: { ru: "Внедрение кода в процессы (T1055)", en: "Process Injection (T1055)" },
         values: [4, 0]
       },
       build_image_on_host: {
+        id: "T1612",
         translations: { ru: "Создание образа на узле (T1612)", en: "Build Image on Host (T1612)" },
         values: [4, 0]
       },
       debugger_evasion: {
+        id: "T1622",
         translations: { ru: "Предотвращение отладки (T1622)", en: "Debugger Evasion (T1622)" },
         values: [2, 0]
       },
       delay_execution: {
+        id: "T1678",
         translations: { ru: "Задержка выполнения (T1678)", en: "Delay Execution (T1678)" },
         values: [0, 30]
       },
       deobfuscate_decode_files: {
+        id: "T1140",
         translations: { ru: "Деобфускация или декодирование файлов или данных (T1140)", en: "Deobfuscate/Decode Files or Information (T1140)" },
         values: [1, 0]
       },
       direct_volume_access: {
+        id: "T1006",
         translations: { ru: "Прямой доступ к тому (T1006)", en: "Direct Volume Access (T1006)" },
         values: [2, 0]
       },
       execution_guardrails: {
+        id: "T1480",
         translations: { ru: "Ограничения на исполнение (T1480)", en: "Execution Guardrails (T1480)" },
         values: [4, 0]
       },
       exploitation_for_stealth: {
+        id: "T1211",
         translations: { ru: "Эксплуатация для скрытности (T1211)", en: "Exploitation for Stealth (T1211)" },
         values: [24, 0]
       },
       file_directory_permissions_modification: {
+        id: "T1222",
         translations: { ru: "Изменение разрешений для файлов и каталогов (T1222)", en: "File and Directory Permissions Modification (T1222)" },
         values: [2, 0]
       },
       hide_artifacts: {
+        id: "T1564",
         translations: { ru: "Сокрытие артефактов (T1564)", en: "Hide Artifacts (T1564)" },
         values: [4, 0]
       },
       indicator_removal: {
+        id: "T1070",
         translations: { ru: "Устранение индикаторов (T1070)", en: "Indicator Removal (T1070)" },
         values: [4, 0]
       },
       indirect_command_execution: {
+        id: "T1202",
         translations: { ru: "Непрямое выполнение команд (T1202)", en: "Indirect Command Execution (T1202)" },
         values: [2, 0]
       },
       masquerading: {
+        id: "T1036",
         translations: { ru: "Маскировка (T1036)", en: "Masquerading (T1036)" },
         values: [4, 0]
       },
       modify_cloud_resource_hierarchy: {
-        translations: { ru: "Изменение облачной вычислительной инфраструктуры (T1666)", en: "Modify Cloud Resource Hierarchy (T1666)" },
+        id: "T1666",
+        translations: { ru: "Изменение иерархии облачных ресурсов (T1666)", en: "Modify Cloud Resource Hierarchy (T1666)" },
         values: [48, 0]
       },
       modify_registry: {
+        id: "T1112",
         translations: { ru: "Изменение реестра (T1112)", en: "Modify Registry (T1112)" },
         values: [2, 0]
       },
       modify_system_image: {
+        id: "T1601",
         translations: { ru: "Изменение образа системы (T1601)", en: "Modify System Image (T1601)" },
         values: [48, 0]
       },
       network_boundary_bridging: {
+        id: "T1599",
         translations: { ru: "Преодоление границ сети (T1599)", en: "Network Boundary Bridging (T1599)" },
         values: [48, 0]
       },
       obfuscated_files_or_information: {
+        id: "T1027",
         translations: { ru: "Обфусцированные файлы или данные (T1027)", en: "Obfuscated Files or Information (T1027)" },
         values: [4, 0]
       },
       plist_file_modification: {
+        id: "T1647",
         translations: { ru: "Изменения файла PLIST (T1647)", en: "Plist File Modification (T1647)" },
         values: [4, 0]
       },
       reflective_code_loading: {
+        id: "T1620",
         translations: { ru: "Отраженная загрузка кода (T1620)", en: "Reflective Code Loading (T1620)" },
         values: [4, 0]
       },
       rogue_domain_controller: {
+        id: "T1207",
         translations: { ru: "Поддельный контроллер домена (T1207)", en: "Rogue Domain Controller (T1207)" },
         values: [48, 0]
       },
       rootkit: {
+        id: "T1014",
         translations: { ru: "Руткит (T1014)", en: "Rootkit (T1014)" },
         values: [120, 0]
       },
       selective_exclusion: {
+        id: "T1679",
         translations: { ru: "Избирательное исключение (T1679)", en: "Selective Exclusion (T1679)" },
         values: [0, 45]
       },
       subvert_trust_controls: {
+        id: "T1553",
         translations: { ru: "Нарушение работы средств контроля доверия (T1553)", en: "Subvert Trust Controls (T1553)" },
         values: [48, 0]
       },
       system_binary_proxy_execution: {
+        id: "T1218",
         translations: { ru: "Выполнение с помощью системных бинарных файлов (T1218)", en: "System Binary Proxy Execution (T1218)" },
         values: [4, 0]
       },
       system_script_proxy_execution: {
+        id: "T1216",
         translations: { ru: "Выполнение через системный сценарий (T1216)", en: "System Script Proxy Execution (T1216)" },
         values: [4, 0]
       },
       template_injection: {
+        id: "T1221",
         translations: { ru: "Внедрение в шаблоны (T1221)", en: "Template Injection (T1221)" },
         values: [4, 0]
       },
       trusted_developer_utils_proxy: {
+        id: "T1127",
         translations: { ru: "Выполнение через доверенные утилиты разработчика (T1127)", en: "Trusted Developer Utilities Proxy Execution (T1127)" },
         values: [4, 0]
       },
       unused_unsupported_cloud_regions: {
+        id: "T1535",
         translations: { ru: "Облачные инфраструктуры в редко используемых регионах (T1535)", en: "Unused/Unsupported Cloud Regions (T1535)" },
         values: [4, 0]
       },
       use_alternate_authentication_material: {
+        id: "T1550",
         translations: { ru: "Использование альтернативных сущностей для аутентификации (T1550)", en: "Use Alternate Authentication Material (T1550)" },
         values: [1, 0]
       },
       virtualization_sandbox_evasion: {
+        id: "T1497",
         translations: { ru: "Обход виртуализации или песочницы (T1497)", en: "Virtualization/Sandbox Evasion (T1497)" },
         values: [48, 0]
       },
       weaken_encryption: {
+        id: "T1600",
         translations: { ru: "Понижение надежности шифрования (T1600)", en: "Weaken Encryption (T1600)" },
         values: [48, 0]
       },
       xsl_script_processing: {
+        id: "T1220",
         translations: { ru: "Использование сценариев XSL (T1220)", en: "XSL Script Processing (T1220)" },
         values: [4, 0]
       },
       adversary_in_the_middle: {
+        id: "T1557",
         translations: { ru: "Злоумышленник посередине (T1557)", en: "Adversary-in-the-Middle (T1557)" },
         values: [4, 0]
       },
       brute_force: {
+        id: "T1110",
         translations: { ru: "Метод перебора (T1110)", en: "Brute Force (T1110)" },
         values: [24, 0]
       },
       credentials_from_password_stores: {
+        id: "T1555",
         translations: { ru: "Учетные данные из хранилищ паролей (T1555)", en: "Credentials from Password Stores (T1555)" },
         values: [1, 0]
       },
       exploitation_for_credential_access: {
+        id: "T1212",
         translations: { ru: "Эксплуатация уязвимостей для получения учетных данных (T1212)", en: "Exploitation for Credential Access (T1212)" },
         values: [24, 0]
       },
       forced_authentication: {
+        id: "T1187",
         translations: { ru: "Принудительная аутентификация (T1187)", en: "Forced Authentication (T1187)" },
         values: [2, 0]
       },
       forge_web_credentials: {
+        id: "T1606",
         translations: { ru: "Подделка учетных данных для веб ресурсов (T1606)", en: "Forge Web Credentials (T1606)" },
         values: [2, 0]
       },
       input_capture: {
+        id: "T1056",
         translations: { ru: "Перехват вводимых данных (T1056)", en: "Input Capture (T1056)" },
         values: [4, 0]
       },
       mfa_interception: {
-        translations: { ru: "Перехват многофакторной аутентификации (T1111)", en: "Multi‑Factor Authentication Interception (T1111)" },
+        id: "T1111",
+        translations: { ru: "Перехват многофакторной аутентификации (T1111)", en: "Multi-Factor Authentication Interception (T1111)" },
         values: [48, 0]
       },
       mfa_request_generation: {
-        translations: { ru: "Генерирование запросов многофакторной аутентификации (T1621)", en: "Multi‑Factor Authentication Request Generation (T1621)" },
+        id: "T1621",
+        translations: { ru: "Генерирование запросов многофакторной аутентификации (T1621)", en: "Multi-Factor Authentication Request Generation (T1621)" },
         values: [48, 0]
       },
       network_sniffing: {
+        id: "T1040",
         translations: { ru: "Прослушивание сетевого трафика (T1040)", en: "Network Sniffing (T1040)" },
         values: [4, 0]
       },
       os_credential_dumping: {
+        id: "T1003",
         translations: { ru: "Получение дампа учетных данных (T1003)", en: "OS Credential Dumping (T1003)" },
         values: [4, 0]
       },
       steal_application_access_tokens: {
-        translations: { ru: "Кража токена доступа к приложению (T1528)", en: "Steal Application Access Tokens (T1528)" },
+        id: "T1528",
+        translations: { ru: "Кража токена доступа к приложению (T1528)", en: "Steal Application Access Token (T1528)" },
         values: [2, 0]
       },
       steal_web_session_cookie: {
+        id: "T1539",
         translations: { ru: "Кража сессионных куки (T1539)", en: "Steal Web Session Cookie (T1539)" },
         values: [2, 0]
       },
       steal_or_forge_auth_certificates: {
+        id: "T1649",
         translations: { ru: "Кража или подделка сертификатов аутентификации (T1649)", en: "Steal or Forge Authentication Certificates (T1649)" },
         values: [48, 0]
       },
       steal_or_forge_kerberos_tickets: {
+        id: "T1558",
         translations: { ru: "Кража или подделка билетов Kerberos (T1558)", en: "Steal or Forge Kerberos Tickets (T1558)" },
         values: [48, 0]
       },
       unsecured_credentials: {
+        id: "T1552",
         translations: { ru: "Незащищенные учетные данные (T1552)", en: "Unsecured Credentials (T1552)" },
         values: [2, 0]
       },
       account_discovery: {
+        id: "T1087",
         translations: { ru: "Изучение учетных записей (T1087)", en: "Account Discovery (T1087)" },
         values: [1, 0]
       },
       application_window_discovery: {
+        id: "T1010",
         translations: { ru: "Изучение открытых приложений (T1010)", en: "Application Window Discovery (T1010)" },
         values: [1, 0]
       },
       browser_information_discovery: {
+        id: "T1217",
         translations: { ru: "Изучение браузера (T1217)", en: "Browser Information Discovery (T1217)" },
         values: [1, 0]
       },
       cloud_infrastructure_discovery: {
+        id: "T1580",
         translations: { ru: "Изучение облачной инфраструктуры (T1580)", en: "Cloud Infrastructure Discovery (T1580)" },
         values: [2, 0]
       },
       cloud_service_dashboard: {
+        id: "T1538",
         translations: { ru: "Дашборд облачного сервиса (T1538)", en: "Cloud Service Dashboard (T1538)" },
         values: [2, 0]
       },
       cloud_service_discovery: {
+        id: "T1526",
         translations: { ru: "Изучение облачных служб (T1526)", en: "Cloud Service Discovery (T1526)" },
         values: [2, 0]
       },
       cloud_storage_object_discovery: {
+        id: "T1619",
         translations: { ru: "Обнаружение объектов облачного хранилища (T1619)", en: "Cloud Storage Object Discovery (T1619)" },
         values: [2, 0]
       },
       container_and_resource_discovery: {
+        id: "T1613",
         translations: { ru: "Изучение контейнеров и их ресурсов (T1613)", en: "Container and Resource Discovery (T1613)" },
         values: [2, 0]
       },
       device_driver_discovery: {
+        id: "T1652",
         translations: { ru: "Изучение драйверов устройств (T1652)", en: "Device Driver Discovery (T1652)" },
         values: [2, 0]
       },
       domain_trust_discovery: {
+        id: "T1482",
         translations: { ru: "Изучение доверительных отношений между доменами (T1482)", en: "Domain Trust Discovery (T1482)" },
         values: [4, 0]
       },
       file_and_directory_discovery: {
+        id: "T1083",
         translations: { ru: "Изучение файлов и каталогов (T1083)", en: "File and Directory Discovery (T1083)" },
         values: [4, 0]
       },
       group_policy_discovery: {
+        id: "T1615",
         translations: { ru: "Изучение групповой политики (T1615)", en: "Group Policy Discovery (T1615)" },
         values: [4, 0]
       },
       local_storage_discovery: {
+        id: "T1680",
         translations: { ru: "Исследование локального хранилища (T1680)", en: "Local Storage Discovery (T1680)" },
         values: [1, 30]
       },
       log_enumeration: {
+        id: "T1654",
         translations: { ru: "Сбор журналов (T1654)", en: "Log Enumeration (T1654)" },
         values: [4, 0]
       },
       network_service_discovery: {
+        id: "T1046",
         translations: { ru: "Изучение сетевых служб (T1046)", en: "Network Service Discovery (T1046)" },
         values: [4, 0]
       },
       network_share_discovery: {
+        id: "T1135",
         translations: { ru: "Изучение общих сетевых ресурсов (T1135)", en: "Network Share Discovery (T1135)" },
         values: [2, 0]
       },
       password_policy_discovery: {
+        id: "T1201",
         translations: { ru: "Изучение парольной политики (T1201)", en: "Password Policy Discovery (T1201)" },
         values: [2, 0]
       },
       peripheral_device_discovery: {
+        id: "T1120",
         translations: { ru: "Изучение периферийных устройств (T1120)", en: "Peripheral Device Discovery (T1120)" },
         values: [2, 0]
       },
       permission_groups_discovery: {
+        id: "T1069",
         translations: { ru: "Изучение групп разрешений (T1069)", en: "Permission Groups Discovery (T1069)" },
         values: [4, 0]
       },
       process_discovery: {
+        id: "T1057",
         translations: { ru: "Изучение процессов (T1057)", en: "Process Discovery (T1057)" },
         values: [2, 0]
       },
       query_registry: {
+        id: "T1012",
         translations: { ru: "Запросы к реестру (T1012)", en: "Query Registry (T1012)" },
         values: [1, 0]
       },
       remote_system_discovery: {
+        id: "T1018",
         translations: { ru: "Изучение удаленных систем (T1018)", en: "Remote System Discovery (T1018)" },
         values: [2, 0]
       },
       software_discovery: {
+        id: "T1518",
         translations: { ru: "Изучение установленного ПО (T1518)", en: "Software Discovery (T1518)" },
         values: [4, 0]
       },
       system_information_discovery: {
+        id: "T1082",
         translations: { ru: "Изучение системы (T1082)", en: "System Information Discovery (T1082)" },
         values: [2, 0]
       },
       system_location_discovery: {
+        id: "T1614",
         translations: { ru: "Изучение местоположения системы (T1614)", en: "System Location Discovery (T1614)" },
         values: [2, 0]
       },
       system_network_configuration_discovery: {
+        id: "T1016",
         translations: { ru: "Изучение конфигурации сети (T1016)", en: "System Network Configuration Discovery (T1016)" },
         values: [4, 0]
       },
       system_network_connections_discovery: {
+        id: "T1049",
         translations: { ru: "Изучение сетевых подключений (T1049)", en: "System Network Connections Discovery (T1049)" },
         values: [4, 0]
       },
       system_owner_user_discovery: {
+        id: "T1033",
         translations: { ru: "Изучение владельца или пользователей системы (T1033)", en: "System Owner/User Discovery (T1033)" },
         values: [2, 0]
       },
       system_service_discovery: {
+        id: "T1007",
         translations: { ru: "Изучение системных служб (T1007)", en: "System Service Discovery (T1007)" },
         values: [2, 0]
       },
       system_time_discovery: {
+        id: "T1124",
         translations: { ru: "Изучение системного времени (T1124)", en: "System Time Discovery (T1124)" },
         values: [1, 0]
       },
       exploration_of_remote_services: {
+        id: "T1210",
         translations: { ru: "Эксплуатация уязвимостей в удаленных службах (T1210)", en: "Exploitation of Remote Services (T1210)" },
         values: [24, 0]
       },
       internal_spearphishing: {
+        id: "T1534",
         translations: { ru: "Внутренний целевой фишинг (T1534)", en: "Internal Spearphishing (T1534)" },
         values: [48, 0]
       },
       lateral_tool_transfer: {
+        id: "T1570",
         translations: { ru: "Передача инструментов внутри периметра (T1570)", en: "Lateral Tool Transfer (T1570)" },
         values: [4, 0]
       },
       remote_service_session_hijacking: {
+        id: "T1563",
         translations: { ru: "Перехват сессии службы удаленного доступа (T1563)", en: "Remote Service Session Hijacking (T1563)" },
         values: [24, 0]
       },
       remote_services: {
+        id: "T1021",
         translations: { ru: "Службы удаленного доступа (T1021)", en: "Remote Services (T1021)" },
         values: [0, 30]
       },
       taint_shared_content: {
+        id: "T1080",
         translations: { ru: "Заражение общего содержимого (T1080)", en: "Taint Shared Content (T1080)" },
         values: [4, 0]
       },
       archive_collected_data: {
+        id: "T1560",
         translations: { ru: "Архивация собранных данных (T1560)", en: "Archive Collected Data (T1560)" },
         values: [2, 0]
       },
       audio_capture: {
+        id: "T1123",
         translations: { ru: "Захват аудиоданных (T1123)", en: "Audio Capture (T1123)" },
         values: [2, 0]
       },
       automated_collection: {
+        id: "T1119",
         translations: { ru: "Автоматизированный сбор данных (T1119)", en: "Automated Collection (T1119)" },
         values: [4, 0]
       },
       browser_session_hijacking: {
+        id: "T1185",
         translations: { ru: "Перехват сессии браузера (T1185)", en: "Browser Session Hijacking (T1185)" },
         values: [4, 0]
       },
       clipboard_data: {
+        id: "T1115",
         translations: { ru: "Данные из буфера обмена (T1115)", en: "Clipboard Data (T1115)" },
         values: [1, 0]
       },
       data_staged: {
+        id: "T1074",
         translations: { ru: "Промежуточное хранение данных (T1074)", en: "Data Staged (T1074)" },
         values: [2, 0]
       },
       data_from_cloud_storage: {
+        id: "T1530",
         translations: { ru: "Данные из облачных хранилищ (T1530)", en: "Data from Cloud Storage (T1530)" },
         values: [4, 0]
       },
       data_from_configuration_repository: {
+        id: "T1602",
         translations: { ru: "Данные из репозитория конфигураций (T1602)", en: "Data from Configuration Repository (T1602)" },
         values: [4, 0]
       },
       data_from_information_repositories: {
+        id: "T1213",
         translations: { ru: "Данные из информационных репозиториев (T1213)", en: "Data from Information Repositories (T1213)" },
         values: [4, 0]
       },
       data_from_local_system: {
+        id: "T1005",
         translations: { ru: "Данные из локальной системы (T1005)", en: "Data from Local System (T1005)" },
         values: [2, 0]
       },
       data_from_removable_media: {
+        id: "T1025",
         translations: { ru: "Данные со съемных носителей (T1025)", en: "Data from Removable Media (T1025)" },
         values: [2, 0]
       },
       email_collection: {
+        id: "T1114",
         translations: { ru: "Сбор электронной почты (T1114)", en: "Email Collection (T1114)" },
         values: [4, 0]
       },
       screen_capture: {
+        id: "T1113",
         translations: { ru: "Захват экрана (T1113)", en: "Screen Capture (T1113)" },
         values: [2, 0]
       },
       video_capture: {
+        id: "T1125",
         translations: { ru: "Захват видеоданных (T1125)", en: "Video Capture (T1125)" },
         values: [4, 0]
       },
       application_layer_protocol: {
+        id: "T1071",
         translations: { ru: "Протокол прикладного уровня (T1071)", en: "Application Layer Protocol (T1071)" },
         values: [2, 0]
       },
       communication_through_removable_media: {
+        id: "T1092",
         translations: { ru: "Взаимодействие через съемные носители (T1092)", en: "Communication Through Removable Media (T1092)" },
         values: [4, 0]
       },
       data_encoding: {
+        id: "T1132",
         translations: { ru: "Кодирование данных (T1132)", en: "Data Encoding (T1132)" },
         values: [1, 0]
       },
       data_obfuscation: {
+        id: "T1001",
         translations: { ru: "Обфускация данных (T1001)", en: "Data Obfuscation (T1001)" },
         values: [1, 0]
       },
       dynamic_resolution: {
+        id: "T1568",
         translations: { ru: "Динамическое разрешение (T1568)", en: "Dynamic Resolution (T1568)" },
         values: [4, 0]
       },
       encrypted_channel: {
+        id: "T1573",
         translations: { ru: "Зашифрованный канал (T1573)", en: "Encrypted Channel (T1573)" },
         values: [2, 0]
       },
       fallback_channels: {
+        id: "T1008",
         translations: { ru: "Резервные каналы (T1008)", en: "Fallback Channels (T1008)" },
         values: [4, 0]
       },
       hide_infrastructure: {
+        id: "T1665",
         translations: { ru: "Сокрытие инфраструктуры (T1665)", en: "Hide Infrastructure (T1665)" },
         values: [4, 0]
       },
       ingress_tool_transfer: {
+        id: "T1105",
         translations: { ru: "Передача инструментов из внешней сети (T1105)", en: "Ingress Tool Transfer (T1105)" },
         values: [2, 0]
       },
       multi_stage_channels: {
-        translations: { ru: "Отдельный канал для каждого этапа (T1104)", en: "Multi‑Stage Channels (T1104)" },
+        id: "T1104",
+        translations: { ru: "Отдельный канал для каждого этапа (T1104)", en: "Multi-Stage Channels (T1104)" },
         values: [4, 0]
       },
       non_app_layer_protocol: {
-        translations: { ru: "Протоколы (кроме прикладного уровня) (T1095)", en: "Non‑Application Layer Protocol (T1095)" },
+        id: "T1095",
+        translations: { ru: "Протоколы (кроме прикладного уровня) (T1095)", en: "Non-Application Layer Protocol (T1095)" },
         values: [4, 0]
       },
       non_standard_port: {
-        translations: { ru: "Нестандартный порт (T1571)", en: "Non‑Standard Port (T1571)" },
+        id: "T1571",
+        translations: { ru: "Нестандартный порт (T1571)", en: "Non-Standard Port (T1571)" },
         values: [4, 0]
       },
       protocol_tunneling: {
+        id: "T1572",
         translations: { ru: "Туннелирование протокола (T1572)", en: "Protocol Tunneling (T1572)" },
         values: [4, 0]
       },
       proxy: {
+        id: "T1090",
         translations: { ru: "Прокси‑сервер (T1090)", en: "Proxy (T1090)" },
         values: [4, 0]
       },
       remote_access_software: {
-        translations: { ru: "ПО для удаленного доступа (T1219)", en: "Remote Access Software (T1219)" },
+        id: "T1219",
+        translations: { ru: "Инструменты удалённого доступа (T1219)", en: "Remote Access Tools (T1219)" },
         values: [4, 0]
       },
       web_service: {
+        id: "T1102",
         translations: { ru: "Веб‑служба (T1102)", en: "Web Service (T1102)" },
         values: [4, 0]
       },
       automated_exfiltration: {
+        id: "T1020",
         translations: { ru: "Автоматизированная эксфильтрация (T1020)", en: "Automated Exfiltration (T1020)" },
         values: [2, 0]
       },
       data_transfer_size_limits: {
+        id: "T1030",
         translations: { ru: "Ограничение размера передаваемых блоков данных (T1030)", en: "Data Transfer Size Limits (T1030)" },
         values: [1, 0]
       },
       exfil_over_alt_protocol: {
+        id: "T1048",
         translations: { ru: "Эксфильтрация по альтернативному протоколу (T1048)", en: "Exfiltration Over Alternative Protocol (T1048)" },
         values: [2, 0]
       },
       exfil_over_c2_channel: {
+        id: "T1041",
         translations: { ru: "Эксфильтрация по каналу управления (T1041)", en: "Exfiltration Over C2 Channel (T1041)" },
         values: [1, 0]
       },
       exfil_over_other_network: {
+        id: "T1011",
         translations: { ru: "Эксфильтрация через альтернативную сетевую среду (T1011)", en: "Exfiltration Over Other Network Medium (T1011)" },
         values: [4, 0]
       },
       exfil_over_physical_medium: {
+        id: "T1052",
         translations: { ru: "Эксфильтрация через альтернативную физическую среду (T1052)", en: "Exfiltration Over Physical Medium (T1052)" },
         values: [2, 0]
       },
       exfil_over_web_service: {
+        id: "T1567",
         translations: { ru: "Эксфильтрация через веб‑службу (T1567)", en: "Exfiltration Over Web Service (T1567)" },
         values: [2, 0]
       },
       scheduled_transfer: {
+        id: "T1029",
         translations: { ru: "Передача по расписанию (T1029)", en: "Scheduled Transfer (T1029)" },
         values: [2, 0]
       },
       transfer_data_to_cloud_account: {
+        id: "T1537",
         translations: { ru: "Перемещение данных между облачными учетными записями (T1537)", en: "Transfer Data to Cloud Account (T1537)" },
         values: [2, 0]
       },
       account_access_removal: {
+        id: "T1531",
         translations: { ru: "Прекращение доступа к учетной записи (T1531)", en: "Account Access Removal (T1531)" },
         values: [2, 0]
       },
       data_destruction: {
+        id: "T1485",
         translations: { ru: "Уничтожение данных (T1485)", en: "Data Destruction (T1485)" },
         values: [4, 0]
       },
       data_encrypted_for_impact: {
+        id: "T1486",
         translations: { ru: "Шифрование данных (T1486)", en: "Data Encrypted for Impact (T1486)" },
         values: [4, 0]
       },
       data_manipulation: {
+        id: "T1565",
         translations: { ru: "Манипуляция с данными (T1565)", en: "Data Manipulation (T1565)" },
         values: [4, 0]
       },
       defacement: {
+        id: "T1491",
         translations: { ru: "Дефейс (T1491)", en: "Defacement (T1491)" },
         values: [4, 0]
       },
       disk_wipe: {
+        id: "T1561",
         translations: { ru: "Уничтожение диска (T1561)", en: "Disk Wipe (T1561)" },
         values: [24, 0]
       },
       endpoint_denial_of_service: {
+        id: "T1499",
         translations: { ru: "Точечный отказ в обслуживании (T1499)", en: "Endpoint Denial of Service (T1499)" },
         values: [4, 0]
       },
       financial_theft: {
+        id: "T1657",
         translations: { ru: "Кража денежных средств (T1657)", en: "Financial Theft (T1657)" },
         values: [24, 0]
       },
       firmware_corruption: {
+        id: "T1495",
         translations: { ru: "Повреждение прошивки (T1495)", en: "Firmware Corruption (T1495)" },
         values: [48, 0]
       },
       inhibit_system_recovery: {
+        id: "T1490",
         translations: { ru: "Препятствование восстановлению системы (T1490)", en: "Inhibit System Recovery (T1490)" },
         values: [48, 0]
       },
       network_denial_of_service: {
+        id: "T1498",
         translations: { ru: "Сетевой отказ в обслуживании (T1498)", en: "Network Denial of Service (T1498)" },
         values: [24, 0]
       },
       resource_hijacking: {
+        id: "T1496",
         translations: { ru: "Несанкционированное использование ресурсов (T1496)", en: "Resource Hijacking (T1496)" },
         values: [4, 0]
       },
       service_stop: {
+        id: "T1489",
         translations: { ru: "Остановка службы (T1489)", en: "Service Stop (T1489)" },
         values: [1, 0]
       },
       system_shutdown_reboot: {
+        id: "T1529",
         translations: { ru: "Завершение работы или перезагрузка системы (T1529)", en: "System Shutdown/Reboot (T1529)" },
         values: [1, 0]
       },
       esxi_administration_command: {
+        id: "T1675",
         translations: { ru: "Команды администрирования ESXi (T1675)", en: "ESXi Administration Command (T1675)" },
         values: [0, 5]
       },
       input_injection: {
+        id: "T1674",
         translations: { ru: "Имитация ввода данных (T1674)", en: "Input Injection (T1674)" },
         values: [1, 0]
       },
       cloud_application_integration: {
+        id: "T1671",
         translations: { ru: "Интеграция облачных приложений (T1671)", en: "Cloud Application Integration (T1671)" },
         values: [4, 0]
       },
       exclusive_control: {
+        id: "T1668",
         translations: { ru: "Исключительный контроль (T1668)", en: "Exclusive Control (T1668)" },
         values: [2, 0]
       },
       virtual_machine_discovery: {
+        id: "T1673",
         translations: { ru: "Изучение виртуальной машины (T1673)", en: "Virtual Machine Discovery (T1673)" },
         values: [2, 0]
       },
       email_bombing: {
+        id: "T1667",
         translations: { ru: "Email Bombing (T1667)", en: "Email Bombing (T1667)" },
         values: [4, 0]
       },
       query_public_ai_services: {
+        id: "T1682",
         translations: { ru: "Запросы к публичным ИИ-сервисам (T1682)", en: "Query Public AI Services (T1682)" },
         values: [1, 0]
       },
       generate_content: {
+        id: "T1683",
         translations: { ru: "Генерация контента (T1683)", en: "Generate Content (T1683)" },
         values: [3, 0]
       },
       social_engineering: {
+        id: "T1684",
         translations: { ru: "Социальная инженерия (T1684)", en: "Social Engineering (T1684)" },
         values: [4, 0]
       },
       disable_or_modify_tools: {
+        id: "T1685",
         translations: { ru: "Отключение или модификация средств защиты (T1685)", en: "Disable or Modify Tools (T1685)" },
         values: [4, 0]
       },
       disable_or_modify_system_firewall: {
+        id: "T1686",
         translations: { ru: "Отключение или модификация системного межсетевого экрана (T1686)", en: "Disable or Modify System Firewall (T1686)" },
         values: [1, 30]
       },
       exploitation_for_defense_impairment: {
+        id: "T1687",
         translations: { ru: "Эксплуатация для нарушения защиты (T1687)", en: "Exploitation for Defense Impairment (T1687)" },
         values: [6, 0]
       },
       safe_mode_boot: {
+        id: "T1688",
         translations: { ru: "Загрузка в безопасном режиме (T1688)", en: "Safe Mode Boot (T1688)" },
         values: [3, 0]
       },
       downgrade_attack: {
+        id: "T1689",
         translations: { ru: "Атака понижения версии (T1689)", en: "Downgrade Attack (T1689)" },
         values: [4, 0]
       },
       prevent_command_history_logging: {
+        id: "T1690",
         translations: { ru: "Отключение журналирования команд (T1690)", en: "Prevent Command History Logging (T1690)" },
         values: [0, 30]
+      },
+      data_from_network_shared_drive: {
+        id: "T1039",
+        translations: { ru: "Данные с общих сетевых ресурсов (T1039)", en: "Data from Network Shared Drive (T1039)" },
+        values: [2, 0]
+      },
+      modify_cloud_compute_infrastructure: {
+        id: "T1578",
+        translations: { ru: "Изменение облачной вычислительной инфраструктуры (T1578)", en: "Modify Cloud Compute Infrastructure (T1578)" },
+        values: [4, 0]
+      },
+      wifi_networks: {
+        id: "T1669",
+        translations: { ru: "Сети Wi-Fi (T1669)", en: "Wi-Fi Networks (T1669)" },
+        values: [4, 0]
+      },
+      anti_automation_evasion: {
+        id: "T1696",
+        translations: { ru: "Обход проверок на автоматизацию (T1696)", en: "Anti-Automation Evasion (T1696)" },
+        values: [4, 0]
+      },
+      steal_application_specific_passwords: {
+        id: "T1697",
+        translations: { ru: "Кража паролей приложений (T1697)", en: "Steal Application Specific Passwords (T1697)" },
+        values: [2, 0]
+      },
+      indirect_prompt_injection: {
+        id: "T1698",
+        translations: { ru: "Косвенная промпт-инъекция (T1698)", en: "Indirect Prompt Injection (T1698)" },
+        values: [4, 0]
+      },
+      direct_prompt_injection: {
+        id: "T1699",
+        translations: { ru: "Прямая промпт-инъекция (T1699)", en: "Direct Prompt Injection (T1699)" },
+        values: [2, 0]
+      },
+      ai_enabled_exfiltration: {
+        id: "T1700",
+        translations: { ru: "Эксфильтрация с использованием ИИ (T1700)", en: "AI-Enabled Exfiltration (T1700)" },
+        values: [2, 0]
       }
     };
 
@@ -1569,342 +1828,358 @@
       reconnaissance: {
         translations: { ru: "Разведка", en: "Reconnaissance" },
         techniques: [
-          { ru: "Активное сканирование (T1595)", en: "Active Scanning (T1595)" },
-          { ru: "Сбор информации об атакуемых узлах (T1592)", en: "Gather Victim Host Information (T1592)" },
-          { ru: "Сбор информации об атакуемых пользователях (T1589)", en: "Gather Victim Identity Information (T1589)" },
-          { ru: "Сбор информации об атакуемой сетевой инфраструктуре (T1590)", en: "Gather Victim Network Information (T1590)" },
-          { ru: "Сбор бизнес-информации об атакуемой организации (T1591)", en: "Gather Victim Org Information (T1591)" },
-          { ru: "Фишинг с целью сбора сведений (T1598)", en: "Phishing for Information (T1598)" },
-          { ru: "Запросы к публичным ИИ-сервисам (T1682)", en: "Query Public AI Services (T1682)" },
-          { ru: "Поиск в закрытых источниках (T1597)", en: "Search Closed Sources (T1597)" },
-          { ru: "Поиск технической информации в общедоступных источниках (T1596)", en: "Search Open Technical Databases (T1596)" },
-          { ru: "Поиск на общедоступных сайтах (T1593)", en: "Search Open Websites/Domains (T1593)" },
-          { ru: "Поиск данных TI-вендоров (T1681)", en: "Search Threat Vendor Data (T1681)" },
-          { ru: "Поиск на сайтах атакуемой организации (T1594)", en: "Search Victim-Owned Websites (T1594)" }
+          { id: "T1595", ru: "Активное сканирование (T1595)", en: "Active Scanning (T1595)" },
+          { id: "T1592", ru: "Сбор информации об атакуемых узлах (T1592)", en: "Gather Victim Host Information (T1592)" },
+          { id: "T1589", ru: "Сбор информации об атакуемых пользователях (T1589)", en: "Gather Victim Identity Information (T1589)" },
+          { id: "T1590", ru: "Сбор информации об атакуемой сетевой инфраструктуре (T1590)", en: "Gather Victim Network Information (T1590)" },
+          { id: "T1591", ru: "Сбор бизнес-информации об атакуемой организации (T1591)", en: "Gather Victim Org Information (T1591)" },
+          { id: "T1598", ru: "Фишинг с целью сбора сведений (T1598)", en: "Phishing for Information (T1598)" },
+          { id: "T1682", ru: "Запросы к публичным ИИ-сервисам (T1682)", en: "Query Public AI Services (T1682)" },
+          { id: "T1597", ru: "Поиск в закрытых источниках (T1597)", en: "Search Closed Sources (T1597)" },
+          { id: "T1596", ru: "Поиск технической информации в общедоступных источниках (T1596)", en: "Search Open Technical Databases (T1596)" },
+          { id: "T1593", ru: "Поиск на общедоступных сайтах (T1593)", en: "Search Open Websites/Domains (T1593)" },
+          { id: "T1681", ru: "Поиск данных TI-вендоров (T1681)", en: "Search Threat Vendor Data (T1681)" },
+          { id: "T1594", ru: "Поиск на сайтах атакуемой организации (T1594)", en: "Search Victim-Owned Websites (T1594)" }
         ]
       },
       resource_preparation: {
         translations: { ru: "Подготовка ресурсов", en: "Resource Development" },
         techniques: [
-          { ru: "Приобретение доступа (T1650)", en: "Acquire Access (T1650)" },
-          { ru: "Приобретение инфраструктуры (T1583)", en: "Acquire Infrastructure (T1583)" },
-          { ru: "Компрометация учетных записей (T1586)", en: "Compromise Accounts (T1586)" },
-          { ru: "Компрометация сторонней инфраструктуры (T1584)", en: "Compromise Infrastructure (T1584)" },
-          { ru: "Разработка собственных средств (T1587)", en: "Develop Capabilities (T1587)" },
-          { ru: "Создание учетных записей (T1585)", en: "Establish Accounts (T1585)" },
-          { ru: "Генерация контента (T1683)", en: "Generate Content (T1683)" },
-          { ru: "Подготовка необходимых средств (T1588)", en: "Obtain Capabilities (T1588)" },
-          { ru: "Размещение средств (T1608)", en: "Stage Capabilities (T1608)" }
+          { id: "T1650", ru: "Приобретение доступа (T1650)", en: "Acquire Access (T1650)" },
+          { id: "T1583", ru: "Приобретение инфраструктуры (T1583)", en: "Acquire Infrastructure (T1583)" },
+          { id: "T1586", ru: "Компрометация учетных записей (T1586)", en: "Compromise Accounts (T1586)" },
+          { id: "T1584", ru: "Компрометация сторонней инфраструктуры (T1584)", en: "Compromise Infrastructure (T1584)" },
+          { id: "T1587", ru: "Разработка собственных средств (T1587)", en: "Develop Capabilities (T1587)" },
+          { id: "T1585", ru: "Создание учетных записей (T1585)", en: "Establish Accounts (T1585)" },
+          { id: "T1683", ru: "Генерация контента (T1683)", en: "Generate Content (T1683)" },
+          { id: "T1588", ru: "Подготовка необходимых средств (T1588)", en: "Obtain Capabilities (T1588)" },
+          { id: "T1608", ru: "Размещение средств (T1608)", en: "Stage Capabilities (T1608)" }
         ]
       },
       initial_access: {
         translations: { ru: "Первоначальный доступ", en: "Initial Access" },
         techniques: [
-          { ru: "Внедрение контента (T1659)", en: "Content Injection (T1659)" },
-          { ru: "Теневая (drive-by) компрометация (T1189)", en: "Drive-by Compromise (T1189)" },
-          { ru: "Недостатки в общедоступном приложении (T1190)", en: "Exploit Public-Facing Application (T1190)" },
-          { ru: "Внешние службы удаленного доступа (T1133)", en: "External Remote Services (T1133)" },
-          { ru: "Подключение дополнительных устройств (T1200)", en: "Hardware Additions (T1200)" },
-          { ru: "Фишинг (T1566)", en: "Phishing (T1566)" },
-          { ru: "Распространение через съемные носители (T1091)", en: "Replication Through Removable Media (T1091)" },
-          { ru: "Компрометация цепочки поставок (T1195)", en: "Supply Chain Compromise (T1195)" },
-          { ru: "Доверительные отношения (T1199)", en: "Trusted Relationships (T1199)" },
-          { ru: "Существующие учетные записи (T1078)", en: "Valid Accounts (T1078)" }
+          { id: "T1669", ru: "Сети Wi-Fi (T1669)", en: "Wi-Fi Networks (T1669)" },
+          { id: "T1659", ru: "Внедрение контента (T1659)", en: "Content Injection (T1659)" },
+          { id: "T1189", ru: "Теневая (drive-by) компрометация (T1189)", en: "Drive-by Compromise (T1189)" },
+          { id: "T1190", ru: "Недостатки в общедоступном приложении (T1190)", en: "Exploit Public-Facing Application (T1190)" },
+          { id: "T1133", ru: "Внешние службы удаленного доступа (T1133)", en: "External Remote Services (T1133)" },
+          { id: "T1200", ru: "Подключение дополнительных устройств (T1200)", en: "Hardware Additions (T1200)" },
+          { id: "T1566", ru: "Фишинг (T1566)", en: "Phishing (T1566)" },
+          { id: "T1091", ru: "Распространение через съемные носители (T1091)", en: "Replication Through Removable Media (T1091)" },
+          { id: "T1195", ru: "Компрометация цепочки поставок (T1195)", en: "Supply Chain Compromise (T1195)" },
+          { id: "T1199", ru: "Доверительные отношения (T1199)", en: "Trusted Relationship (T1199)" },
+          { id: "T1078", ru: "Существующие учетные записи (T1078)", en: "Valid Accounts (T1078)" }
         ]
       },
 
       execution: {
         translations: { ru: "Выполнение", en: "Execution" },
         techniques: [
-          { ru: "Задания BITS (T1197)", en: "BITS Jobs (T1197)" },
-          { ru: "Средства администрирования облака (T1651)", en: "Cloud Administration Command (T1651)" },
-          { ru: "Интерпретаторы командной строки и сценариев (T1059)", en: "Command and Scripting Interpreter (T1059)" },
-          { ru: "Средства администрирования контейнера (T1609)", en: "Container Administration Command (T1609)" },
-          { ru: "Развертывание контейнера (T1610)", en: "Deploy Container (T1610)" },
-          { ru: "Команды администрирования ESXi (T1675)", en: "ESXi Administration Command (T1675)" },
-          { ru: "Эксплуатация уязвимостей в клиентском ПО (T1203)", en: "Exploitation for Client Execution (T1203)" },
-          { ru: "Перехват потока исполнения (T1574)", en: "Hijack Execution Flow (T1574)" },
-          { ru: "Имитация ввода данных (T1674)", en: "Input Injection (T1674)" },
-          { ru: "Межпроцессное взаимодействие (T1559)", en: "Inter-Process Communication (T1559)" },
-          { ru: "Нативный API (T1106)", en: "Native API (T1106)" },
-          { ru: "Манипуляция процессами непрерывной интеграции/разработки (CI/CD) (T1677)", en: "Poisoned Pipeline Execution (T1677)" },
-          { ru: "Запланированная задача (T1053)", en: "Scheduled Task/Job (T1053)" },
-          { ru: "Бессерверное выполнение (T1648)", en: "Serverless Execution (T1648)" },
-          { ru: "Общие модули (T1129)", en: "Shared Modules (T1129)" },
-          { ru: "Средства развертывания ПО (T1072)", en: "Software Deployment Tools (T1072)" },
-          { ru: "Системные службы (T1569)", en: "System Services (T1569)" },
-          { ru: "Выполнение через доверенные утилиты разработчика (T1127)", en: "Trusted Developer Utilities Proxy Execution (T1127)" },
-          { ru: "Выполнение с участием пользователя (T1204)", en: "User Execution (T1204)" },
-          { ru: "Инструментарий управления Windows (T1047)", en: "Windows Management Instrumentation (T1047)" }
+          { id: "T1698", ru: "Косвенная промпт-инъекция (T1698)", en: "Indirect Prompt Injection (T1698)" },
+          { id: "T1699", ru: "Прямая промпт-инъекция (T1699)", en: "Direct Prompt Injection (T1699)" },
+          { id: "T1197", ru: "Задания BITS (T1197)", en: "BITS Jobs (T1197)" },
+          { id: "T1651", ru: "Средства администрирования облака (T1651)", en: "Cloud Administration Command (T1651)" },
+          { id: "T1059", ru: "Интерпретаторы командной строки и сценариев (T1059)", en: "Command and Scripting Interpreter (T1059)" },
+          { id: "T1609", ru: "Средства администрирования контейнера (T1609)", en: "Container Administration Command (T1609)" },
+          { id: "T1610", ru: "Развертывание контейнера (T1610)", en: "Deploy Container (T1610)" },
+          { id: "T1675", ru: "Команды администрирования ESXi (T1675)", en: "ESXi Administration Command (T1675)" },
+          { id: "T1203", ru: "Эксплуатация уязвимостей в клиентском ПО (T1203)", en: "Exploitation for Client Execution (T1203)" },
+          { id: "T1574", ru: "Перехват потока исполнения (T1574)", en: "Hijack Execution Flow (T1574)" },
+          { id: "T1674", ru: "Имитация ввода данных (T1674)", en: "Input Injection (T1674)" },
+          { id: "T1559", ru: "Межпроцессное взаимодействие (T1559)", en: "Inter-Process Communication (T1559)" },
+          { id: "T1106", ru: "Нативный API (T1106)", en: "Native API (T1106)" },
+          { id: "T1677", ru: "Манипуляция процессами непрерывной интеграции/разработки (CI/CD) (T1677)", en: "Poisoned Pipeline Execution (T1677)" },
+          { id: "T1053", ru: "Запланированная задача (T1053)", en: "Scheduled Task/Job (T1053)" },
+          { id: "T1648", ru: "Бессерверное выполнение (T1648)", en: "Serverless Execution (T1648)" },
+          { id: "T1129", ru: "Общие модули (T1129)", en: "Shared Modules (T1129)" },
+          { id: "T1072", ru: "Средства развертывания ПО (T1072)", en: "Software Deployment Tools (T1072)" },
+          { id: "T1569", ru: "Системные службы (T1569)", en: "System Services (T1569)" },
+          { id: "T1127", ru: "Выполнение через доверенные утилиты разработчика (T1127)", en: "Trusted Developer Utilities Proxy Execution (T1127)" },
+          { id: "T1204", ru: "Выполнение с участием пользователя (T1204)", en: "User Execution (T1204)" },
+          { id: "T1047", ru: "Инструментарий управления Windows (T1047)", en: "Windows Management Instrumentation (T1047)" }
         ]
       },
 
       persistence: {
         translations: { ru: "Закрепление", en: "Persistence" },
         techniques: [
-          { ru: "Манипуляции с учетной записью (T1098)", en: "Account Manipulation (T1098)" },
-          { ru: "Задания BITS (T1197)", en: "BITS Jobs (T1197)" },
-          { ru: "Автозапуск при загрузке или входе в систему (T1547)", en: "Boot or Logon Autostart Execution (T1547)" },
-          { ru: "Сценарии инициализации при загрузке или входе в систему (T1037)", en: "Boot or Logon Initialization Scripts (T1037)" },
-          { ru: "Интеграция облачных приложений (T1671)", en: "Cloud Application Integration (T1671)" },
-          { ru: "Расширения браузеров (T1176)", en: "Browser Extensions (T1176)" },
-          { ru: "Компрометация бинарных файлов ПО узла (T1554)", en: "Compromise Host Software Binary (T1554)" },
-          { ru: "Создание учетной записи (T1136)", en: "Create Account (T1136)" },
-          { ru: "Создание или изменение системных процессов (T1543)", en: "Create or Modify System Process (T1543)" },
-          { ru: "Выполнение по событию (T1546)", en: "Event Triggered Execution (T1546)" },
-          { ru: "Исключительный контроль (T1668)", en: "Exclusive Control (T1668)" },
-          { ru: "Внешние службы удаленного доступа (T1133)", en: "External Remote Services (T1133)" },
-          { ru: "Внедрение кода в образ (T1525)", en: "Implant Internal Image (T1525)" },
-          { ru: "Изменение процесса аутентификации (T1556)", en: "Modify Authentication Process (T1556)" },
-          { ru: "Запуск приложения Office (T1137)", en: "Office Application Startup (T1137)" },
-          { ru: "Настройки питания (T1653)", en: "Power Settings (T1653)" },
-          { ru: "Загрузка раньше ОС (T1542)", en: "Pre-OS Boot (T1542)" },
-          { ru: "Запланированная задача (T1053)", en: "Scheduled Task/Job (T1053)" },
-          { ru: "Компонент серверного ПО (T1505)", en: "Server Software Component (T1505)" },
-          { ru: "Передача управляющих сигналов в трафике (T1205)", en: "Traffic Signaling (T1205)" },
-          { ru: "Существующие учетные записи (T1078)", en: "Valid Accounts (T1078)" }
+          { id: "T1112", ru: "Изменение реестра (T1112)", en: "Modify Registry (T1112)" },
+          { id: "T1098", ru: "Манипуляции с учетной записью (T1098)", en: "Account Manipulation (T1098)" },
+          { id: "T1197", ru: "Задания BITS (T1197)", en: "BITS Jobs (T1197)" },
+          { id: "T1547", ru: "Автозапуск при загрузке или входе в систему (T1547)", en: "Boot or Logon Autostart Execution (T1547)" },
+          { id: "T1037", ru: "Сценарии инициализации при загрузке или входе в систему (T1037)", en: "Boot or Logon Initialization Scripts (T1037)" },
+          { id: "T1671", ru: "Интеграция облачных приложений (T1671)", en: "Cloud Application Integration (T1671)" },
+          { id: "T1176", ru: "Расширения ПО (T1176)", en: "Software Extensions (T1176)" },
+          { id: "T1554", ru: "Компрометация бинарных файлов ПО узла (T1554)", en: "Compromise Host Software Binary (T1554)" },
+          { id: "T1136", ru: "Создание учетной записи (T1136)", en: "Create Account (T1136)" },
+          { id: "T1543", ru: "Создание или изменение системных процессов (T1543)", en: "Create or Modify System Process (T1543)" },
+          { id: "T1546", ru: "Выполнение по событию (T1546)", en: "Event Triggered Execution (T1546)" },
+          { id: "T1668", ru: "Исключительный контроль (T1668)", en: "Exclusive Control (T1668)" },
+          { id: "T1133", ru: "Внешние службы удаленного доступа (T1133)", en: "External Remote Services (T1133)" },
+          { id: "T1525", ru: "Внедрение кода в образ (T1525)", en: "Implant Internal Image (T1525)" },
+          { id: "T1556", ru: "Изменение процесса аутентификации (T1556)", en: "Modify Authentication Process (T1556)" },
+          { id: "T1137", ru: "Запуск приложения Office (T1137)", en: "Office Application Startup (T1137)" },
+          { id: "T1653", ru: "Настройки питания (T1653)", en: "Power Settings (T1653)" },
+          { id: "T1542", ru: "Загрузка раньше ОС (T1542)", en: "Pre-OS Boot (T1542)" },
+          { id: "T1053", ru: "Запланированная задача (T1053)", en: "Scheduled Task/Job (T1053)" },
+          { id: "T1505", ru: "Компонент серверного ПО (T1505)", en: "Server Software Component (T1505)" },
+          { id: "T1205", ru: "Передача управляющих сигналов в трафике (T1205)", en: "Traffic Signaling (T1205)" },
+          { id: "T1078", ru: "Существующие учетные записи (T1078)", en: "Valid Accounts (T1078)" }
         ]
       },
 
       privilege_escalation: {
         translations: { ru: "Повышение привилегий", en: "Privilege Escalation" },
         techniques: [
-          { ru: "Обход механизмов контроля привилегий (T1548)", en: "Abuse Elevation Control Mechanism (T1548)" },
-          { ru: "Манипуляции с токенами доступа (T1134)", en: "Access Token Manipulation (T1134)" },
-          { ru: "Манипуляции с учётной записью (T1098)", en: "Account Manipulation (T1098)" },
-          { ru: "Автозапуск при загрузке или входе в систему (T1547)", en: "Boot or Logon Autostart Execution (T1547)" },
-          { ru: "Сценарии инициализации при загрузке или входе в систему (T1037)", en: "Boot or Logon Initialization Scripts (T1037)" },
-          { ru: "Создание или изменение системных процессов (T1543)", en: "Create or Modify System Process (T1543)" },
-          { ru: "Изменение политики домена или тенанта (T1484)", en: "Domain or Tenant Policy Modification (T1484)" },
-          { ru: "Выход за пределы контейнера (T1611)", en: "Escape to Host (T1611)" },
-          { ru: "Выполнение по событию (T1546)", en: "Event Triggered Execution (T1546)" },
-          { ru: "Эксплуатация уязвимостей для повышения привилегий (T1068)", en: "Exploitation for Privilege Escalation (T1068)" },
-          { ru: "Внедрение кода в процессы (T1055)", en: "Process Injection (T1055)" },
-          { ru: "Запланированная задача (T1053)", en: "Scheduled Task/Job (T1053)" },
-          { ru: "Существующие учетные записи (T1078)", en: "Valid Accounts (T1078)" }
+          { id: "T1548", ru: "Обход механизмов контроля привилегий (T1548)", en: "Abuse Elevation Control Mechanism (T1548)" },
+          { id: "T1134", ru: "Манипуляции с токенами доступа (T1134)", en: "Access Token Manipulation (T1134)" },
+          { id: "T1098", ru: "Манипуляции с учетной записью (T1098)", en: "Account Manipulation (T1098)" },
+          { id: "T1547", ru: "Автозапуск при загрузке или входе в систему (T1547)", en: "Boot or Logon Autostart Execution (T1547)" },
+          { id: "T1037", ru: "Сценарии инициализации при загрузке или входе в систему (T1037)", en: "Boot or Logon Initialization Scripts (T1037)" },
+          { id: "T1543", ru: "Создание или изменение системных процессов (T1543)", en: "Create or Modify System Process (T1543)" },
+          { id: "T1484", ru: "Изменение политики домена или тенанта (T1484)", en: "Domain or Tenant Policy Modification (T1484)" },
+          { id: "T1611", ru: "Выход за пределы контейнера (T1611)", en: "Escape to Host (T1611)" },
+          { id: "T1546", ru: "Выполнение по событию (T1546)", en: "Event Triggered Execution (T1546)" },
+          { id: "T1068", ru: "Эксплуатация уязвимостей для повышения привилегий (T1068)", en: "Exploitation for Privilege Escalation (T1068)" },
+          { id: "T1055", ru: "Внедрение кода в процессы (T1055)", en: "Process Injection (T1055)" },
+          { id: "T1053", ru: "Запланированная задача (T1053)", en: "Scheduled Task/Job (T1053)" },
+          { id: "T1078", ru: "Существующие учетные записи (T1078)", en: "Valid Accounts (T1078)" }
         ]
       },
 
       stealth: {
         translations: { ru: "Скрытность", en: "Stealth" },
         techniques: [
-          { ru: "Манипуляции с токенами доступа (T1134)", en: "Access Token Manipulation (T1134)" },
-          { ru: "Задания BITS (T1197)", en: "BITS Jobs (T1197)" },
-          { ru: "Создание образа на узле (T1612)", en: "Build Image on Host (T1612)" },
-          { ru: "Предотвращение отладки (T1622)", en: "Debugger Evasion (T1622)" },
-          { ru: "Задержка выполнения (T1678)", en: "Delay Execution (T1678)" },
-          { ru: "Деобфускация или декодирование файлов или данных (T1140)", en: "Deobfuscate/Decode Files or Information (T1140)" },
-          { ru: "Прямой доступ к тому (T1006)", en: "Direct Volume Access (T1006)" },
-          { ru: "Ограничения на исполнение (T1480)", en: "Execution Guardrails (T1480)" },
-          { ru: "Эксплуатация для скрытности (T1211)", en: "Exploitation for Stealth (T1211)" },
-          { ru: "Сокрытие артефактов (T1564)", en: "Hide Artifacts (T1564)" },
-          { ru: "Перехват потока исполнения (T1574)", en: "Hijack Execution Flow (T1574)" },
-          { ru: "Устранение индикаторов (T1070)", en: "Indicator Removal (T1070)" },
-          { ru: "Непрямое выполнение команд (T1202)", en: "Indirect Command Execution (T1202)" },
-          { ru: "Маскировка (T1036)", en: "Masquerading (T1036)" },
-          { ru: "Обфусцированные файлы или данные (T1027)", en: "Obfuscated Files or Information (T1027)" },
-          { ru: "Загрузка раньше ОС (T1542)", en: "Pre-OS Boot (T1542)" },
-          { ru: "Внедрение кода в процессы (T1055)", en: "Process Injection (T1055)" },
-          { ru: "Отраженная загрузка кода (T1620)", en: "Reflective Code Loading (T1620)" },
-          { ru: "Руткит (T1014)", en: "Rootkit (T1014)" },
-          { ru: "Избирательное исключение (T1679)", en: "Selective Exclusion (T1679)" },
-          { ru: "Социальная инженерия (T1684)", en: "Social Engineering (T1684)" },
-          { ru: "Выполнение с помощью системных бинарных файлов (T1218)", en: "System Binary Proxy Execution (T1218)" },
-          { ru: "Выполнение через системный сценарий (T1216)", en: "System Script Proxy Execution (T1216)" },
-          { ru: "Внедрение в шаблоны (T1221)", en: "Template Injection (T1221)" },
-          { ru: "Передача управляющих сигналов в трафике (T1205)", en: "Traffic Signaling (T1205)" },
-          { ru: "Выполнение через доверенные утилиты разработчика (T1127)", en: "Trusted Developer Utilities Proxy Execution (T1127)" },
-          { ru: "Облачные инфраструктуры в редко используемых регионах (T1535)", en: "Unused/Unsupported Cloud Regions (T1535)" },
-          { ru: "Существующие учетные записи (T1078)", en: "Valid Accounts (T1078)" },
-          { ru: "Обход виртуализации или песочницы (T1497)", en: "Virtualization/Sandbox Evasion (T1497)" },
-          { ru: "Использование сценариев XSL (T1220)", en: "XSL Script Processing (T1220)" }
+          { id: "T1696", ru: "Обход проверок на автоматизацию (T1696)", en: "Anti-Automation Evasion (T1696)" },
+          { id: "T1134", ru: "Манипуляции с токенами доступа (T1134)", en: "Access Token Manipulation (T1134)" },
+          { id: "T1197", ru: "Задания BITS (T1197)", en: "BITS Jobs (T1197)" },
+          { id: "T1612", ru: "Создание образа на узле (T1612)", en: "Build Image on Host (T1612)" },
+          { id: "T1622", ru: "Предотвращение отладки (T1622)", en: "Debugger Evasion (T1622)" },
+          { id: "T1678", ru: "Задержка выполнения (T1678)", en: "Delay Execution (T1678)" },
+          { id: "T1140", ru: "Деобфускация или декодирование файлов или данных (T1140)", en: "Deobfuscate/Decode Files or Information (T1140)" },
+          { id: "T1006", ru: "Прямой доступ к тому (T1006)", en: "Direct Volume Access (T1006)" },
+          { id: "T1480", ru: "Ограничения на исполнение (T1480)", en: "Execution Guardrails (T1480)" },
+          { id: "T1211", ru: "Эксплуатация для скрытности (T1211)", en: "Exploitation for Stealth (T1211)" },
+          { id: "T1564", ru: "Сокрытие артефактов (T1564)", en: "Hide Artifacts (T1564)" },
+          { id: "T1574", ru: "Перехват потока исполнения (T1574)", en: "Hijack Execution Flow (T1574)" },
+          { id: "T1070", ru: "Устранение индикаторов (T1070)", en: "Indicator Removal (T1070)" },
+          { id: "T1202", ru: "Непрямое выполнение команд (T1202)", en: "Indirect Command Execution (T1202)" },
+          { id: "T1036", ru: "Маскировка (T1036)", en: "Masquerading (T1036)" },
+          { id: "T1027", ru: "Обфусцированные файлы или данные (T1027)", en: "Obfuscated Files or Information (T1027)" },
+          { id: "T1542", ru: "Загрузка раньше ОС (T1542)", en: "Pre-OS Boot (T1542)" },
+          { id: "T1055", ru: "Внедрение кода в процессы (T1055)", en: "Process Injection (T1055)" },
+          { id: "T1620", ru: "Отраженная загрузка кода (T1620)", en: "Reflective Code Loading (T1620)" },
+          { id: "T1014", ru: "Руткит (T1014)", en: "Rootkit (T1014)" },
+          { id: "T1679", ru: "Избирательное исключение (T1679)", en: "Selective Exclusion (T1679)" },
+          { id: "T1684", ru: "Социальная инженерия (T1684)", en: "Social Engineering (T1684)" },
+          { id: "T1218", ru: "Выполнение с помощью системных бинарных файлов (T1218)", en: "System Binary Proxy Execution (T1218)" },
+          { id: "T1216", ru: "Выполнение через системный сценарий (T1216)", en: "System Script Proxy Execution (T1216)" },
+          { id: "T1221", ru: "Внедрение в шаблоны (T1221)", en: "Template Injection (T1221)" },
+          { id: "T1205", ru: "Передача управляющих сигналов в трафике (T1205)", en: "Traffic Signaling (T1205)" },
+          { id: "T1127", ru: "Выполнение через доверенные утилиты разработчика (T1127)", en: "Trusted Developer Utilities Proxy Execution (T1127)" },
+          { id: "T1535", ru: "Облачные инфраструктуры в редко используемых регионах (T1535)", en: "Unused/Unsupported Cloud Regions (T1535)" },
+          { id: "T1078", ru: "Существующие учетные записи (T1078)", en: "Valid Accounts (T1078)" },
+          { id: "T1497", ru: "Обход виртуализации или песочницы (T1497)", en: "Virtualization/Sandbox Evasion (T1497)" },
+          { id: "T1220", ru: "Использование сценариев XSL (T1220)", en: "XSL Script Processing (T1220)" }
         ]
       },
 
       defense_impairment: {
         translations: { ru: "Нарушение защиты", en: "Defense Impairment" },
         techniques: [
-          { ru: "Отключение или модификация системного межсетевого экрана (T1686)", en: "Disable or Modify System Firewall (T1686)" },
-          { ru: "Отключение или модификация средств защиты (T1685)", en: "Disable or Modify Tools (T1685)" },
-          { ru: "Изменение политики домена или тенанта (T1484)", en: "Domain or Tenant Policy Modification (T1484)" },
-          { ru: "Атака понижения версии (T1689)", en: "Downgrade Attack (T1689)" },
-          { ru: "Эксплуатация для нарушения защиты (T1687)", en: "Exploitation for Defense Impairment (T1687)" },
-          { ru: "Изменение разрешений для файлов и каталогов (T1222)", en: "File and Directory Permissions Modification (T1222)" },
-          { ru: "Изменение процесса аутентификации (T1556)", en: "Modify Authentication Process (T1556)" },
-          { ru: "Изменение облачной вычислительной инфраструктуры (T1666)", en: "Modify Cloud Resource Hierarchy (T1666)" },
-          { ru: "Изменение реестра (T1112)", en: "Modify Registry (T1112)" },
-          { ru: "Изменение образа системы (T1601)", en: "Modify System Image (T1601)" },
-          { ru: "Преодоление границ сети (T1599)", en: "Network Boundary Bridging (T1599)" },
-          { ru: "Изменения файла PLIST (T1647)", en: "Plist File Modification (T1647)" },
-          { ru: "Отключение журналирования команд (T1690)", en: "Prevent Command History Logging (T1690)" },
-          { ru: "Поддельный контроллер домена (T1207)", en: "Rogue Domain Controller (T1207)" },
-          { ru: "Загрузка в безопасном режиме (T1688)", en: "Safe Mode Boot (T1688)" },
-          { ru: "Нарушение работы средств контроля доверия (T1553)", en: "Subvert Trust Controls (T1553)" },
-          { ru: "Понижение надежности шифрования (T1600)", en: "Weaken Encryption (T1600)" }
+          { id: "T1578", ru: "Изменение облачной вычислительной инфраструктуры (T1578)", en: "Modify Cloud Compute Infrastructure (T1578)" },
+          { id: "T1686", ru: "Отключение или модификация системного межсетевого экрана (T1686)", en: "Disable or Modify System Firewall (T1686)" },
+          { id: "T1685", ru: "Отключение или модификация средств защиты (T1685)", en: "Disable or Modify Tools (T1685)" },
+          { id: "T1484", ru: "Изменение политики домена или тенанта (T1484)", en: "Domain or Tenant Policy Modification (T1484)" },
+          { id: "T1689", ru: "Атака понижения версии (T1689)", en: "Downgrade Attack (T1689)" },
+          { id: "T1687", ru: "Эксплуатация для нарушения защиты (T1687)", en: "Exploitation for Defense Impairment (T1687)" },
+          { id: "T1222", ru: "Изменение разрешений для файлов и каталогов (T1222)", en: "File and Directory Permissions Modification (T1222)" },
+          { id: "T1556", ru: "Изменение процесса аутентификации (T1556)", en: "Modify Authentication Process (T1556)" },
+          { id: "T1666", ru: "Изменение иерархии облачных ресурсов (T1666)", en: "Modify Cloud Resource Hierarchy (T1666)" },
+          { id: "T1112", ru: "Изменение реестра (T1112)", en: "Modify Registry (T1112)" },
+          { id: "T1601", ru: "Изменение образа системы (T1601)", en: "Modify System Image (T1601)" },
+          { id: "T1599", ru: "Преодоление границ сети (T1599)", en: "Network Boundary Bridging (T1599)" },
+          { id: "T1647", ru: "Изменения файла PLIST (T1647)", en: "Plist File Modification (T1647)" },
+          { id: "T1690", ru: "Отключение журналирования команд (T1690)", en: "Prevent Command History Logging (T1690)" },
+          { id: "T1207", ru: "Поддельный контроллер домена (T1207)", en: "Rogue Domain Controller (T1207)" },
+          { id: "T1688", ru: "Загрузка в безопасном режиме (T1688)", en: "Safe Mode Boot (T1688)" },
+          { id: "T1553", ru: "Нарушение работы средств контроля доверия (T1553)", en: "Subvert Trust Controls (T1553)" },
+          { id: "T1600", ru: "Понижение надежности шифрования (T1600)", en: "Weaken Encryption (T1600)" }
         ]
       },
 
       credential_access: {
         translations: { ru: "Получение учетных данных", en: "Credential Access" },
         techniques: [
-          { ru: "Злоумышленник посередине (T1557)", en: "Adversary-in-the-Middle (T1557)" },
-          { ru: "Метод перебора (T1110)", en: "Brute Force (T1110)" },
-          { ru: "Учетные данные из хранилищ паролей (T1555)", en: "Credentials from Password Stores (T1555)" },
-          { ru: "Эксплуатация уязвимостей для получения учетных данных (T1212)", en: "Exploitation for Credential Access (T1212)" },
-          { ru: "Принудительная аутентификация (T1187)", en: "Forced Authentication (T1187)" },
-          { ru: "Подделка учетных данных для веб ресурсов (T1606)", en: "Forge Web Credentials (T1606)" },
-          { ru: "Перехват вводимых данных (T1056)", en: "Input Capture (T1056)" },
-          { ru: "Изменение процесса аутентификации (T1556)", en: "Modify Authentication Process (T1556)" },
-          { ru: "Перехват многофакторной аутентификации (T1111)", en: "Multi-Factor Authentication Interception (T1111)" },
-          { ru: "Генерирование запросов многофакторной аутентификации (T1621)", en: "Multi-Factor Authentication Request Generation (T1621)" },
-          { ru: "Прослушивание сетевого трафика (T1040)", en: "Network Sniffing (T1040)" },
-          { ru: "Получение дампа учетных данных (T1003)", en: "OS Credential Dumping (T1003)" },
-          { ru: "Кража токена доступа к приложению (T1528)", en: "Steal Application Access Tokens (T1528)" },
-          { ru: "Кража сессионных куки (T1539)", en: "Steal Web Session Cookie (T1539)" },
-          { ru: "Кража или подделка сертификатов аутентификации (T1649)", en: "Steal or Forge Authentication Certificates (T1649)" },
-          { ru: "Кража или подделка билетов Kerberos (T1558)", en: "Steal or Forge Kerberos Tickets (T1558)" },
-          { ru: "Незащищенные учетные данные (T1552)", en: "Unsecured Credentials (T1552)" }
+          { id: "T1697", ru: "Кража паролей приложений (T1697)", en: "Steal Application Specific Passwords (T1697)" },
+          { id: "T1557", ru: "Злоумышленник посередине (T1557)", en: "Adversary-in-the-Middle (T1557)" },
+          { id: "T1110", ru: "Метод перебора (T1110)", en: "Brute Force (T1110)" },
+          { id: "T1555", ru: "Учетные данные из хранилищ паролей (T1555)", en: "Credentials from Password Stores (T1555)" },
+          { id: "T1212", ru: "Эксплуатация уязвимостей для получения учетных данных (T1212)", en: "Exploitation for Credential Access (T1212)" },
+          { id: "T1187", ru: "Принудительная аутентификация (T1187)", en: "Forced Authentication (T1187)" },
+          { id: "T1606", ru: "Подделка учетных данных для веб ресурсов (T1606)", en: "Forge Web Credentials (T1606)" },
+          { id: "T1056", ru: "Перехват вводимых данных (T1056)", en: "Input Capture (T1056)" },
+          { id: "T1556", ru: "Изменение процесса аутентификации (T1556)", en: "Modify Authentication Process (T1556)" },
+          { id: "T1111", ru: "Перехват многофакторной аутентификации (T1111)", en: "Multi-Factor Authentication Interception (T1111)" },
+          { id: "T1621", ru: "Генерирование запросов многофакторной аутентификации (T1621)", en: "Multi-Factor Authentication Request Generation (T1621)" },
+          { id: "T1040", ru: "Прослушивание сетевого трафика (T1040)", en: "Network Sniffing (T1040)" },
+          { id: "T1003", ru: "Получение дампа учетных данных (T1003)", en: "OS Credential Dumping (T1003)" },
+          { id: "T1528", ru: "Кража токена доступа к приложению (T1528)", en: "Steal Application Access Token (T1528)" },
+          { id: "T1539", ru: "Кража сессионных куки (T1539)", en: "Steal Web Session Cookie (T1539)" },
+          { id: "T1649", ru: "Кража или подделка сертификатов аутентификации (T1649)", en: "Steal or Forge Authentication Certificates (T1649)" },
+          { id: "T1558", ru: "Кража или подделка билетов Kerberos (T1558)", en: "Steal or Forge Kerberos Tickets (T1558)" },
+          { id: "T1552", ru: "Незащищенные учетные данные (T1552)", en: "Unsecured Credentials (T1552)" }
         ]
       },
 
     "discovery": {
       translations: { ru: "Обнаружение", en: "Discovery" },
       techniques: [
-        { ru: "Изучение учетных записей (T1087)", en: "Account Discovery (T1087)" },
-        { ru: "Изучение открытых приложений (T1010)", en: "Application Window Discovery (T1010)" },
-        { ru: "Изучение браузера (T1217)", en: "Browser Information Discovery (T1217)" },
-        { ru: "Изучение облачной инфраструктуры (T1580)", en: "Cloud Infrastructure Discovery (T1580)" },
-        { ru: "Дашборд облачного сервиса (T1538)", en: "Cloud Service Dashboard (T1538)" },
-        { ru: "Изучение облачных служб (T1526)", en: "Cloud Service Discovery (T1526)" },
-        { ru: "Обнаружение объектов облачного хранилища (T1619)", en: "Cloud Storage Object Discovery (T1619)" },
-        { ru: "Изучение контейнеров и их ресурсов (T1613)", en: "Container and Resource Discovery (T1613)" },
-        { ru: "Предотвращение отладки (T1622)", en: "Debugger Evasion (T1622)" },
-        { ru: "Изучение драйверов устройств (T1652)", en: "Device Driver Discovery (T1652)" },
-        { ru: "Изучение доверительных отношений между доменами (T1482)", en: "Domain Trust Discovery (T1482)" },
-        { ru: "Изучение файлов и каталогов (T1083)", en: "File and Directory Discovery (T1083)" },
-        { ru: "Изучение групповой политики (T1615)", en: "Group Policy Discovery (T1615)" },
-        { ru: "Исследование локального хранилища (T1680)", en: "Local Storage Discovery (T1680)" },
-        { ru: "Сбор журналов (T1654)", en: "Log Enumeration (T1654)" },
-        { ru: "Изучение сетевых служб (T1046)", en: "Network Service Discovery (T1046)" },
-        { ru: "Изучение общих сетевых ресурсов (T1135)", en: "Network Share Discovery (T1135)" },
-        { ru: "Прослушивание сетевого трафика (T1040)", en: "Network Sniffing (T1040)" },
-        { ru: "Изучение парольной политики (T1201)", en: "Password Policy Discovery (T1201)" },
-        { ru: "Изучение периферийных устройств (T1120)", en: "Peripheral Device Discovery (T1120)" },
-        { ru: "Изучение групп разрешений (T1069)", en: "Permission Groups Discovery (T1069)" },
-        { ru: "Изучение процессов (T1057)", en: "Process Discovery (T1057)" },
-        { ru: "Запросы к реестру (T1012)", en: "Query Registry (T1012)" },
-        { ru: "Изучение удаленных систем (T1018)", en: "Remote System Discovery (T1018)" },
-        { ru: "Изучение установленного ПО (T1518)", en: "Software Discovery (T1518)" },
-        { ru: "Изучение системы (T1082)", en: "System Information Discovery (T1082)" },
-        { ru: "Изучение местоположения системы (T1614)", en: "System Location Discovery (T1614)" },
-        { ru: "Изучение конфигурации сети (T1016)", en: "System Network Configuration Discovery (T1016)" },
-        { ru: "Изучение сетевых подключений (T1049)", en: "System Network Connections Discovery (T1049)" },
-        { ru: "Изучение владельца или пользователей системы (T1033)", en: "System Owner/User Discovery (T1033)" },
-        { ru: "Изучение системных служб (T1007)", en: "System Service Discovery (T1007)" },
-        { ru: "Изучение системного времени (T1124)", en: "System Time Discovery (T1124)" },
-        { ru: "Изучение виртуальной машины (T1673)", en: "Virtual Machine Discovery (T1673)" },
-        { ru: "Обход виртуализации или песочницы (T1497)", en: "Virtualization/Sandbox Evasion (T1497)" }
+        { id: "T1087", ru: "Изучение учетных записей (T1087)", en: "Account Discovery (T1087)" },
+        { id: "T1010", ru: "Изучение открытых приложений (T1010)", en: "Application Window Discovery (T1010)" },
+        { id: "T1217", ru: "Изучение браузера (T1217)", en: "Browser Information Discovery (T1217)" },
+        { id: "T1580", ru: "Изучение облачной инфраструктуры (T1580)", en: "Cloud Infrastructure Discovery (T1580)" },
+        { id: "T1538", ru: "Дашборд облачного сервиса (T1538)", en: "Cloud Service Dashboard (T1538)" },
+        { id: "T1526", ru: "Изучение облачных служб (T1526)", en: "Cloud Service Discovery (T1526)" },
+        { id: "T1619", ru: "Обнаружение объектов облачного хранилища (T1619)", en: "Cloud Storage Object Discovery (T1619)" },
+        { id: "T1613", ru: "Изучение контейнеров и их ресурсов (T1613)", en: "Container and Resource Discovery (T1613)" },
+        { id: "T1622", ru: "Предотвращение отладки (T1622)", en: "Debugger Evasion (T1622)" },
+        { id: "T1652", ru: "Изучение драйверов устройств (T1652)", en: "Device Driver Discovery (T1652)" },
+        { id: "T1482", ru: "Изучение доверительных отношений между доменами (T1482)", en: "Domain Trust Discovery (T1482)" },
+        { id: "T1083", ru: "Изучение файлов и каталогов (T1083)", en: "File and Directory Discovery (T1083)" },
+        { id: "T1615", ru: "Изучение групповой политики (T1615)", en: "Group Policy Discovery (T1615)" },
+        { id: "T1680", ru: "Исследование локального хранилища (T1680)", en: "Local Storage Discovery (T1680)" },
+        { id: "T1654", ru: "Сбор журналов (T1654)", en: "Log Enumeration (T1654)" },
+        { id: "T1046", ru: "Изучение сетевых служб (T1046)", en: "Network Service Discovery (T1046)" },
+        { id: "T1135", ru: "Изучение общих сетевых ресурсов (T1135)", en: "Network Share Discovery (T1135)" },
+        { id: "T1040", ru: "Прослушивание сетевого трафика (T1040)", en: "Network Sniffing (T1040)" },
+        { id: "T1201", ru: "Изучение парольной политики (T1201)", en: "Password Policy Discovery (T1201)" },
+        { id: "T1120", ru: "Изучение периферийных устройств (T1120)", en: "Peripheral Device Discovery (T1120)" },
+        { id: "T1069", ru: "Изучение групп разрешений (T1069)", en: "Permission Groups Discovery (T1069)" },
+        { id: "T1057", ru: "Изучение процессов (T1057)", en: "Process Discovery (T1057)" },
+        { id: "T1012", ru: "Запросы к реестру (T1012)", en: "Query Registry (T1012)" },
+        { id: "T1018", ru: "Изучение удаленных систем (T1018)", en: "Remote System Discovery (T1018)" },
+        { id: "T1518", ru: "Изучение установленного ПО (T1518)", en: "Software Discovery (T1518)" },
+        { id: "T1082", ru: "Изучение системы (T1082)", en: "System Information Discovery (T1082)" },
+        { id: "T1614", ru: "Изучение местоположения системы (T1614)", en: "System Location Discovery (T1614)" },
+        { id: "T1016", ru: "Изучение конфигурации сети (T1016)", en: "System Network Configuration Discovery (T1016)" },
+        { id: "T1049", ru: "Изучение сетевых подключений (T1049)", en: "System Network Connections Discovery (T1049)" },
+        { id: "T1033", ru: "Изучение владельца или пользователей системы (T1033)", en: "System Owner/User Discovery (T1033)" },
+        { id: "T1007", ru: "Изучение системных служб (T1007)", en: "System Service Discovery (T1007)" },
+        { id: "T1124", ru: "Изучение системного времени (T1124)", en: "System Time Discovery (T1124)" },
+        { id: "T1673", ru: "Изучение виртуальной машины (T1673)", en: "Virtual Machine Discovery (T1673)" },
+        { id: "T1497", ru: "Обход виртуализации или песочницы (T1497)", en: "Virtualization/Sandbox Evasion (T1497)" }
       ]
     },
 
     lateral_movement: {
       translations: { ru: "Перемещение внутри периметра", en: "Lateral Movement" },
       techniques: [
-        { ru: "Эксплуатация уязвимостей в удаленных службах (T1210)", en: "Exploitation of Remote Services (T1210)" },
-        { ru: "Внутренний целевой фишинг (T1534)", en: "Internal Spearphishing (T1534)" },
-        { ru: "Передача инструментов внутри периметра (T1570)", en: "Lateral Tool Transfer (T1570)" },
-        { ru: "Перехват сессии служб удаленного доступа (T1563)", en: "Remote Service Session Hijacking (T1563)" },
-        { ru: "Службы удаленного доступа (T1021)", en: "Remote Services (T1021)" },
-        { ru: "Распространение через съемные носители (T1091)", en: "Replication Through Removable Media (T1091)" },
-        { ru: "Средства развертывания ПО (T1072)", en: "Software Deployment Tools (T1072)" },
-        { ru: "Заражение общего содержимого (T1080)", en: "Taint Shared Content (T1080)" },
-        { ru: "Использование альтернативных сущностей для аутентификации (T1550)", en: "Use Alternate Authentication Material (T1550)" }
+        { id: "T1210", ru: "Эксплуатация уязвимостей в удаленных службах (T1210)", en: "Exploitation of Remote Services (T1210)" },
+        { id: "T1534", ru: "Внутренний целевой фишинг (T1534)", en: "Internal Spearphishing (T1534)" },
+        { id: "T1570", ru: "Передача инструментов внутри периметра (T1570)", en: "Lateral Tool Transfer (T1570)" },
+        { id: "T1563", ru: "Перехват сессии службы удаленного доступа (T1563)", en: "Remote Service Session Hijacking (T1563)" },
+        { id: "T1021", ru: "Службы удаленного доступа (T1021)", en: "Remote Services (T1021)" },
+        { id: "T1091", ru: "Распространение через съемные носители (T1091)", en: "Replication Through Removable Media (T1091)" },
+        { id: "T1072", ru: "Средства развертывания ПО (T1072)", en: "Software Deployment Tools (T1072)" },
+        { id: "T1080", ru: "Заражение общего содержимого (T1080)", en: "Taint Shared Content (T1080)" },
+        { id: "T1550", ru: "Использование альтернативных сущностей для аутентификации (T1550)", en: "Use Alternate Authentication Material (T1550)" }
       ]
     },
 
     data_collection: {
       translations: { ru: "Сбор данных", en: "Collection" },
       techniques: [
-        { ru: "Злоумышленник посередине (T1557)", en: "Adversary-in-the-Middle (T1557)" },
-        { ru: "Архивация собранных данных (T1560)", en: "Archive Collected Data (T1560)" },
-        { ru: "Захват аудиоданных (T1123)", en: "Audio Capture (T1123)" },
-        { ru: "Автоматизированный сбор данных (T1119)", en: "Automated Collection (T1119)" },
-        { ru: "Данные буфера обмена (T1115)", en: "Clipboard Data (T1115)" },
-        { ru: "Данные из облачного хранилища (T1530)", en: "Data from Cloud Storage (T1530)" },
-        { ru: "Перехват сессии браузера (T1185)", en: "Browser Session Hijacking (T1185)" },
-        { ru: "Промежуточное хранение данных (T1074)", en: "Data Staged (T1074)" },
-        { ru: "Данные из репозиториев конфигураций (T1602)", en: "Data from Configuration Repository (T1602)" },
-        { ru: "Данные из информационных репозиториев (T1213)", en: "Data from Information Repositories (T1213)" },
-        { ru: "Данные из локальной системы (T1005)", en: "Data from Local System (T1005)" },
-        { ru: "Данные со съемных дисков (T1025)", en: "Data from Removable Media (T1025)" },
-        { ru: "Сбор электронной почты (T1114)", en: "Email Collection (T1114)" },
-        { ru: "Захват экрана (T1113)", en: "Screen Capture (T1113)" },
-        { ru: "Захват ввода (T1056)", en: "Input Capture (T1056)" },
-        { ru: "Захват видеоданных (T1125)", en: "Video Capture (T1125)" }
+          { id: "T1039", ru: "Данные с общих сетевых ресурсов (T1039)", en: "Data from Network Shared Drive (T1039)" },
+        { id: "T1557", ru: "Злоумышленник посередине (T1557)", en: "Adversary-in-the-Middle (T1557)" },
+        { id: "T1560", ru: "Архивация собранных данных (T1560)", en: "Archive Collected Data (T1560)" },
+        { id: "T1123", ru: "Захват аудиоданных (T1123)", en: "Audio Capture (T1123)" },
+        { id: "T1119", ru: "Автоматизированный сбор данных (T1119)", en: "Automated Collection (T1119)" },
+        { id: "T1115", ru: "Данные из буфера обмена (T1115)", en: "Clipboard Data (T1115)" },
+        { id: "T1530", ru: "Данные из облачных хранилищ (T1530)", en: "Data from Cloud Storage (T1530)" },
+        { id: "T1185", ru: "Перехват сессии браузера (T1185)", en: "Browser Session Hijacking (T1185)" },
+        { id: "T1074", ru: "Промежуточное хранение данных (T1074)", en: "Data Staged (T1074)" },
+        { id: "T1602", ru: "Данные из репозитория конфигураций (T1602)", en: "Data from Configuration Repository (T1602)" },
+        { id: "T1213", ru: "Данные из информационных репозиториев (T1213)", en: "Data from Information Repositories (T1213)" },
+        { id: "T1005", ru: "Данные из локальной системы (T1005)", en: "Data from Local System (T1005)" },
+        { id: "T1025", ru: "Данные со съемных носителей (T1025)", en: "Data from Removable Media (T1025)" },
+        { id: "T1114", ru: "Сбор электронной почты (T1114)", en: "Email Collection (T1114)" },
+        { id: "T1113", ru: "Захват экрана (T1113)", en: "Screen Capture (T1113)" },
+        { id: "T1056", ru: "Перехват вводимых данных (T1056)", en: "Input Capture (T1056)" },
+        { id: "T1125", ru: "Захват видеоданных (T1125)", en: "Video Capture (T1125)" }
       ]
     },
 
     management: {
       translations: { ru: "Организация управления", en: "Command and Control" },
       techniques: [
-        { ru: "Протокол прикладного уровня (T1071)", en: "Application Layer Protocol (T1071)" },
-        { ru: "Взаимодействие через съемные носители (T1092)", en: "Communication Through Removable Media (T1092)" },
-        { ru: "Внедрение контента (T1659)", en: "Content Injection (T1659)" },
-        { ru: "Кодирование данных (T1132)", en: "Data Encoding (T1132)" },
-        { ru: "Обфускация данных (T1001)", en: "Data Obfuscation (T1001)" },
-        { ru: "Динамическое разрешение (T1568)", en: "Dynamic Resolution (T1568)" },
-        { ru: "Зашифрованный канал (T1573)", en: "Encrypted Channel (T1573)" },
-        { ru: "Резервные каналы (T1008)", en: "Fallback Channels (T1008)" },
-        { ru: "Сокрытие инфраструктуры (T1665)", en: "Hide Infrastructure (T1665)" },
-        { ru: "Передача инструментов из внешней сети (T1105)", en: "Ingress Tool Transfer (T1105)" },
-        { ru: "Отдельный канал для каждого этапа (T1104)", en: "Multi-Stage Channels (T1104)" },
-        { ru: "Протоколы (кроме прикладного уровня) (T1095)", en: "Non-Application Layer Protocol (T1095)" },
-        { ru: "Нестандартный порт (T1571)", en: "Non-Standard Port (T1571)" },
-        { ru: "Туннелирование протокола (T1572)", en: "Protocol Tunneling (T1572)" },
-        { ru: "Прокси-сервер (T1090)", en: "Proxy (T1090)" },
-        { ru: "ПО для удаленного доступа (T1219)", en: "Remote Access Software (T1219)" },
-        { ru: "Передача управляющих сигналов в трафике (T1205)", en: "Traffic Signaling (T1205)" },
-        { ru: "Веб-служба (T1102)", en: "Web Service (T1102)" }
+        { id: "T1071", ru: "Протокол прикладного уровня (T1071)", en: "Application Layer Protocol (T1071)" },
+        { id: "T1092", ru: "Взаимодействие через съемные носители (T1092)", en: "Communication Through Removable Media (T1092)" },
+        { id: "T1659", ru: "Внедрение контента (T1659)", en: "Content Injection (T1659)" },
+        { id: "T1132", ru: "Кодирование данных (T1132)", en: "Data Encoding (T1132)" },
+        { id: "T1001", ru: "Обфускация данных (T1001)", en: "Data Obfuscation (T1001)" },
+        { id: "T1568", ru: "Динамическое разрешение (T1568)", en: "Dynamic Resolution (T1568)" },
+        { id: "T1573", ru: "Зашифрованный канал (T1573)", en: "Encrypted Channel (T1573)" },
+        { id: "T1008", ru: "Резервные каналы (T1008)", en: "Fallback Channels (T1008)" },
+        { id: "T1665", ru: "Сокрытие инфраструктуры (T1665)", en: "Hide Infrastructure (T1665)" },
+        { id: "T1105", ru: "Передача инструментов из внешней сети (T1105)", en: "Ingress Tool Transfer (T1105)" },
+        { id: "T1104", ru: "Отдельный канал для каждого этапа (T1104)", en: "Multi-Stage Channels (T1104)" },
+        { id: "T1095", ru: "Протоколы (кроме прикладного уровня) (T1095)", en: "Non-Application Layer Protocol (T1095)" },
+        { id: "T1571", ru: "Нестандартный порт (T1571)", en: "Non-Standard Port (T1571)" },
+        { id: "T1572", ru: "Туннелирование протокола (T1572)", en: "Protocol Tunneling (T1572)" },
+        { id: "T1090", ru: "Прокси‑сервер (T1090)", en: "Proxy (T1090)" },
+        { id: "T1219", ru: "Инструменты удалённого доступа (T1219)", en: "Remote Access Tools (T1219)" },
+        { id: "T1205", ru: "Передача управляющих сигналов в трафике (T1205)", en: "Traffic Signaling (T1205)" },
+        { id: "T1102", ru: "Веб‑служба (T1102)", en: "Web Service (T1102)" }
       ]
     },
 
     data_exfiltration: {
       translations: { ru: "Эксфильтрация данных", en: "Exfiltration" },
       techniques: [
-        { ru: "Автоматизированная эксфильтрация (T1020)", en: "Automated Exfiltration (T1020)" },
-        { ru: "Ограничение размера передаваемых блоков данных (T1030)", en: "Data Transfer Size Limits (T1030)" },
-        { ru: "Эксфильтрация по альтернативному протоколу (T1048)", en: "Exfiltration Over Alternative Protocol (T1048)" },
-        { ru: "Эксфильтрация по каналу управления (T1041)", en: "Exfiltration Over C2 Channel (T1041)" },
-        { ru: "Эксфильтрация через альтернативную сетевую среду (T1011)", en: "Exfiltration Over Other Network Medium (T1011)" },
-        { ru: "Эксфильтрация через альтернативную физическую среду (T1052)", en: "Exfiltration Over Physical Medium (T1052)" },
-        { ru: "Эксфильтрация через веб-службу (T1567)", en: "Exfiltration Over Web Service (T1567)" },
-        { ru: "Передача по расписанию (T1029)", en: "Scheduled Transfer (T1029)" },
-        { ru: "Перемещение данных между облачными учетными записями (T1537)", en: "Transfer Data to Cloud Account (T1537)" }
+          { id: "T1700", ru: "Эксфильтрация с использованием ИИ (T1700)", en: "AI-Enabled Exfiltration (T1700)" },
+        { id: "T1020", ru: "Автоматизированная эксфильтрация (T1020)", en: "Automated Exfiltration (T1020)" },
+        { id: "T1030", ru: "Ограничение размера передаваемых блоков данных (T1030)", en: "Data Transfer Size Limits (T1030)" },
+        { id: "T1048", ru: "Эксфильтрация по альтернативному протоколу (T1048)", en: "Exfiltration Over Alternative Protocol (T1048)" },
+        { id: "T1041", ru: "Эксфильтрация по каналу управления (T1041)", en: "Exfiltration Over C2 Channel (T1041)" },
+        { id: "T1011", ru: "Эксфильтрация через альтернативную сетевую среду (T1011)", en: "Exfiltration Over Other Network Medium (T1011)" },
+        { id: "T1052", ru: "Эксфильтрация через альтернативную физическую среду (T1052)", en: "Exfiltration Over Physical Medium (T1052)" },
+        { id: "T1567", ru: "Эксфильтрация через веб‑службу (T1567)", en: "Exfiltration Over Web Service (T1567)" },
+        { id: "T1029", ru: "Передача по расписанию (T1029)", en: "Scheduled Transfer (T1029)" },
+        { id: "T1537", ru: "Перемещение данных между облачными учетными записями (T1537)", en: "Transfer Data to Cloud Account (T1537)" }
       ]
     },
 
     destructive_impact: {
       translations: { ru: "Деструктивное воздействие", en: "Impact" },
       techniques: [
-        { ru: "Прекращение доступа к учетной записи (T1531)", en: "Account Access Removal (T1531)" },
-        { ru: "Уничтожение данных (T1485)", en: "Data Destruction (T1485)" },
-        { ru: "Шифрование данных (T1486)", en: "Data Encrypted for Impact (T1486)" },
-        { ru: "Манипуляция с данными (T1565)", en: "Data Manipulation (T1565)" },
-        { ru: "Дефейс (T1491)", en: "Defacement (T1491)" },
-        { ru: "Уничтожение диска (T1561)", en: "Disk Wipe (T1561)" },
-        { ru: "Email Bombing (T1667)", en: "Email Bombing (T1667)" },
-        { ru: "Точечный отказ в обслуживании (T1499)", en: "Endpoint Denial of Service (T1499)" },
-        { ru: "Кража денежных средств (T1657)", en: "Financial Theft (T1657)" },
-        { ru: "Повреждение прошивки (T1495)", en: "Firmware Corruption (T1495)" },
-        { ru: "Препятствование восстановлению системы (T1490)", en: "Inhibit System Recovery (T1490)" },
-        { ru: "Сетевой отказ в обслуживании (T1498)", en: "Network Denial of Service (T1498)" },
-        { ru: "Несанкционированное использование ресурсов (T1496)", en: "Resource Hijacking (T1496)" },
-        { ru: "Остановка службы (T1489)", en: "Service Stop (T1489)" },
-        { ru: "Завершение работы или перезагрузка системы (T1529)", en: "System Shutdown/Reboot (T1529)" }
+        { id: "T1531", ru: "Прекращение доступа к учетной записи (T1531)", en: "Account Access Removal (T1531)" },
+        { id: "T1485", ru: "Уничтожение данных (T1485)", en: "Data Destruction (T1485)" },
+        { id: "T1486", ru: "Шифрование данных (T1486)", en: "Data Encrypted for Impact (T1486)" },
+        { id: "T1565", ru: "Манипуляция с данными (T1565)", en: "Data Manipulation (T1565)" },
+        { id: "T1491", ru: "Дефейс (T1491)", en: "Defacement (T1491)" },
+        { id: "T1561", ru: "Уничтожение диска (T1561)", en: "Disk Wipe (T1561)" },
+        { id: "T1667", ru: "Email Bombing (T1667)", en: "Email Bombing (T1667)" },
+        { id: "T1499", ru: "Точечный отказ в обслуживании (T1499)", en: "Endpoint Denial of Service (T1499)" },
+        { id: "T1657", ru: "Кража денежных средств (T1657)", en: "Financial Theft (T1657)" },
+        { id: "T1495", ru: "Повреждение прошивки (T1495)", en: "Firmware Corruption (T1495)" },
+        { id: "T1490", ru: "Препятствование восстановлению системы (T1490)", en: "Inhibit System Recovery (T1490)" },
+        { id: "T1498", ru: "Сетевой отказ в обслуживании (T1498)", en: "Network Denial of Service (T1498)" },
+        { id: "T1496", ru: "Несанкционированное использование ресурсов (T1496)", en: "Resource Hijacking (T1496)" },
+        { id: "T1489", ru: "Остановка службы (T1489)", en: "Service Stop (T1489)" },
+        { id: "T1529", ru: "Завершение работы или перезагрузка системы (T1529)", en: "System Shutdown/Reboot (T1529)" }
       ]
     },
 
     };
+
+    // ATT&CK IDs, not translated labels, join the catalogue to its time estimates.
+    var TECHNIQUES_BY_ID = Object.create(null);
+    Object.keys(TECHNIQUE_TIMES).forEach(function(key) {
+      var technique = TECHNIQUE_TIMES[key];
+      TECHNIQUES_BY_ID[technique.id] = technique;
+    });
 
     function parseFloatSafe(s) {
       s = s.replace(',', '.');
@@ -2482,6 +2757,134 @@ var cell16_2_4 = $("<div></div>")
 
     }
 
+    function getTechniqueId(text) {
+      var match = (text || "").trim().match(/(?:^|\()(T\d{4}(?:\.\d{3})?)\)?$/);
+      return match ? match[1] : null;
+    }
+
+    function resolveTacticKey(text, savedKey) {
+      if (Object.prototype.hasOwnProperty.call(TACTICS_TO_TECHNIQUES, savedKey)) return savedKey;
+      var label = (text || "").trim();
+      return Object.keys(TACTICS_TO_TECHNIQUES).find(function(key) {
+        var translations = TACTICS_TO_TECHNIQUES[key].translations;
+        return translations.ru === label || translations.en === label;
+      }) || null;
+    }
+
+    function configureStageTechniques($block, tacticKey) {
+      var tactic = TACTICS_TO_TECHNIQUES[tacticKey];
+      var options = tactic ? tactic.techniques.map(function(technique) {
+        return { label: technique[currentLang], value: technique[currentLang], techniqueId: technique.id };
+      }) : [];
+      // map() creates UI-only copies. Autocomplete filters this array without reordering it.
+      var locale = currentLang === "ru" ? "ru" : "en";
+      options.sort(function(a, b) {
+        return a.label.localeCompare(b.label, locale, { sensitivity: "base" });
+      });
+      $block.find(".tactic-input").data("tactic-key", tacticKey)
+        .data("tactic-text", $block.find(".tactic-input").val());
+      // Unknown legacy stages remain editable, with an empty suggestion list.
+      $block.find(".technique-input").prop("disabled", false).autocomplete("option", "source", options);
+    }
+
+    function updateStageCatalogStatus($block) {
+      var tacticKey = $block.find(".tactic-input").data("tactic-key");
+      var tactic = TACTICS_TO_TECHNIQUES[tacticKey];
+      var id = $block.find(".technique-input").data("technique-id");
+      var text = $block.find(".technique-input").val();
+      var message = "";
+      if (!tactic && ($block.find(".tactic-input").val() || text || id)) {
+        message = currentLang === "ru"
+          ? "Тактика не связана с каталогом. Введённые текст и время сохранены; проверьте их вручную."
+          : "Tactic is not linked to the catalogue. Entered text and time are retained; please review them manually.";
+      } else if ((text || id) && (!tactic || !tactic.techniques.some(function(item) { return item.id === id; }))) {
+        message = currentLang === "ru"
+          ? "Техника не связана с каталогом выбранной тактики. Введённые текст и время сохранены; проверьте их вручную."
+          : "Technique is not linked to the selected tactic's catalogue. Entered text and time are retained; please review them manually.";
+      } else if (id && !TECHNIQUES_BY_ID[id]) {
+        message = currentLang === "ru"
+          ? "Для техники " + id + " нет времени по умолчанию. Укажите время вручную."
+          : "No default time is available for " + id + ". Enter the time manually.";
+      }
+      $block.find(".stage-catalog-status").text(message).toggle(Boolean(message));
+    }
+
+    function initializeStageCatalog($block) {
+      var tactics = Object.keys(TACTICS_TO_TECHNIQUES).map(function(key) {
+        return TACTICS_TO_TECHNIQUES[key].translations[currentLang];
+      });
+      $block.find(".tactic-input").data("tactic-text", "").autocomplete({
+        source: tactics,
+        minLength: 0,
+        select: function(event, ui) {
+          $(this).val(ui.item.value).trigger("change");
+          return false;
+        }
+      }).on("focus", function() {
+        $(this).autocomplete("search", "");
+      }).on("change", function() {
+        if ($(this).data("tactic-text") === $(this).val()) return;
+        configureStageTechniques($block, resolveTacticKey($(this).val()));
+        $block.find(".technique-input").val("").data("technique-id", null);
+        $block.find(".time-hours, .time-minutes").val("");
+        updateStageCatalogStatus($block);
+        recalcDynamicBlock($block);
+      });
+      $block.find(".technique-input").autocomplete({
+        source: [],
+        minLength: 0,
+        select: function(event, ui) {
+          var id = ui.item.techniqueId;
+          $(this).val(ui.item.value).data("technique-id", id);
+          $block.find(".time-hours, .time-minutes").val("");
+          var technique = TECHNIQUES_BY_ID[id];
+          if (technique) {
+            $block.find(".time-hours").val(technique.values[0]);
+            $block.find(".time-minutes").val(technique.values[1]);
+          }
+          updateStageCatalogStatus($block);
+          recalcDynamicBlock($block);
+          return false;
+        }
+      }).on("focus", function() {
+        $(this).autocomplete("search", "");
+      }).on("input change", function() {
+        $(this).data("technique-id", getTechniqueId($(this).val()));
+        updateStageCatalogStatus($block);
+        recalcDynamicBlock($block);
+      });
+      $block.find(".time-hours, .time-minutes, .qualification-select").on("input change", function() {
+        recalcDynamicBlock($block);
+      });
+    }
+
+    function getDynamicBlockState($block) {
+      return {
+        tactic: $block.find(".tactic-input").val(),
+        tacticKey: $block.find(".tactic-input").data("tactic-key") || null,
+        technique: $block.find(".technique-input").val(),
+        techniqueId: $block.find(".technique-input").data("technique-id") || null,
+        qualification: $block.find(".qualification-select").val(),
+        time_hours: $block.find(".time-hours").val(),
+        time_minutes: $block.find(".time-minutes").val(),
+        comment: $block.find(".stage-comment").val()
+      };
+    }
+
+    function restoreDynamicBlock($block, blockData) {
+      $block.find(".tactic-input").val(blockData.tactic || "");
+      configureStageTechniques($block, resolveTacticKey(blockData.tactic, blockData.tacticKey));
+      $block.find(".technique-input").val(blockData.technique || "")
+        .data("technique-id", blockData.techniqueId || getTechniqueId(blockData.technique));
+      $block.find(".qualification-select").val(blockData.qualification || "basic");
+      // Restoring is not a user selection: never replace saved/manual time with a default.
+      $block.find(".time-hours").val(blockData.time_hours == null ? "" : blockData.time_hours);
+      $block.find(".time-minutes").val(blockData.time_minutes == null ? "" : blockData.time_minutes);
+      $block.find(".stage-comment").val(blockData.comment || "");
+      updateStageCatalogStatus($block);
+      recalcDynamicBlock($block);
+    }
+
     var dynamicBlockCount = 0;
     function createNewDynamicBlock() {
       dynamicBlockCount++;
@@ -2544,6 +2947,7 @@ var cell16_2_4 = $("<div></div>")
               <input type="text" class="technique-input" disabled>
             </div>
           </div>
+          <p class="stage-catalog-status" role="status" style="display:none; margin-bottom:16px; color:#8a4500;"></p>
           <div style="display: flex; gap: 16px; margin-bottom: 16px;">
             <div class="field-group" style="margin-bottom: 16px;">
               <label>${qualLabel}</label>
@@ -2593,60 +2997,7 @@ var cell16_2_4 = $("<div></div>")
       var $block = $("#" + blockId);
       $block.hide().slideDown(300);
 
-      var tactics = [];
-      var tacticKeyMap = {};
-      for (var key in TACTICS_TO_TECHNIQUES) {
-        var display = TACTICS_TO_TECHNIQUES[key].translations[currentLang];
-        tactics.push(display);
-        tacticKeyMap[display] = key;
-      }
-      $block.find(".tactic-input").autocomplete({
-        source: tactics,
-        minLength: 0,
-        select: function(event, ui) {
-          var selectedDisplay = ui.item.value;
-          var tacticKey = tacticKeyMap[selectedDisplay];
-          $(this).val(selectedDisplay);
-          $(this).data("tactic-key", tacticKey);
-          $(this).trigger("change");
-          $block.find(".technique-input").prop("disabled", false).val("");
-          var techArray = TACTICS_TO_TECHNIQUES[tacticKey].techniques || [];
-          var techsText = techArray.map(function(item){
-            return currentLang === "ru" ? item.ru : item.en;
-          });
-          $block.find(".technique-input").autocomplete({ source: techsText, minLength: 0 });
-        }
-      }).on("focus", function() {
-        $(this).autocomplete("search", "");
-      });
-      $block.find(".technique-input").autocomplete({
-        source: [],
-        minLength: 0,
-        select: function(event, ui) {
-          var selectedText = ui.item.value;
-          var techKey = null;
-          for (var key in TECHNIQUE_TIMES) {
-            if (TECHNIQUE_TIMES[key].translations[currentLang] === selectedText) {
-              techKey = key;
-              break;
-            }
-          }
-          if (techKey && TECHNIQUE_TIMES.hasOwnProperty(techKey)) {
-            var times = TECHNIQUE_TIMES[techKey].values;
-            $block.find(".time-hours").val(times[0]);
-            $block.find(".time-minutes").val(times[1]);
-          }
-          recalcDynamicBlock($block);
-        }
-      }).on("focus", function() {
-        $(this).autocomplete("search", "");
-      });
-      $block.find(".time-hours, .time-minutes, .qualification-select").on("input change", function() {
-        recalcDynamicBlock($block);
-      });
-      $block.find(".technique-input").on("change", function() {
-        recalcDynamicBlock($block);
-      });
+      initializeStageCatalog($block);
       updateStageNumbersAndMenuStates();
     }
 
@@ -3096,14 +3447,7 @@ var cell16_2_4 = $("<div></div>")
       });
       state.dynamicBlocks = [];
       $("#blocks_container .dynamic-block").each(function() {
-        var blockData = {
-          tactic: $(this).find(".tactic-input").val(),
-          technique: $(this).find(".technique-input").val(),
-          qualification: $(this).find(".qualification-select").val(),
-          time_hours: $(this).find(".time-hours").val(),
-          time_minutes: $(this).find(".time-minutes").val(),
-          comment: $(this).find(".stage-comment").val()
-        };
+        var blockData = getDynamicBlockState($(this));
         state.dynamicBlocks.push(blockData);
         
       });
@@ -3276,14 +3620,10 @@ var cell16_2_4 = $("<div></div>")
         $.each(state.dynamicBlocks, function(i, blockData) {
           createNewDynamicBlock();
           var $block = $("#blocks_container .dynamic-block").last();
-          $block.find(".tactic-input").val(blockData.tactic).trigger("change");
-          $block.find(".technique-input").val(blockData.technique).trigger("change");
-          $block.find(".qualification-select").val(blockData.qualification).trigger("change");
-          $block.find(".time-hours").val(blockData.time_hours).trigger("input");
-          $block.find(".time-minutes").val(blockData.time_minutes).trigger("input");
-          $block.find(".stage-comment").val(blockData.comment || "");
+          restoreDynamicBlock($block, blockData);
         });
         window.isRestoringDynamicBlocks = false;
+        updateStageNumbersAndMenuStates();
         $("#vuln_container").empty();
         vulnBlockCount = 0;
         window.isRestoringState = true;
