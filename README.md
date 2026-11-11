@@ -50,38 +50,6 @@ In this section, you must specify the number of vulnerabilities for which hacker
 ## Hacker attack chain
 The attack chain is a detailed description of the hackers' actions based on the MITRE ATT&CK matrix. To correctly fill out this section in the attack report or security analysis, each effective action must have time stamps (start and end time).
 
-### Catalogue version and time estimates
-
-The catalogue follows **Enterprise ATT&CK v20.1**: 227 active top-level techniques and 259 technique–tactic placements. Sub-techniques, Mobile, and ICS are not included.
-The exact source is MITRE's [Enterprise STIX bundle at tag ATT&CK-v20.1](https://raw.githubusercontent.com/mitre/cti/ATT%26CK-v20.1/enterprise-attack/enterprise-attack.json), SHA-256 `f92e8ec8b0e6f56fa310063332ba8f7524330ef51286c1b7e5315f4d2ee0b042`. The bundle is not shipped with CSC.
-
-The eight added defaults are **preliminary CSC expert estimates**, not MITRE standards or measured durations. Russian translations are CSC translations. All times remain manually editable; the defaults for the preceding 219 techniques and all cost formulas are unchanged.
-
-| Technique | Default hours | Default minutes |
-|---|---:|---:|
-| T1039 — Data from Network Shared Drive | 2 | 0 |
-| T1578 — Modify Cloud Compute Infrastructure | 4 | 0 |
-| T1669 — Wi-Fi Networks | 4 | 0 |
-| T1696 — Anti-Automation Evasion | 4 | 0 |
-| T1697 — Steal Application Specific Passwords | 2 | 0 |
-| T1698 — Indirect Prompt Injection | 4 | 0 |
-| T1699 — Direct Prompt Injection | 2 | 0 |
-| T1700 — AI-Enabled Exfiltration | 2 | 0 |
-
-Selecting a technique explicitly applies its default by ATT&CK ID. Changing the tactic clears the previous technique and time. Loading a saved calculation preserves its saved hours, minutes, qualification, and comment, including legacy JSON without ID fields. Unknown legacy entries retain their text and time and display a catalogue warning.
-
-Catalogue regression checks use Node.js without additional dependencies:
-
-```sh
-CSC_ATTACK_STIX=/path/to/enterprise-attack-v20.1.json node --test tests/attack-catalog.test.cjs
-```
-
-The suite reads baseline commit `394f211` from local Git history to verify unchanged times and formulas. Without `CSC_ATTACK_STIX`, the external STIX comparison is explicitly skipped. Stage interaction checks use an in-memory jQuery adapter; they do not replace browser testing.
-
-"Tactics" and "Technique": filled in for all documented hacker steps that form successful attack vectors (breaking through the network perimeter, obtaining maximum privileges in the internal infrastructure, implementing events that are unacceptable for the company).
-
-A sequence of similar hacker actions can be combined under one tactic. For example, if hackers consistently executed multiple commands to examine a compromised node or system (id, uname, ifconfig, ip a, whoami, ...), then you don't have to describe each technique in detail, but specify the general tactic "Detection", specify a dash instead of technique and set the time for the sum of these steps.
-
 ## Required qualifications
 The attacker's qualifications are assessed twice.
 When evaluating the vector, it is necessary to evaluate the complexity of each step in accordance with the required qualifications of the attacker:
